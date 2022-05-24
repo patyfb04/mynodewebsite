@@ -5,7 +5,6 @@ npm install sequelize
 
 2-install postgres driver
 npm install pg-hstore pg
-----------------------------------------
 
 TEST libs
 3- install MOCHA
@@ -15,6 +14,8 @@ npm install mocha
 npm install npx
 
 5- install nyc
-npm install nyc
+npm install nyc 
 
 
+test node server request no powershell 
+Invoke-WebRequest -Uri http://localhost:3000  -UseBasicParsing

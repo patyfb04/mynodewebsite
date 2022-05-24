@@ -32,6 +32,7 @@ class PostGresDB extends ICrud {
     }
 
     async read(entityName, item = {}) {
+
         let params = []
         for (let prop in Object.getOwnPropertyNames(item)) {
             let propName = Object.getOwnPropertyNames(item)[prop]

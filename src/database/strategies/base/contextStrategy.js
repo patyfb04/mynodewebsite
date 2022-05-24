@@ -14,8 +14,8 @@ class ContextStrategy {
         return await this.database.update(entityName, query, item)
     }
 
-    async delete(entityName, id) {
-        return await this.database.delete(entityName, id)
+    async delete(entityName, query) {
+        return await this.database.delete(entityName, query)
     }
 
     async isConnected(){
