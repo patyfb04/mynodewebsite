@@ -16,6 +16,10 @@ npm install npx
 5- install nyc
 npm install nyc 
 
+APIs
+6- npm install expressjs
+7- npm install body-parser
 
 test node server request no powershell 
 Invoke-WebRequest -Uri http://localhost:3000  -UseBasicParsing
+

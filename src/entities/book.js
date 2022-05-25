@@ -5,7 +5,7 @@ class Book {
         this.id = id
         this.clientId = clientId
         this.title = title
-        this.status = status
+        this.status = status //Published / In Process / Cancelled
         this.link = link
         this.thumbnail = thumbnail
     }

@@ -14,6 +14,7 @@ const ContextStrategy = require('./database/strategies/base/contextStrategy')
 const UserRoutes = require('./services/routes/user.routes')
 const ClientRoutes = require('./services/routes/client.routes')
 const BookRoutes = require('./services/routes/book.routes')
+const BookDeliverableRoutes = require('./services/routes/bookDeliverable.routes')
 
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
@@ -26,14 +27,15 @@ async function main() {
     const userRoutes = mapRoutes(new UserRoutes(contextDB), UserRoutes.methods())
     const clientRoutes = mapRoutes(new ClientRoutes(contextDB), ClientRoutes.methods())
     const bookRoutes = mapRoutes(new BookRoutes(contextDB), BookRoutes.methods())
+    const bookDeliverableRoutes = mapRoutes(new BookDeliverableRoutes(contextDB), BookDeliverableRoutes.methods())
 
     const allRoutes = [
         ...userRoutes,
         ...clientRoutes,
-        ...bookRoutes
+        ...bookRoutes,
+        ...bookDeliverableRoutes
     ]
 
-   // console.log(allRoutes)
     await contextDB.connect()
     console.log('is db connected?', await contextDB.isConnected())
 

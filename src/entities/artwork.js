@@ -10,7 +10,7 @@ class Artwork {
             this.thumbnail = thumbnail
             this.image = image
             this.link = link
-            this.category = category
+            this.category = category // realism / children / cartoon / vectorial / sculpture / painting / drawing
             this.createdDate = createdDate
         }
 }

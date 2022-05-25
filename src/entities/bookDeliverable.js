@@ -5,7 +5,7 @@ class BookDeliverable {
         this.id = id
         this.bookId = bookId
         this.description = description
-        this.status = status
+        this.status = status //Sketch /In Process / Delivered / Revision
         this.amount = amount
         this.link = link
         this.modifiedDate = modifiedDate
