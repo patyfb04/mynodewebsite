@@ -9,60 +9,24 @@ class ClientRoutes extends BaseRoute{
     }
 
     list() {
-        return{
-            path: '/clients',
-            method:'GET',
-            handler :(request, headers) =>{
-                console.log('LIST CLIENTS', request.params)
-                return this.db.read(this.entityName)
-            }
-        }
+        return super.list(this.entityName)
     }
 
     get() {
-        return{
-            path: '/client/:id',
-            method:'GET',
-            handler :(request, headers) =>{
-                console.log('GET CLIENT', request.params)
-                return this.db.read(this.entityName, request.params)
-            }
-        }
+        return super.get(this.entityName)
     }
 
     
     create() {
-        return{
-            path: '/client/create',
-            method:'POST',
-            handler :(request, headers) =>{
-                console.log('CREATE CLIENT', request.body)
-                return this.db.create(this.entityName, request.body)
-            }
-        }
+        return  super.create(this.entityName)
     }
 
     update() {
-        return{
-            path: '/client/update',
-            method:'PUT',
-            handler :(request, headers) =>{
-                const id = {id: request.body.id}
-                console.log('UPDATE CLIENT', {id: id}, request.body)
-                return this.db.update(this.entityName, {id: id}, request.body)
-            }
-        }
+         return  super.update(this.entityName)
     }
 
     delete() {
-        return{
-            path: '/client/delete/:id',
-            method:'DELETE',
-            handler :(request, headers) =>{
-                console.log('DELETE CLIENT', request.params)
-                return this.db.delete(this.entityName, request.params)
-            }
-        }
+        return  super.delete(this.entityName)
     }
 
 }

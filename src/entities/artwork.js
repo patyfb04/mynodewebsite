@@ -1,5 +1,3 @@
-const Client = require('./client')
-
 class Artwork {
         constructor({id, clientId, title, description, tools, thumbnail, image, link, category, createdDate, totalPaid, display}){
             this.id = id

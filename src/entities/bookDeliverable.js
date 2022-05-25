@@ -1,5 +1,3 @@
-const Book = require('./book')
-
 class BookDeliverable {
     constructor({id, bookId, description, status, amount, link, modifiedDate}){
         this.id = id

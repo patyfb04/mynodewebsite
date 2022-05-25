@@ -1,5 +1,3 @@
-const Book = require('./book')
-
 class BookPaymentBalance {
     constructor({id, bookId, totalAmountPaid, modifiedDate}){
         this.id = id
