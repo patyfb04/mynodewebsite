@@ -1,18 +1,19 @@
 const BaseRoute = require('./base/base.route')
 
-class UserRoutes extends BaseRoute{
+class BookRoutes extends BaseRoute{
+
     constructor(db){
         super()
         this.db = db
-        this.entityName = 'user'
+        this.entityName = 'book'
     }
 
     list() {
         return{
-            path: '/users',
+            path: '/books',
             method:'GET',
             handler :(request, headers) =>{
-                console.log('LIST USERS', request.params)
+                console.log('LIST BOOKS', request.params)
                 return this.db.read(this.entityName)
             }
         }
@@ -20,10 +21,10 @@ class UserRoutes extends BaseRoute{
 
     get() {
         return{
-            path: '/user/:id',
+            path: '/book/:id',
             method:'GET',
             handler :(request, headers) =>{
-                console.log('GET USER', request.params)
+                console.log('GET BOOK', request.params)
                 return this.db.read(this.entityName, request.params)
             }
         }
@@ -32,10 +33,10 @@ class UserRoutes extends BaseRoute{
     
     create() {
         return{
-            path: '/user/create',
+            path: '/book/create',
             method:'POST',
             handler :(request, headers) =>{
-                console.log('CREATE USER', request.body)
+                console.log('CREATE BOOK', request.body)
                 return this.db.create(this.entityName, request.body)
             }
         }
@@ -43,11 +44,11 @@ class UserRoutes extends BaseRoute{
 
     update() {
         return{
-            path: '/user/update',
+            path: '/book/update',
             method:'PUT',
             handler :(request, headers) =>{
                 const id = {id: request.body.id}
-                console.log('UPDATE USER', {id: id}, request.body)
+                console.log('UPDATE BOOK', {id: id}, request.body)
                 return this.db.update(this.entityName, {id: id}, request.body)
             }
         }
@@ -55,10 +56,10 @@ class UserRoutes extends BaseRoute{
 
     delete() {
         return{
-            path: '/user/delete/:id',
+            path: '/book/delete/:id',
             method:'DELETE',
             handler :(request, headers) =>{
-                console.log('DELETE USER', request.params)
+                console.log('DELETE BOOK', request.params)
                 return this.db.delete(this.entityName, request.params)
             }
         }
@@ -66,4 +67,4 @@ class UserRoutes extends BaseRoute{
 
 }
 
-module.exports = UserRoutes
+module.exports = BookRoutes

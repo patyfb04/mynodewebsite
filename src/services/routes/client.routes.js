@@ -5,6 +5,7 @@ class ClientRoutes extends BaseRoute{
     constructor(db){
         super()
         this.db = db
+        this.entityName = 'client'
     }
 
     list() {
@@ -13,7 +14,7 @@ class ClientRoutes extends BaseRoute{
             method:'GET',
             handler :(request, headers) =>{
                 console.log('LIST CLIENTS', request.params)
-                return this.db.read('client')
+                return this.db.read(this.entityName)
             }
         }
     }
@@ -24,7 +25,7 @@ class ClientRoutes extends BaseRoute{
             method:'GET',
             handler :(request, headers) =>{
                 console.log('GET CLIENT', request.params)
-                return this.db.read('client', request.params)
+                return this.db.read(this.entityName, request.params)
             }
         }
     }
@@ -36,7 +37,7 @@ class ClientRoutes extends BaseRoute{
             method:'POST',
             handler :(request, headers) =>{
                 console.log('CREATE CLIENT', request.body)
-                return this.db.create('client', request.body)
+                return this.db.create(this.entityName, request.body)
             }
         }
     }
@@ -48,7 +49,7 @@ class ClientRoutes extends BaseRoute{
             handler :(request, headers) =>{
                 const id = {id: request.body.id}
                 console.log('UPDATE CLIENT', {id: id}, request.body)
-                return this.db.update('client', {id: id}, request.body)
+                return this.db.update(this.entityName, {id: id}, request.body)
             }
         }
     }
@@ -59,7 +60,7 @@ class ClientRoutes extends BaseRoute{
             method:'DELETE',
             handler :(request, headers) =>{
                 console.log('DELETE CLIENT', request.params)
-                return this.db.delete('client', request.params)
+                return this.db.delete(this.entityName, request.params)
             }
         }
     }
