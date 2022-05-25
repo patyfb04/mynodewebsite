@@ -1,7 +1,7 @@
 const Client = require('./client')
 
 class Artwork {
-        constructor({id, clientId, title, description, tools, thumbnail, image, link, category, createdDate}){
+        constructor({id, clientId, title, description, tools, thumbnail, image, link, category, createdDate, totalPaid, display}){
             this.id = id
             this.clientId = clientId
             this.title = title
@@ -11,7 +11,9 @@ class Artwork {
             this.image = image
             this.link = link
             this.category = category // realism / children / cartoon / vectorial / sculpture / painting / drawing
-            this.createdDate = createdDate
+            this.createdDate = createdDate,
+            this.totalPaid = totalPaid,
+            this.display = display
         }
 }
 

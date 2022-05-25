@@ -219,6 +219,12 @@ console
                     type: Sequelize.DATE,
                     required: true
                 },
+                totalPaid: {
+                    type: Sequelize.DOUBLE
+                },
+                display:{
+                    type: Sequelize.BOOLEAN
+                }
               
             }, {
                 tableName: 'artwork',
