@@ -12,6 +12,7 @@ const PostGresDB = require('./database/strategies/postgres')
 const ContextStrategy = require('./database/strategies/base/contextStrategy')
 
 const UserRoutes = require('./services/routes/user.routes')
+const ClientRoutes = require('./services/routes/client.routes')
 
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
@@ -22,13 +23,18 @@ async function main() {
 
     // const routes
     const userRoutes = mapRoutes(new UserRoutes(contextDB), UserRoutes.methods())
-   
-    
+    const clientRoutes = mapRoutes(new ClientRoutes(contextDB), ClientRoutes.methods())
+    const allRoutes = [
+        ...userRoutes,
+        ...clientRoutes
+    ]
+
+   // console.log(allRoutes)
     await contextDB.connect()
     console.log('is db connected?', await contextDB.isConnected())
 
     //routes
-    userRoutes.forEach(route => {
+    allRoutes.forEach(route => {
         app[route.method.toLowerCase()](route.path, (req, res) => { 
             route.handler(req,res).then((result)=>{
                 console.log(result)

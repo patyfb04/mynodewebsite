@@ -12,7 +12,7 @@ class UserRoutes extends BaseRoute{
             path: '/users',
             method:'GET',
             handler :(request, headers) =>{
-                console.log('LIST', request.params)
+                console.log('LIST USERS', request.params)
                 return this.db.read('user')
             }
         }
@@ -23,7 +23,7 @@ class UserRoutes extends BaseRoute{
             path: '/user/:id',
             method:'GET',
             handler :(request, headers) =>{
-                console.log('GET', request.params)
+                console.log('GET USER', request.params)
                 return this.db.read('user', request.params)
             }
         }
@@ -35,7 +35,7 @@ class UserRoutes extends BaseRoute{
             path: '/user/create',
             method:'POST',
             handler :(request, headers) =>{
-                console.log('CREATE', request.body)
+                console.log('CREATE USER', request.body)
                 return this.db.create('user', request.body)
             }
         }
@@ -47,7 +47,7 @@ class UserRoutes extends BaseRoute{
             method:'PUT',
             handler :(request, headers) =>{
                 const id = {id: request.body.id}
-                console.log('UPDATE', {id: id}, request.body)
+                console.log('UPDATE USER', {id: id}, request.body)
                 return this.db.update('user', {id: id}, request.body)
             }
         }
@@ -58,7 +58,7 @@ class UserRoutes extends BaseRoute{
             path: '/user/delete/:id',
             method:'DELETE',
             handler :(request, headers) =>{
-                console.log('DELETE', request.params)
+                console.log('DELETE USER', request.params)
                 return this.db.delete('user', request.params)
             }
         }
