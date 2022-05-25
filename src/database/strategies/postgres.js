@@ -37,7 +37,7 @@ class PostGresDB extends ICrud {
         for (let prop in Object.getOwnPropertyNames(item)) {
             let propName = Object.getOwnPropertyNames(item)[prop]
             let paramObj = {}
-            paramObj[propName] = item[propName]
+            paramObj[propName] = propName == "id" ? parseInt(item[propName]) : item[propName]
             params.push(paramObj);
         }
 
@@ -53,7 +53,7 @@ class PostGresDB extends ICrud {
         for (let prop in Object.getOwnPropertyNames(query)) {
             let propName = Object.getOwnPropertyNames(query)[prop]
             let paramObj = {}
-            paramObj[propName] = item[propName]
+            paramObj[propName] =  item[propName]
 
             params.push(paramObj);
         }
@@ -71,7 +71,7 @@ class PostGresDB extends ICrud {
         for (let prop in Object.getOwnPropertyNames(query)) {
             let propName = Object.getOwnPropertyNames(query)[prop]
             let paramObj = {}
-            paramObj[propName] = query[propName]
+            paramObj[propName] = propName == "id" ? parseInt(query[propName]) : query[propName]
 
             params.push(paramObj);
         }
@@ -80,7 +80,7 @@ class PostGresDB extends ICrud {
             where: {
              [Op.and]: params  
             }, raw:true})
-
+console
         return result
     }
 
