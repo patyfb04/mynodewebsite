@@ -16,6 +16,6 @@ export class AppComponent  implements OnInit  {
   }
 
   public ngOnInit(): void {
-    this.response = this.appService.makeCall();
+    this.response = this.appService.getUsers();
 }
 }

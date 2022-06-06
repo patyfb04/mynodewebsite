@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BaseService } from 'src/common/services/BaseService';
 
 @Injectable()
-export class AppService {
-public rootURL : string = "http://localhost:5000/users";
+export class AppService extends BaseService{
 
-   constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient) {
+       super();
+    }
 
-   }
-
-   public makeCall(): Observable<any> {
-       return this.httpClient.get<any>('https://jsonplaceholder.typicode.com/posts/1');
-   }
+    public getUsers(): Observable<any> {
+        console.log(this.requestOptions)
+        return this.httpClient.get<any>(this.rootURL +'users', this.requestOptions);
+    }
 }
