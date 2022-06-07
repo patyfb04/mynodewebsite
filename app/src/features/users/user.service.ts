@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/common/services/BaseService';
+import  { User }  from './user';
 
 @Injectable()
 export class UserService extends BaseService{
@@ -18,12 +19,12 @@ export class UserService extends BaseService{
         return this.httpClient.get<any>(this.rootURL +'user/'+ id, this.requestOptions);
     }
 
-    public create(user : any): Observable<any> {
+    public create(user : User): Observable<any> {
         return this.httpClient.post<any>(this.rootURL +'user/create', user, this.requestOptions);
     }
 
-    public update(user : any, id: number): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'user/update/' +id, user, this.requestOptions);
+    public update(user : User): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'user/update', user, this.requestOptions);
     }
 
     public delete(id: number): Observable<any> {
