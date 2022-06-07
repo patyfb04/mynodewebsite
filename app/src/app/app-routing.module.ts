@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminViewComponent } from './adminView.component';
 import { AppViewComponent } from './appView.component'
-import { UserComponent } from '../features/users/user.component';
 import { routes as userRoutes } from '../features/users/user-routing.module'
 
 const routes: Routes = [
