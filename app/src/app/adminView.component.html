@@ -5,8 +5,11 @@
 <a href="#" (click)="displayView($event, 'clients')">Clients</a>
 &nbsp; 
 <a href="#" (click)="displayView($event, 'books')">Books</a>
+&nbsp; 
+<a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a>
 
 <clients-view *ngIf="display.clients"></clients-view>
 <users-view  *ngIf="display.users"></users-view>
 <books-view  *ngIf="display.books"></books-view>
+<book-payment-balances-view  *ngIf="display.bookPaymentBalances"></book-payment-balances-view>
 </div>
