@@ -5,6 +5,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import {AdminViewComponent } from './adminView.component'
+import {AppViewComponent } from './appView.component'
 import { UserComponent } from './../features/users/user.component';
 import { ClientComponent } from './../features/clients/client.component';
 
@@ -15,6 +17,8 @@ import { ClientService } from './../features/clients/client.service';
 @NgModule({
   declarations: [
     AppComponent,
+    AdminViewComponent,
+    AppViewComponent,
     UserComponent,
     ClientComponent
   ],
