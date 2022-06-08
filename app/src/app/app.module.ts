@@ -9,10 +9,12 @@ import {AdminViewComponent } from './adminView.component'
 import {AppViewComponent } from './appView.component'
 import { UserComponent } from './../features/users/user.component';
 import { ClientComponent } from './../features/clients/client.component';
+import { BookComponent } from './../features/books/book.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
 import { ClientService } from './../features/clients/client.service';
+import { BookService } from './../features/books/book.service';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,15 @@ import { ClientService } from './../features/clients/client.service';
     AdminViewComponent,
     AppViewComponent,
     UserComponent,
-    ClientComponent
+    ClientComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AppService, UserService, ClientService],
+  providers: [AppService, UserService, ClientService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

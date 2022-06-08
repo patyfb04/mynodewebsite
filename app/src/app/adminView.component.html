@@ -1,9 +1,12 @@
 <div>
 <h3>ADMIN PAGE</h3>
 
-<a href="#" (click)="displayView($event, 'users')">Users</a>  &nbsp; <a href="#" (click)="displayView($event, 'clients')">Clients</a>
+<a href="#" (click)="displayView($event, 'users')">Users</a>  &nbsp; 
+<a href="#" (click)="displayView($event, 'clients')">Clients</a>
+&nbsp; 
+<a href="#" (click)="displayView($event, 'books')">Books</a>
 
 <clients-view *ngIf="display.clients"></clients-view>
 <users-view  *ngIf="display.users"></users-view>
-
+<books-view  *ngIf="display.books"></books-view>
 </div>

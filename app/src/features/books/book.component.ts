@@ -9,16 +9,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./book.component.sass']
 })
 export class BookComponent implements OnInit {
-  public clientsList: Observable<any>;
+  public booksList: Observable<any>;
   public clientId: any;
 
   constructor(private activateRoute: ActivatedRoute, private bookService: BookService) {
-    this.clientsList = new Observable<any>();
+    this.booksList = new Observable<any>();
   }
 
   public ngOnInit(): void {
     this.bookService.getAll().subscribe((result : any) => {
-      this.clientsList = result;
+      this.booksList = result;
     })
 
     this.activateRoute.params.subscribe(params => {

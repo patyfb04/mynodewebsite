@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppService } from './app.service';
-import { Observable } from 'rxjs';
-import { Router,NavigationEnd,NavigationStart,NavigationError } from '@angular/router';
 
 @Component({
   selector: 'admin-view',
