@@ -1,17 +1,20 @@
-<div>
-<h3>ADMIN PAGE</h3>
 
-<a href="#" (click)="displayView($event, 'users')">Users</a>  &nbsp; 
-<a href="#" (click)="displayView($event, 'clients')">Clients</a>
-&nbsp; 
-<a href="#" (click)="displayView($event, 'artworks')">Artworks</a>
-&nbsp; 
-<a href="#" (click)="displayView($event, 'books')">Books</a>
-&nbsp; 
-<a href="#" (click)="displayView($event, 'bookDeliverables')">Book Deliverables</a>
-&nbsp; 
-<a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a>
+<h3>ADMINISTRATION</h3>
 
+<nav class="admin-navigation">
+    <button class="menu-toggle">Menu</button>
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+    <div class="menu-menu-1-container">
+        <ul id="menu-menu-1" class="menu">
+            <li><a href="#" (click)="displayView($event, 'users')">Users</a></li>
+            <li><a href="#" (click)="displayView($event, 'clients')">Clients</a></li>
+            <li><a href="#" (click)="displayView($event, 'artworks')">Artworks</a></li>
+            <li><a href="#" (click)="displayView($event, 'books')">Books</a></li>
+            <li><a href="#" (click)="displayView($event, 'bookDeliverables')">Book Deliverables</a></li>
+            <li><a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a></li>
+        </ul>
+    </div>
+    </nav>
 
 
 <clients-view *ngIf="display.clients"></clients-view>
@@ -20,4 +23,3 @@
 <books-view  *ngIf="display.books"></books-view>
 <book-payment-balances-view  *ngIf="display.bookPaymentBalances"></book-payment-balances-view>
 <book-deliverable-view  *ngIf="display.bookDeliverables"></book-deliverable-view>
-</div>

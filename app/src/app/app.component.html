@@ -1,16 +1,60 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
-   <title>Angular & Webpack demystified</title>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300">
-   <link rel="stylesheet" href="/assets/styles/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patricia Braga</title>
 </head>
-<body>
-<div class="content">
-   
-   <h1>MAIN PAGE</h1>
+<body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
+<div id="page">
+	<div class="container">
 
-<router-outlet></router-outlet>
+		<header id="masthead" class="site-header">
+		<div class="site-branding">
+			<h1 class="site-title"><a href="/" rel="home">Patricia Braga</a></h1>
+			<h2 class="site-description">Freelance Professional Illustrator</h2>
+		</div>
+		<nav id="site-navigation" class="main-navigation" *ngIf="!isAdmin">
+		<button class="menu-toggle">Menu</button>
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<div class="menu-menu-1-container">
+			<ul id="menu-menu-1" class="menu">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">Artworks</a></li>
+				<li><a href="shop.html">Books</a></li>
+				<li><a href="blog.html">Service</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+		</div>
+		</nav>
+		</header>
 
+		<!-- #masthead -->
+		<div id="content" [ngClass]="{'site-content-admin' : isAdmin, 'site-content' : !isAdmin}">
+			<div id="primary" class="content-area column full">
+				<main id="main" class="site-main">
+        	         <router-outlet></router-outlet>
+				</main>
+				<!-- #main -->
+			</div>
+			<!-- #primary -->
+		</div>
+		<!-- #content -->
+	</div>
+	<!-- .container -->
+	<footer id="colophon" class="site-footer">
+	<div class="container">
+		<div class="site-info">
+			
+		</div>
+	</div>	
+	</footer>
+	<a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
 </div>
+<!-- #page -->
+<script src='./js/jquery.js' type="script"></script>
+<script src='./js/plugins.js' type="script"></script>
+<script src='./js/scripts.js' type="script"></script>
+<script src='./js/masonry.pkgd.min.js' type="script"></script>
 </body>
 </html>
