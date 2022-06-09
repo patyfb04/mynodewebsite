@@ -1,6 +1,11 @@
-<div>
-   ARTWORKS PAGE
-<br>
+<div *ngIf="isAdmin">
+   ARTWORKS PAGE IN ADMIN
   response: {{ artworksList | json }}
+
+</div>
+
+<div *ngIf="!isAdmin">
+  ARTWORKS PAGE IN WEBSITE
+ response: {{ artworksList | json }}
 
 </div>

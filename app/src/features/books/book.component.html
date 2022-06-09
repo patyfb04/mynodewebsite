@@ -1,6 +1,11 @@
-<div>
-   BOOK PAGE
+<div *ngIf="isAdmin">
+   BOOK PAGE IN ADMIN
 <br>
   response: {{ booksList | json }}
+</div>
 
+<div *ngIf="!isAdmin">
+  BOOK PAGE IN WEBSITE
+<br>
+ response: {{ booksList | json }}
 </div>

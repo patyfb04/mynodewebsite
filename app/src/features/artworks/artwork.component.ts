@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input  } from '@angular/core';
 import { ArtworkService } from './artwork.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -11,12 +11,15 @@ import { ActivatedRoute } from '@angular/router';
 export class ArtworkComponent implements OnInit {
   public artworksList: Observable<any>;
   public clientId: any;
+  public isAdmin: boolean = false;
 
   constructor(private activateRoute: ActivatedRoute, private artworkService: ArtworkService) {
     this.artworksList = new Observable<any>();
+    this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
   }
 
   public ngOnInit(): void {
+
     this.artworkService.getAll().subscribe((result : any) => {
       this.artworksList = result;
     })

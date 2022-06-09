@@ -11,9 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class BookComponent implements OnInit {
   public booksList: Observable<any>;
   public clientId: any;
-
+  public isAdmin: boolean = false;
+  
   constructor(private activateRoute: ActivatedRoute, private bookService: BookService) {
     this.booksList = new Observable<any>();
+    this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
   }
 
   public ngOnInit(): void {
