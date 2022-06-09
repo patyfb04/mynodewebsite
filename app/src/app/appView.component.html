@@ -10,6 +10,11 @@
     </div>
 </nav>
 
+
+<div *ngIf="!display.artworks && !display.books && !display.service && !display.contact">
+HOME
+</div>
+
 <artworks-view  *ngIf="display.artworks"></artworks-view>
 <books-view  *ngIf="display.books"></books-view>
 <service-view  *ngIf="display.service"></service-view>

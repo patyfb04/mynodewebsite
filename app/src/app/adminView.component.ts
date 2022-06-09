@@ -12,6 +12,7 @@ export class AdminViewComponent implements OnInit {
 
   public currentRoute: any;
   public display: any = {
+    home: false,
     users: false,
     clients : false,
     books: false,
@@ -29,6 +30,7 @@ export class AdminViewComponent implements OnInit {
   public displayView(event: Event, view: any) {
     event.preventDefault();
     this.display  = {
+      home: false,
       users: false,
       clients : false,
       books: false,
