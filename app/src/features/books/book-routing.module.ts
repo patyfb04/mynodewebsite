@@ -11,6 +11,6 @@ export const adminRoutes: Routes = [
 ];
 
 export const appRoutes: Routes = [
-  { path: 'booka', component: BookComponent},
+  { path: 'books', component: BookComponent},
   { path: 'book/:id', component: BookComponent}
 ];

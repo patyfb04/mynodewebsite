@@ -11,12 +11,14 @@ import { UserComponent } from './../features/users/user.component';
 import { ClientComponent } from './../features/clients/client.component';
 import { BookComponent } from './../features/books/book.component';
 import { BookPaymentBalanceComponent } from './../features/bookPaymentBalance/bookPaymentBalance.component';
+import { BookDeliverableComponent } from './../features/bookDeliverables/bookDeliverable.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
 import { ClientService } from './../features/clients/client.service';
 import { BookService } from './../features/books/book.service';
 import { BookPaymentBalanceService } from './../features/bookPaymentBalance/bookPaymentBalance.service';
+import { BookDeliverableService } from './../features/bookDeliverables/bookDeliverable.service';
 
 @NgModule({
   declarations: [
@@ -26,14 +28,20 @@ import { BookPaymentBalanceService } from './../features/bookPaymentBalance/book
     UserComponent,
     ClientComponent,
     BookComponent,
-    BookPaymentBalanceComponent
+    BookPaymentBalanceComponent,
+    BookDeliverableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AppService, UserService, ClientService, BookService,BookPaymentBalanceService],
+  providers: [AppService, 
+              UserService, 
+              ClientService, 
+              BookService,
+              BookPaymentBalanceService,
+              BookDeliverableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
