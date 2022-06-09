@@ -13,6 +13,7 @@ import { BookComponent } from './../features/books/book.component';
 import { BookPaymentBalanceComponent } from './../features/bookPaymentBalance/bookPaymentBalance.component';
 import { BookDeliverableComponent } from './../features/bookDeliverables/bookDeliverable.component';
 import { ArtworkComponent } from './../features/artworks/artwork.component';
+import { ServiceComponent } from './../features/service/service.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
@@ -21,6 +22,7 @@ import { BookService } from './../features/books/book.service';
 import { BookPaymentBalanceService } from './../features/bookPaymentBalance/bookPaymentBalance.service';
 import { BookDeliverableService } from './../features/bookDeliverables/bookDeliverable.service';
 import { ArtworkService } from './../features/artworks/artwork.service';
+import { ServiceService } from './../features/service/service.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ArtworkService } from './../features/artworks/artwork.service';
     BookComponent,
     BookPaymentBalanceComponent,
     BookDeliverableComponent,
-    ArtworkComponent
+    ArtworkComponent,
+    ServiceComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { ArtworkService } from './../features/artworks/artwork.service';
               BookService,
               BookPaymentBalanceService,
               BookDeliverableService,
-              ArtworkService],
+              ArtworkService,
+              ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

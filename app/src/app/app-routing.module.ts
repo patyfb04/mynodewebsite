@@ -6,7 +6,7 @@ import { AppViewComponent } from './appView.component';
 const routes: Routes = [
   { 
     path: '',  component: AppViewComponent, },
-  { path: 'admin',  component: AdminViewComponent,}
+  { path: 'admin',  component: AdminViewComponent,},
 ];
 
 @NgModule({

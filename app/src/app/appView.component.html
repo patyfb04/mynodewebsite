@@ -2,10 +2,14 @@
     <div class="menu-menu-1-container">
         <ul id="menu-menu-1" class="menu">
             <li><a href="#" href="/">Home</a></li>
-            <li><a href="#" href="/artworks">Artworks</a></li>
-            <li><a href="#" href="/books">Books</a></li>
-            <li><a href="#" href="/service">Service</a></li>
-            <li><a href="#" href="/contact">Contact</a></li>
+            <li><a href="#"(click)="displayView($event, 'artworks')">Artworks</a></li>
+            <li><a href="#" (click)="displayView($event, 'books')">Books</a></li>
+            <li><a href="#" (click)="displayView($event, 'service')">Service</a></li>
+            <li><a href="#" (click)="displayView($event, 'contact')">Contact</a></li>
         </ul>
     </div>
-    </nav>
+</nav>
+
+<artworks-view  *ngIf="display.artworks"></artworks-view>
+<books-view  *ngIf="display.books"></books-view>
+<service-view  *ngIf="display.service"></service-view>

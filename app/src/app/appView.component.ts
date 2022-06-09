@@ -7,14 +7,29 @@ import { Observable } from 'rxjs';
   templateUrl: './appView.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppViewComponent  implements OnInit  {
+export class AppViewComponent {
   public response: Observable<any>;
+
+  public display: any = {
+    service: false,
+    contact: false,
+    books: false,
+    artworks: false
+  };
 
   constructor(private appService: AppService) {
     this.response = new Observable<any>();
   }
 
-  public ngOnInit(): void {
-    this.response = this.appService.getUsers();
-}
+  public displayView(event: Event, view: any) {
+    event.preventDefault();
+    this.display = {
+      service: false,
+      contact: false,
+      books: false,
+      artworks: false
+    };
+
+    return this.display[view] = true;
+  }
 }
