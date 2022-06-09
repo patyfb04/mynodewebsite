@@ -15,6 +15,8 @@ class PostGresDB extends ICrud {
         this._book = null
         this._bookDeliverable = null
         this._bookPaymentBalance = null
+        this._contact = null
+        this._service= null
 
         this.entities = {
             user : this._user,
@@ -22,7 +24,9 @@ class PostGresDB extends ICrud {
             artwork : this._artwork,
             book : this._book,
             bookDeliverable : this._bookDeliverable,
-            bookPaymentBalance: this._bookPaymentBalance
+            bookPaymentBalance: this._bookPaymentBalance,
+            contact :   this._contact,
+            service : this._service
         }
     }
 
@@ -335,13 +339,55 @@ console
   
         await this._bookPaymentBalance.sync()
 
+        //CONTACT
+        this._contact = this._driver.define('contact', {
+            id: {
+                type: Sequelize.INTEGER,
+                required: true,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            description: {
+                type: Sequelize.STRING
+            }
+        }, {
+            tableName: 'user',
+            freezeTableName: false,
+            timestamps: false
+        })
+        await this._contact.sync()
+
+         //SERVICE
+         this._service = this._driver.define('service', {
+            id: {
+                type: Sequelize.INTEGER,
+                required: true,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            description: {
+                type: Sequelize.STRING
+            },
+            email: {
+                type: Sequelize.STRING,
+                required: true
+            }
+        }, {
+            tableName: 'user',
+            freezeTableName: false,
+            timestamps: false
+        })
+        await this._contact.sync()
+
         this.entities = {
             user : this._user,
             client : this._client,
             artwork : this._artwork,
             book : this._book,
             bookDeliverable : this._bookDeliverable,
-            bookPaymentBalance: this._bookPaymentBalance
+            bookPaymentBalance: this._bookPaymentBalance,
+            contact : this._contact,
+            service : this.service
         }
     }
 
