@@ -9,9 +9,4 @@ export class AppService extends BaseService{
     constructor(private httpClient: HttpClient) {
        super();
     }
-
-    public getUsers(): Observable<any> {
-        console.log(this.requestOptions)
-        return this.httpClient.get<any>(this.rootURL +'users', this.requestOptions);
-    }
 }

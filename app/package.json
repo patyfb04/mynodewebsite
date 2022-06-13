@@ -4,19 +4,22 @@
   "scripts": {
     "build": "ng serve",
     "server": "node ../api/src/api.js",
-    "sass": "node-sass -w src/styles.sass -o src/assets/styles/main.css",
-    "start": "concurrently \"npm run sass\" \"npm run build\" \"npm run server\""
+    "sass": "node-sass src/styles.sass -src/assets/styles/main.css",
+    "start": "concurrently \"npm run build\" \"npm run server\""
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
+    "@angular/cdk": "^14.0.1",
     "@angular/common": "^14.0.0",
     "@angular/compiler": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@angular/forms": "^14.0.0",
+    "@angular/material": "^14.0.1",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@flaticon/flaticon-uicons": "^1.7.0",
     "@ngtools/webpack": "^14.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
@@ -24,6 +27,7 @@
     "rxjs": "~7.5.0",
     "sass-loader": "^13.0.0",
     "tslib": "^2.3.0",
+    "webpack": "^5.73.0",
     "zone.js": "^0.11.5"
   },
   "devDependencies": {

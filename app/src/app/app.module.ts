@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AngularMaterialModule } from './angular-material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -25,6 +26,7 @@ import { BookDeliverableService } from './../features/bookDeliverables/bookDeliv
 import { ArtworkService } from './../features/artworks/artwork.service';
 import { ServiceService } from './../features/service/service.service';
 import { ContactService } from './../features/contact/contact.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { ContactService } from './../features/contact/contact.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule
   ],
   providers: [AppService, 
               UserService, 
@@ -54,6 +58,7 @@ import { ContactService } from './../features/contact/contact.service';
               ArtworkService,
               ServiceService,
               ContactService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

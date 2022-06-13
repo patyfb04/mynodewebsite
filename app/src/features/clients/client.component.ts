@@ -9,22 +9,28 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./client.component.sass']
 })
 export class ClientComponent implements OnInit {
-  public clientsList: Observable<any>;
+  public dataSource: Observable<any>;
   public clientId: any;
-
+  public displayedColumns: string[] = ['name', 'email', 'active', 'id'];
+  
   constructor(private activateRoute: ActivatedRoute, private clientService: ClientService) {
-    this.clientsList = new Observable<any>();
+    this.dataSource = new Observable<any>();
   }
 
   public ngOnInit(): void {
     this.clientService.getAll().subscribe((result : any) => {
-      this.clientsList = result;
+      this.dataSource = result;
     })
 
-    this.activateRoute.params.subscribe(params => {
+    this.activateRoute.params.subscribe((params : any)=> {
       if (params["id"] !== undefined) {
         this.clientId = params["id"]
       }
     })
   }
+
+  public edit(id: number) {
+    console.log(id)
+  }
+
 }
