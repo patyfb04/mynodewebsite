@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit,ChangeDetectorRef   } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { ClientService } from './client.service';
 import { Client } from './client';
 import { Observable } from 'rxjs';
@@ -15,8 +15,7 @@ import { NgStyle } from '@angular/common';
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.sass']
 })
-export class ClientComponent implements OnInit, AfterViewInit  {
- // public dataSource: Observable<any>;
+export class ClientComponent implements OnInit  {
   public displayedColumns: string[] = ['name', 'email', 'active', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
@@ -57,9 +56,6 @@ export class ClientComponent implements OnInit, AfterViewInit  {
     this.loadData();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
   public displayForm(eventName: any, id: any) {
     this.display = eventName == 'edit' ? true : !this.display;
