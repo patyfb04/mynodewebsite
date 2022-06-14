@@ -41,11 +41,11 @@ class BaseRoute {
     update(entityName) {
         return{
             path: '/'+ entityName +'/update',
-            method:'PUT',
+            method:'POST',
             handler :(request, headers) =>{
                 const id = {id: request.body.id}
                 console.log('UPDATE ' + entityName, {id: id}, request.body)
-                return this.db.update(this.entityName, {id: id}, request.body)
+                return this.db.update(this.entityName, id, request.body)
             }
         }
     }

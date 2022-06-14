@@ -4,6 +4,7 @@ import { Client } from './client';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Component({
   selector: 'clients-view',
@@ -17,6 +18,7 @@ export class ClientComponent implements OnInit {
   public display: boolean = false;
   public isEdit: boolean = false;
   public myForm: FormGroup;
+  public selectedId : any;
 
   constructor(private activateRoute: ActivatedRoute, private clientService: ClientService) {
     this.dataSource = new Observable<any>();
@@ -38,6 +40,7 @@ export class ClientComponent implements OnInit {
 
     if (eventName == 'edit') {
       this.initForm(id);
+      this.selectedId = id;
     }
   }
 
@@ -45,6 +48,7 @@ export class ClientComponent implements OnInit {
     const client = new Client(0, form.value.name, form.value.email, form.value.active);
 
     if (this.isEdit) {
+      client.id = this.selectedId;
       this.update(client);
     }
     else {
