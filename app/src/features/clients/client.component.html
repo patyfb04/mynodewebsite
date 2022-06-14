@@ -35,6 +35,11 @@
 </div>
 
   <div>
+
+      <mat-form-field class="search">
+        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Type the client's name to search">
+      </mat-form-field>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef  mat-sort-header> Name </th>

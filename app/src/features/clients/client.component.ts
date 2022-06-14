@@ -8,7 +8,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
-import { NgStyle } from '@angular/common';
+
 
 @Component({
   selector: 'clients-view',
@@ -121,5 +121,11 @@ export class ClientComponent implements OnInit  {
     this.clientService.getAll().subscribe((result: any) => {
        this.dataSource.data = result;
     })
+  }
+
+  public doFilter = (event: Event) => {
+    const element = event.currentTarget as HTMLInputElement;
+    const value = element.value;
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 }
