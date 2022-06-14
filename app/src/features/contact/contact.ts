@@ -1,5 +1,5 @@
 export class Contact {
-    public id : number;
+    public id? : number;
     public description : string;
     public email : string;
 

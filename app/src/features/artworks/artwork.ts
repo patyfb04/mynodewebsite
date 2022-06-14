@@ -1,5 +1,5 @@
 export class Artwork {
-    public id : number;
+    public id? : number;
     public clientId : number;
     public title : string;
     public  description  : string;

@@ -1,5 +1,5 @@
 export class BookPaymentBalance {
-    public id : number;
+    public id? : number;
     public bookId : number;
     public totalAmountPaid : number;
     public  modifiedDate  : Date;

@@ -52,11 +52,13 @@ class BaseRoute {
 
     delete(entityName) {
         return {
-            path: '/'+ entityName +'/delete/:id',
-            method:'DELETE',
-            handler :(request, headers) =>{
-                console.log('DELETE ' + entityName, request.params)
-                return this.db.delete(this.entityName, request.params)
+            path: '/'+ entityName +'/delete',
+            method:'POST',
+            handler :(request, response) =>{
+                const id = {id: request.body.id}
+                console.log('DELETE '+ entityName, id, request.body)
+                 this.db.delete(this.entityName, id, request.body)
+                 return response.status(200).json({})
             }
         }
     }

@@ -84,7 +84,7 @@ class PostGresDB extends ICrud {
             where: {
              [Op.and]: params  
             }, raw:true})
-console
+
         return result
     }
 

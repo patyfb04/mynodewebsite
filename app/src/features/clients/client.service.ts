@@ -27,7 +27,7 @@ export class ClientService extends BaseService{
         return this.httpClient.post<any>(this.rootURL +'client/update', client, this.requestOptions);
     }
 
-    public delete(id: number): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'client/delete/' +id, this.requestOptions);
+    public delete(client : any): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'client/delete', client, this.requestOptions);
     }
 }

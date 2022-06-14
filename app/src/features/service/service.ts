@@ -1,5 +1,5 @@
 export class Service {
-    public id : number;
+    public id? : number;
     public description : string;
 
     constructor(id:number, description: string){

@@ -1,5 +1,5 @@
 export class BookDeliverable {
-    public id : number;
+    public id? : number;
     public bookId : number;
     public description : string;
     public  status  : string;

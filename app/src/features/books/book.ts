@@ -1,5 +1,5 @@
 export class Book {
-    public id : number;
+    public id? : number;
     public clientId : number;
     public title : string;
     public  status  : string;
