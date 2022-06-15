@@ -4,7 +4,6 @@ import { Client } from './client';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
@@ -64,6 +63,8 @@ export class ClientComponent implements OnInit  {
     if (eventName == 'edit') {
       this.initForm(id);
       this.selectedId = id;
+    } else {
+      this.clearForm();
     }
   }
 
@@ -95,7 +96,6 @@ export class ClientComponent implements OnInit  {
 
   public delete(id: number) {
       this.clientService.delete({id: id}).subscribe((result: any) => {
-        console.log('deleted')
         this.loadData();
       })
   }
