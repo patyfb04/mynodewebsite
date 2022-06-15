@@ -1,11 +1,107 @@
-<div *ngIf="isAdmin">
-   BOOK PAGE IN ADMIN
-<br>
-  response: {{ booksList | json }}
+<div *ngIf="isAdmin" class="bookClass">
+  <div>
+    <h4>BOOKS </h4>
+    <img class="icon-button right" src="./../../assets/icons/add-create-new.svg" *ngIf="!display"
+      (click)="displayForm('create', 0)" />
+    <img class="icon-button right" src="./../../assets/icons/close-delete-minus.svg" *ngIf="display"
+      (click)="displayForm('create', 0)" />
+  </div>
+
+  <div *ngIf="display">
+    {{ isEdit? 'Edit': 'Create '}} Book
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <div>
+        <label>
+          Author:
+          <input formControlName="author" placeholder="Author name" type="text">
+        </label>
+      </div>
+      <div>
+        some image
+      </div>
+      <div>
+        <label>
+          Title:
+          <input formControlName="title" placeholder="Book title" type="text">
+        </label>
+      </div>
+      <div>
+        <label>
+          Status:
+          <input formControlName="status" placeholder="Book status" type="text">
+        </label>
+      </div>
+      <div>
+        <label>
+          Link:
+          <input formControlName="link" placeholder="Book link" type="text">
+        </label>
+      </div>
+      <button type="submit">Save</button> &nbsp;
+      <button type="reset" *ngIf="!isEdit">Clear</button>
+      <button type="button" *ngIf="isEdit" (click)="display = false">Cancel</button>
+    </form>
+  </div>
+  <div>
+
+    <mat-form-field class="search">
+      <input matInput type="text" (keyup)="doFilter($event)"
+        placeholder="Type the book title, author name, status or link to search">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" [ngClass]="'grid'" matSort>
+
+      <ng-container matColumnDef="thumbnail">
+        <th mat-header-cell *matHeaderCellDef> Thumbnail </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> <img
+            src="./../../assets/img/thumbnails/{{element.thumbnail}}.jpg " width="30px"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.authorName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.status }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+        <td mat-cell *matCellDef="let element" (click)="goToUrl(element.link)" style="cursor: pointer"> {{element.link}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/draw-edit-new.svg"
+            (click)="displayForm('edit',element.id)" /> &nbsp;
+          <img alt="delete" class="icon-button table" src="./../../assets/icons/cancel-close-delete.svg"
+            (click)="delete(element.id)" />
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of books">
+    </mat-paginator>
+
+  </div>
+
 </div>
 
 <div *ngIf="!isAdmin">
   BOOK PAGE IN WEBSITE
-<br>
- response: {{ booksList | json }}
+  <br>
+
 </div>

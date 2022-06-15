@@ -5,6 +5,7 @@ export class Book {
     public  status  : string;
     public  link  : string;
     public  thumbnail  : string;
+    public authorName : string = '';
 
     constructor(id: number, clientId: number, title:string, status:string, link:string,thumbnail: string){
         this.id = id

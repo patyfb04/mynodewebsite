@@ -30,6 +30,7 @@
   </div>
   <button type="submit">Save</button> &nbsp;
   <button type="reset" *ngIf="!isEdit">Clear</button>
+  <button type="button" *ngIf="isEdit" (click)="display = false">Cancel</button>
 </form>
 
 </div>
@@ -37,7 +38,7 @@
   <div>
 
       <mat-form-field class="search">
-        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Type the client's name to search">
+        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Type the client name or email to search">
       </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
