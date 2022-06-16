@@ -78,6 +78,7 @@ export class BookComponent implements OnInit {
        }))
      )
    } 
+
   public ngOnInit(): void { 
     this.loadData();
   }
@@ -146,12 +147,16 @@ export class BookComponent implements OnInit {
     this.bookService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
         this.myForm.patchValue({
-          author: result[0].author,
           title: result[0].title,
-          book_status: result[0].status,
           link: result[0].link,
           thumbnail: result[0].thumbnail
         });
+
+        this.bookStatus.setValue(result[0].status);
+
+        this.clientService.getById(result[0].clientId).subscribe((result1: any) => {
+          this.author.setValue(result1[0].name);
+        })
       }
     })
   }
