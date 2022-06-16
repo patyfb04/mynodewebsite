@@ -26,18 +26,18 @@
 
         </label>
       </div>
-      <div>
-        <label>
-          Image:
-          <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-          <div class="file-upload">
-            {{filename || "No file uploaded yet."}}
-            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
-              <mat-icon>attach_file</mat-icon>
-            </button>
-          </div>
-        </label>
-      </div>
+
+    <div class="form-group">
+        <label for="file">Book Cover Image:</label>
+        <input 
+            formControlName="file"
+            id="file" 
+            type="file" 
+            class="form-control"
+            (change)="onFileChange($event)">
+    </div>
+
+
       <div>
         <label>
           Title:

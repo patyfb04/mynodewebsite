@@ -98,6 +98,7 @@ export class BookComponent implements OnInit {
 
 //FILE UPLOAD ----------------------------
 onFileSelected(event: any) {
+event.preventPropagation();
 
   const file:File = event.target.files[0];
 
@@ -107,6 +108,19 @@ onFileSelected(event: any) {
       formData.append("thumbnail", file);
       const upload$ = this.bookService.uploadFile(formData);
       upload$.subscribe();
+  }
+}
+
+get f(){
+  return this.myForm.controls;
+}
+
+onFileChange(event: any) {
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.myForm.patchValue({
+      fileSource: file
+    });
   }
 }
 
@@ -142,6 +156,10 @@ onFileSelected(event: any) {
     delete book['id'];
     book.clientId = this.clientId;
     book.status = this.status;
+
+    const formData = new FormData();
+    formData.append('file', this.myForm.get('fileSource')?.value);
+
     this.bookService.create(book).subscribe((result: any) => {
       this.loadData();
     })
@@ -150,6 +168,10 @@ onFileSelected(event: any) {
   public update(book: Book) {
     book.clientId = this.clientId;
     book.status = this.status;
+
+    const formData = new FormData();
+    formData.append('file', this.myForm.get('fileSource')?.value);
+
     this.bookService.update(book).subscribe((result: any) => {
       this.loadData();
     })
