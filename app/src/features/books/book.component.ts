@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BookService } from './book.service';
 import { ClientService } from './../clients/client.service';
 import { Book } from './book';
-import { Observable } from 'rxjs';
+import { Client } from './../clients/client';
+import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,14 +18,17 @@ import { MatTableDataSource, } from '@angular/material/table';
   encapsulation: ViewEncapsulation.None
 })
 export class BookComponent implements OnInit {
+  public isAdmin: boolean = false;
   public displayedColumns: string[] = ['thumbnail', 'author', 'title', 'status', 'link', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
   public myForm: FormGroup;
   public selectedId: any;
-  public clients: Observable<any>;
   public dataSource: MatTableDataSource<Book>;
-  public isAdmin: boolean = false;
+
+  public myControl = new FormControl();
+  public options = [];
+  public filteredOptions: Observable<any>;
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -44,7 +48,6 @@ export class BookComponent implements OnInit {
     private bookService: BookService,
     private clientService: ClientService) {
     this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
-    this.clients = new Observable<any>();
     this.dataSource = new MatTableDataSource<Book>();
 
     this.myForm = new FormGroup({
@@ -55,13 +58,29 @@ export class BookComponent implements OnInit {
       thumbnail: new FormControl('')
     });
 
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(val => {
+            return this.filter(val || '')
+       }) 
+    )
   }
 
-  public ngOnInit(): void {
+  filter(val: string): Observable<any> {
+    return this.clientService.getAll()
+     .pipe(
+       map(response => response.filter((option: Client)=> { 
+         return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+       }))
+     )
+   } 
+  public ngOnInit(): void { 
     this.loadData();
   }
 
-
+  //TABLE
   public displayForm(eventName: any, id: any) {
     this.display = eventName == 'edit' ? true : !this.display;
     this.isEdit = eventName == 'edit' ? true : false;
@@ -102,8 +121,9 @@ export class BookComponent implements OnInit {
   }
 
   public delete(id: number) {
+
     this.bookService.delete({ id: id }).subscribe((result: any) => {
-      this.loadData();
+     this.loadData();
     })
   }
 
@@ -126,7 +146,7 @@ export class BookComponent implements OnInit {
   }
 
   public loadData() {
-  
+
     this.bookService.getAll().subscribe((result: Book[]) => {
       this.dataSource.data = result;
 

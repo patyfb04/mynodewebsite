@@ -27,7 +27,7 @@ export class BookService extends BaseService{
         return this.httpClient.post<any>(this.rootURL +'book/update', book, this.requestOptions);
     }
 
-    public delete(book: any): Observable<any> {
+    public delete(book : any): Observable<any> {
         return this.httpClient.post<any>(this.rootURL +'book/delete', book, this.requestOptions);
     }
 

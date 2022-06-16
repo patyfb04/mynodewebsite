@@ -14,7 +14,22 @@
       <div>
         <label>
           Author:
-          <input formControlName="author" placeholder="Author name" type="text">
+            <mat-form-field>
+       <input
+               type="text"
+               placeholder="Enter Location"
+               [formControl]="myControl"
+               matInput
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option.name">
+              {{option.name}}
+           </mat-option>
+       </mat-autocomplete>
+    </mat-form-field>
+
         </label>
       </div>
       <div>
@@ -55,7 +70,7 @@
       <ng-container matColumnDef="thumbnail">
         <th mat-header-cell *matHeaderCellDef> Thumbnail </th>
         <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> <img
-            src="./../../assets/img/thumbnails/{{element.thumbnail}}.jpg " width="30px"></td>
+            src="./../../assets/img/thumbnails/{{element.thumbnail}}.jpg " width="30px" *ngIf="element.thumbnail != ''"></td>
       </ng-container>
 
       <ng-container matColumnDef="author">
