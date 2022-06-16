@@ -127,6 +127,8 @@ export class BookComponent implements OnInit {
   }
 
   public update(book: Book) {
+    book.clientId = this.clientId;
+    book.status = this.status;
     this.bookService.update(book).subscribe((result: any) => {
       this.loadData();
     })
