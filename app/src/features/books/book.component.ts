@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild,  ElementRef } from '@angular/core';
 import { BookService } from './book.service';
 import { ClientService } from './../clients/client.service';
 import { Book } from './book';
@@ -14,8 +14,7 @@ import { MatTableDataSource, } from '@angular/material/table';
 @Component({
   selector: 'books-view',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.sass'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./book.component.sass']
 })
 export class BookComponent implements OnInit {
   public isAdmin: boolean = false;
@@ -34,6 +33,8 @@ export class BookComponent implements OnInit {
   public bookStatus = new FormControl();
   public status : string ='';
 
+  public filename : string = '';
+
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
     if (this.dataSource) {
@@ -47,6 +48,8 @@ export class BookComponent implements OnInit {
       this.dataSource.sort = value;
     }
   }
+
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private activateRoute: ActivatedRoute,
     private bookService: BookService,
@@ -70,6 +73,8 @@ export class BookComponent implements OnInit {
     )
   }
 
+//AUTOCOMPLETE /DROPDOWNS----------------
+
   filter(val: string): Observable<any> {
     return this.clientService.getAll()
      .pipe(
@@ -90,7 +95,23 @@ export class BookComponent implements OnInit {
   public onStatusChange(option : string){
     this.status = option;
  }
-  //TABLE
+
+//FILE UPLOAD ----------------------------
+onFileSelected(event: any) {
+
+  const file:File = event.target.files[0];
+
+  if (file) {
+      this.filename = file.name;
+      const formData = new FormData();
+      formData.append("thumbnail", file);
+      const upload$ = this.bookService.uploadFile(formData);
+      upload$.subscribe();
+  }
+}
+
+  //TABLE ---------------------------------------------------
+
   public displayForm(eventName: any, id: any) {
     this.display = eventName == 'edit' ? true : !this.display;
     this.isEdit = eventName == 'edit' ? true : false;

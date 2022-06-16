@@ -31,4 +31,8 @@ export class BookService extends BaseService{
         return this.httpClient.post<any>(this.rootURL +'book/delete', book, this.requestOptions);
     }
 
+    public uploadFile(book : any): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'book/upload', book, this.requestOptions);
+    }
+
 }

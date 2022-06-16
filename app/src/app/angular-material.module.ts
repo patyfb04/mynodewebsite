@@ -6,7 +6,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatIconModule } from '@angular/material/icon';
 
 const materialModules = [
   MatTableModule,
@@ -14,7 +16,10 @@ const materialModules = [
   MatSortModule,
   MatFormFieldModule,
   MatInputModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatProgressBarModule,
+  MatToolbarModule,
+  MatIconModule
 ];
 @NgModule({
   imports: [
