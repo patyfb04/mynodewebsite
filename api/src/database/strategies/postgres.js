@@ -17,6 +17,7 @@ class PostGresDB extends ICrud {
         this._bookPaymentBalance = null
         this._contact = null
         this._service= null
+        this._testimonial = null
 
         this.entities = {
             user : this._user,
@@ -26,7 +27,8 @@ class PostGresDB extends ICrud {
             bookDeliverable : this._bookDeliverable,
             bookPaymentBalance: this._bookPaymentBalance,
             contact :   this._contact,
-            service : this._service
+            service : this._service,
+            testimonial: this.testimonial
         }
     }
 
@@ -379,6 +381,34 @@ class PostGresDB extends ICrud {
         })
         await this._contact.sync()
 
+        // TESTIMONIAL
+        this._testimonial = this._driver.define('testimonial', {
+            id: {
+                type: Sequelize.INTEGER,
+                required: true,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            author: {
+                type: Sequelize.STRING,
+                required: true
+            },
+            comment: {
+                type: Sequelize.STRING,
+                required: true
+            },
+            display: {
+                type: Sequelize.BOOLEAN
+              }
+        }, {
+            tableName: 'testimonial',
+            freezeTableName: false,
+            timestamps: false
+        } )
+
+    await this._testimonial.sync()
+
+
         this.entities = {
             user : this._user,
             client : this._client,
@@ -387,7 +417,8 @@ class PostGresDB extends ICrud {
             bookDeliverable : this._bookDeliverable,
             bookPaymentBalance: this._bookPaymentBalance,
             contact : this._contact,
-            service : this.service
+            service : this.service,
+            testimonial: this.testimonial
         }
     }
 

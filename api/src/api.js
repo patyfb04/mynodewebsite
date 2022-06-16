@@ -47,13 +47,15 @@ async function main() {
 
     //routes
     allRoutes.forEach(route => {
-        app[route.method.toLowerCase()](route.path, (req, res) => { 
-            route.handler(req,res).then((result)=>{
-                console.log(result)
-                if(typeof(result) == 'object') res.send(result)
-                else res.sendStatus(200)
+        console.log(route)
+            app[route.method.toLowerCase()](route.path, (req, res) => { 
+                route.handler(req,res).then((result)=>{
+                    console.log(result)
+                    if(typeof(result) == 'object') res.send(result)
+                    else res.sendStatus(200)
+                })
             })
-        })
+        
    });
     
     return app;

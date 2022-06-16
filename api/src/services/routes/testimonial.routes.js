@@ -1,11 +1,10 @@
 const BaseRoute = require('./base/base.route')
 
-class BookRoutes extends BaseRoute{
-
+class TestimonialRoutes extends BaseRoute{
     constructor(db){
         super()
         this.db = db
-        this.entityName = 'book'
+        this.entityName = 'testimonial'
     }
 
     list() {
@@ -29,10 +28,6 @@ class BookRoutes extends BaseRoute{
         return  super.delete(this.entityName)
     }
 
-    upload(){
-        return  super.upload(this.entityName)
-    }
-
 }
 
-module.exports = BookRoutes
+module.exports = UserRoutes

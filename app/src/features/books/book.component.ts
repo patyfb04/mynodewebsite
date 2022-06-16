@@ -33,7 +33,7 @@ export class BookComponent implements OnInit {
   public bookStatus = new FormControl();
   public status : string ='';
 
-  public filename : string = '';
+  public filename : string = 'Upload File';
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -97,19 +97,6 @@ export class BookComponent implements OnInit {
  }
 
 //FILE UPLOAD ----------------------------
-onFileSelected(event: any) {
-event.preventPropagation();
-
-  const file:File = event.target.files[0];
-
-  if (file) {
-      this.filename = file.name;
-      const formData = new FormData();
-      formData.append("thumbnail", file);
-      const upload$ = this.bookService.uploadFile(formData);
-      upload$.subscribe();
-  }
-}
 
 get f(){
   return this.myForm.controls;
@@ -118,8 +105,9 @@ get f(){
 onFileChange(event: any) {
   if (event.target.files.length > 0) {
     const file = event.target.files[0];
+    this.filename = file.name;
     this.myForm.patchValue({
-      fileSource: file
+      thumbnail: file
     });
   }
 }
@@ -158,11 +146,15 @@ onFileChange(event: any) {
     book.status = this.status;
 
     const formData = new FormData();
-    formData.append('file', this.myForm.get('fileSource')?.value);
+    formData.append('file', this.myForm.get('thumbnail')?.value);
+    book.thumbnail = this.filename;
 
-    this.bookService.create(book).subscribe((result: any) => {
-      this.loadData();
-    })
+    console.log(formData);
+    this.bookService.uploadFile(formData).subscribe((result: any) => {
+      this.bookService.create(book).subscribe((result1: any) => {
+        this.loadData();
+      });
+    });
   }
 
   public update(book: Book) {
