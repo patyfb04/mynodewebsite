@@ -26,9 +26,13 @@ export class BookComponent implements OnInit {
   public selectedId: any;
   public dataSource: MatTableDataSource<Book>;
 
-  public myControl = new FormControl();
+  public author = new FormControl();
   public options = [];
   public filteredOptions: Observable<any>;
+  public clientId : number = 0;
+
+  public bookStatus = new FormControl();
+  public status : string ='';
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -51,14 +55,12 @@ export class BookComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Book>();
 
     this.myForm = new FormGroup({
-      author: new FormControl(''),
       title: new FormControl(''),
-      status: new FormControl(''),
       link: new FormControl(''),
       thumbnail: new FormControl('')
     });
-
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    
+    this.filteredOptions = this.author.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -80,6 +82,13 @@ export class BookComponent implements OnInit {
     this.loadData();
   }
 
+  public onAuthorChange(option : Client){
+     this.clientId = option.id === undefined ? 0 : option.id;
+  }
+
+  public onStatusChange(option : string){
+    this.status = option;
+ }
   //TABLE
   public displayForm(eventName: any, id: any) {
     this.display = eventName == 'edit' ? true : !this.display;
@@ -109,6 +118,8 @@ export class BookComponent implements OnInit {
 
   public create(book: Book) {
     delete book['id'];
+    book.clientId = this.clientId;
+    book.status = this.status;
     this.bookService.create(book).subscribe((result: any) => {
       this.loadData();
     })
@@ -137,7 +148,7 @@ export class BookComponent implements OnInit {
         this.myForm.patchValue({
           author: result[0].author,
           title: result[0].title,
-          status: result[0].status,
+          book_status: result[0].status,
           link: result[0].link,
           thumbnail: result[0].thumbnail
         });
@@ -145,6 +156,7 @@ export class BookComponent implements OnInit {
     })
   }
 
+  
   public loadData() {
 
     this.bookService.getAll().subscribe((result: Book[]) => {
