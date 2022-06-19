@@ -1,6 +1,8 @@
-var formidable = require('formidable');
+var multer = require('multer');
 var fs = require('fs');
-var path = require('path');
+var busboy = require('connect-busboy');
+
+const upload = multer({ dest: './assets/books/' }).single('thumbnail');
 
 class BaseRoute {
     static methods() {
@@ -62,7 +64,9 @@ class BaseRoute {
                 const id = { id: request.body.id }
                 console.log('DELETE ' + entityName, id, request.body)
                 this.db.delete(this.entityName, id, request.body)
-                return response.status(200).json({})
+                return new Promise((resolve, reject) => {
+                    resolve(1);
+                  })
             }
         }
     }
@@ -72,19 +76,43 @@ class BaseRoute {
             path: '/' + entityName + '/upload',
             method: 'POST',
             handler: (request, response) => {
-                var form = new formidable.IncomingForm();
-           
-                
-                form.parse(request, function (err, fields, files) {
 
-                    var oldpath = files.filetoupload.filepath;
-                    var newpath1 = path.join(__dirname, '../assets/img/books', files.filetoupload.originalFilename);
-     
-                    fs.rename(oldpath, newpath1, function (err) {
-                        if (err) return response.status(401).json({});
-                        return response.status(200).json({})
-                    });
-                });
+                console.log(request)
+               if (!request.files) {
+                   console.log('==> NO FILES WERE UPLOADED')
+               }
+               
+               var fstream;
+               request.pipe(request.busboy);
+               request.busboy.on('file', function (fieldname, file, filename) {
+                   console.log("Uploading: " + filename);
+                   fstream = fs.createWriteStream(__dirname + '/assets/books/' + filename);
+                   file.pipe(fstream);
+                   fstream.on('close', function () {
+                         return new Promise((resolve, reject) => {
+                                resolve(1);
+                              })
+                   });
+               });
+
+
+                // upload(request, response,function(err) {
+
+                //     if(err) {
+                //         console.log('==> UPLOAD ERROR', err)
+                //         return new Promise((resolve, reject) => {
+                //             resolve(0);
+                //           })
+                //     }
+                //     console.log('==> UPLOADED')
+                //     return new Promise((resolve, reject) => {
+                //         resolve(1);
+                //       })
+                // });
+
+                return new Promise((resolve, reject) => {
+                    resolve(1);
+                  })
             }
         }
     }

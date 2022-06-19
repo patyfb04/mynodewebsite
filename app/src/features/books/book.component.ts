@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,  ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BookService } from './book.service';
 import { ClientService } from './../clients/client.service';
 import { Book } from './book';
@@ -28,12 +28,13 @@ export class BookComponent implements OnInit {
   public author = new FormControl();
   public options = [];
   public filteredOptions: Observable<any>;
-  public clientId : number = 0;
+  public clientId: number = 0;
 
   public bookStatus = new FormControl();
-  public status : string ='';
+  public status: string = '';
 
-  public filename : string = 'Upload File';
+  public filename: string = 'Upload File';
+  public serverUrl: string = "http://localhost:5000/src/assets/books/";
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -62,55 +63,55 @@ export class BookComponent implements OnInit {
       link: new FormControl(''),
       thumbnail: new FormControl('')
     });
-    
+
     this.filteredOptions = this.author.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
       switchMap(val => {
-            return this.filter(val || '')
-       }) 
+        return this.filter(val || '')
+      })
     )
   }
 
-//AUTOCOMPLETE /DROPDOWNS----------------
+  //AUTOCOMPLETE /DROPDOWNS----------------
 
   filter(val: string): Observable<any> {
     return this.clientService.getAll()
-     .pipe(
-       map(response => response.filter((option: Client)=> { 
-         return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
-       }))
-     )
-   } 
+      .pipe(
+        map(response => response.filter((option: Client) => {
+          return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+        }))
+      )
+  }
 
-  public ngOnInit(): void { 
+  public ngOnInit(): void {
     this.loadData();
   }
 
-  public onAuthorChange(option : Client){
-     this.clientId = option.id === undefined ? 0 : option.id;
+  public onAuthorChange(option: Client) {
+    this.clientId = option.id === undefined ? 0 : option.id;
   }
 
-  public onStatusChange(option : string){
+  public onStatusChange(option: string) {
     this.status = option;
- }
-
-//FILE UPLOAD ----------------------------
-
-get f(){
-  return this.myForm.controls;
-}
-
-onFileChange(event: any) {
-  if (event.target.files.length > 0) {
-    const file = event.target.files[0];
-    this.filename = file.name;
-    this.myForm.patchValue({
-      thumbnail: file
-    });
   }
-}
+
+  //FILE UPLOAD ----------------------------
+
+  get f() {
+    return this.myForm.controls;
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.filename = file.name;
+      this.myForm.patchValue({
+        thumbnail: file
+      });
+    }
+  }
 
   //TABLE ---------------------------------------------------
 
@@ -146,15 +147,19 @@ onFileChange(event: any) {
     book.status = this.status;
 
     const formData = new FormData();
-    formData.append('file', this.myForm.get('thumbnail')?.value);
+    const file = this.myForm.get('thumbnail')?.value;
+
+    formData.append('file', file, this.filename);
+
     book.thumbnail = this.filename;
 
-    console.log(formData);
-    this.bookService.uploadFile(formData).subscribe((result: any) => {
-      this.bookService.create(book).subscribe((result1: any) => {
-        this.loadData();
+    if (this.myForm.get('thumbnail') != null) {
+      this.bookService.uploadFile(formData).subscribe((result: any) => {
+        this.bookService.create(book).subscribe((result1: any) => {
+          this.loadData();
+        });
       });
-    });
+    }
   }
 
   public update(book: Book) {
@@ -172,7 +177,7 @@ onFileChange(event: any) {
   public delete(id: number) {
 
     this.bookService.delete({ id: id }).subscribe((result: any) => {
-     this.loadData();
+      this.loadData();
     })
   }
 
@@ -198,7 +203,7 @@ onFileChange(event: any) {
     })
   }
 
-  
+
   public loadData() {
 
     this.bookService.getAll().subscribe((result: Book[]) => {

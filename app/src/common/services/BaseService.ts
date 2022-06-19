@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class BaseService {
     public rootURL: string = "http://localhost:5000/";
     public requestOptions : any;
+    public requestOptionsFile : any;
 
     constructor() {
 
@@ -17,6 +18,15 @@ export class BaseService {
             }),
         };
 
+        this.requestOptionsFile = {
+            headers: new HttpHeaders({
+                'Content-Type': 'multipart/form-data  boundary=MyBoundary',
+                'Accept':'application/json',
+                'Access-Control-Allow-Origin': '*',
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+            }),
+        };
 
     }
 }

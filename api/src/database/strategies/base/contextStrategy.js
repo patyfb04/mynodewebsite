@@ -25,6 +25,7 @@ class ContextStrategy {
     async connect(){
         return await this.database.connect()
     }
+    
 }
 
  module.exports = ContextStrategy

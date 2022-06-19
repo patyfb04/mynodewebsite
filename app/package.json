@@ -23,6 +23,7 @@
     "@ngtools/webpack": "^14.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "multer": "^1.4.5-lts.1",
     "node-sass": "^7.0.1",
     "rxjs": "~7.5.0",
     "sass-loader": "^13.0.0",

@@ -3,9 +3,12 @@ const Promise = require('fs/promises')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
 app.use(bodyParser.raw())
+app.use(bodyParser.json({limit:1024*1024*20, type:'application/json'}));
+app.use(bodyParser.urlencoded({ extended:true,limit:1024*1024*20, type:'application/x-www-form-urlencoded' }))
+
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 const PORT = 5000
 const PostGresDB = require('./database/strategies/postgres')
@@ -21,6 +24,8 @@ const ArtworkRoutes = require('./services/routes/artwork.routes')
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
 })
+
+
 
 async function main() {
     const contextDB = new ContextStrategy(new PostGresDB())
@@ -47,12 +52,14 @@ async function main() {
 
     //routes
     allRoutes.forEach(route => {
-        console.log(route)
             app[route.method.toLowerCase()](route.path, (req, res) => { 
+                console.log('route.path=>',route.path)
                 route.handler(req,res).then((result)=>{
-                    console.log(result)
                     if(typeof(result) == 'object') res.send(result)
-                    else res.sendStatus(200)
+                    else {
+                        if(result == 1) { res.status(200).json({}) }
+                        else { { res.status(500).json({}) }}
+                    } 
                 })
             })
         
