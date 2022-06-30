@@ -69,7 +69,7 @@ async function main() {
                 })
             })
         } 
-        else  // if upload
+        else  // if uploads
         {
             app[route.method.toLowerCase()](route.path,  multipartMiddleware, (req, res) => {
                 console.log('route.path=>', route.path)

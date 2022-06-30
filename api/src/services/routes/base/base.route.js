@@ -62,7 +62,7 @@ class BaseRoute {
                 this.db.delete(this.entityName, id, request.body)
                 return new Promise((resolve, reject) => {
                     resolve(1);
-                  })
+                })
             }
         }
     }
@@ -72,7 +72,16 @@ class BaseRoute {
             path: '/' + entityName + '/upload',
             method: 'POST',
             handler: (request, response) => {
-              console.log('DATA =>', request.files.file);
+                console.log('DATA =>', request.files.file)
+
+                const path = "src\\assets\\img\\"
+                const newPath = path +""+ request.files.file.originalFilename;
+
+                fs.rename(request.files.file.path, newPath, function (err) {
+                    if (err) throw err;
+                    console.log('File Renamed.');
+                });
+
                 return new Promise((resolve, reject) => {
                     resolve(1);
                 })
