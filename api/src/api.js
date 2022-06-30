@@ -1,14 +1,19 @@
-const http = require('http')
-const Promise = require('fs/promises')
 const express = require('express')
 const bodyParser = require('body-parser')
+const multer = require('multer')
+var cors = require('cors')
+const path = require('path')
 const app = express()
-app.use(bodyParser.raw())
-app.use(bodyParser.json({limit:1024*1024*20, type:'application/json'}));
-app.use(bodyParser.urlencoded({ extended:true,limit:1024*1024*20, type:'application/x-www-form-urlencoded' }))
+const  multipart  =  require('connect-multiparty');
+const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' });
 
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
+app.use(bodyParser.raw())
+app.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb' }))
+
+const upload = multer({ dest: './images/' })
 
 const PORT = 5000
 const PostGresDB = require('./database/strategies/postgres')
@@ -52,19 +57,35 @@ async function main() {
 
     //routes
     allRoutes.forEach(route => {
-            app[route.method.toLowerCase()](route.path, (req, res) => { 
-                console.log('route.path=>',route.path)
-                route.handler(req,res).then((result)=>{
-                    if(typeof(result) == 'object') res.send(result)
+        if (route.path.indexOf('upload') <= 0) 
+        {
+            app[route.method.toLowerCase()](route.path, (req, res) => {
+                route.handler(req, res).then((result) => {
+                    if (typeof (result) == 'object') res.send(result)
                     else {
-                        if(result == 1) { res.status(200).json({}) }
-                        else { { res.status(500).json({}) }}
-                    } 
+                        if (result == 1) { res.status(200).json({}) }
+                        else { { res.status(500).json({}) } }
+                    }
                 })
             })
-        
-   });
-    
+        } 
+        else  // if upload
+        {
+            app[route.method.toLowerCase()](route.path,  multipartMiddleware, (req, res) => {
+                console.log('route.path=>', route.path)
+                route.handler(req, res).then((result) => {
+                    if (typeof (result) == 'object') res.send(result)
+                    else {
+                        if (result == 1) { res.status(200).json({}) }
+                        else { { res.status(500).json({}) } }
+                    }
+                })
+            })
+        }
+
+
+    });
+
     return app;
 }
 

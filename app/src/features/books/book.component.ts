@@ -153,11 +153,12 @@ export class BookComponent implements OnInit {
 
     book.thumbnail = this.filename;
 
-    if (this.myForm.get('thumbnail') != null) {
+    if (formData.get('file') != null) {
+      console.log('FORM DATA FROM ANGULAR => ',formData.get('file'));
       this.bookService.uploadFile(formData).subscribe((result: any) => {
-        this.bookService.create(book).subscribe((result1: any) => {
-          this.loadData();
-        });
+        // this.bookService.create(book).subscribe((result1: any) => {
+        //   this.loadData();
+        // });
       });
     }
   }

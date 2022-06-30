@@ -32,7 +32,7 @@ export class BookService extends BaseService{
     }
 
     public uploadFile(formData : FormData): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'book/upload', formData, this.requestOptionsFile);
+        return this.httpClient.post<any>(this.rootURL +'book/upload', formData);
     }
 
 }
