@@ -17,7 +17,10 @@ export class AdminViewComponent implements OnInit {
     clients : false,
     books: false,
     artworks: false,
-    bookPaymentBalance: false
+    bookPaymentBalance: false,
+    testimonial: false,
+    contact : false,
+    service: false
   };
 
   constructor(private appService: AppService) {
@@ -35,7 +38,10 @@ export class AdminViewComponent implements OnInit {
       clients : false,
       books: false,
       artworks: false,
-      bookPaymentBalance: false
+      bookPaymentBalance: false,
+      testimonial: false,
+      contact : false,
+      service: false
     };
 
     return this.display[view] = true;

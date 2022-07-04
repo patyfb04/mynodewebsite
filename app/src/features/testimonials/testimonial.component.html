@@ -1,27 +1,42 @@
 <div>
 
   <div>
-    <h4>USERS </h4>
+    <h4>TESTIMONIALS </h4>
     <img class="icon-button right" src="./../../assets/icons/add-create-new.svg"  *ngIf="!display" (click)="displayForm('create', 0)"/>
     <img class="icon-button right" src="./../../assets/icons/close-delete-minus.svg"  *ngIf="display"(click)="displayForm('create', 0)"/>
   </div>
 
 <div *ngIf="display">
-{{ isEdit? 'Edit': 'Create '}} User
+{{ isEdit? 'Edit': 'Create '}} Testimonial
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
   <div>
     <label>
-      Login:
-      <input formControlName="login" placeholder="Your login" type="text">
+      Author:
+      <mat-form-field>
+        <input type="text" placeholder="Enter author name" [formControl]="author" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
+            (onSelectionChange)="onAuthorChange(option)">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </label>
   </div>
   <div>
     <label>
-      Password:
-      <input formControlName="password" placeholder="Your password" type="text">
+      Comment:
+      <input formControlName="comment" placeholder="Author Comment" type="text">
     </label>
   </div>
+  <div>
+    <label>
+      Display:
+      <input formControlName="display" type="checkbox">
+    </label>
+  </div>
+
   <button type="submit">Save</button> &nbsp;
   <button type="reset" *ngIf="!isEdit">Clear</button>
   <button type="button" *ngIf="isEdit" (click)="display = false">Cancel</button>
@@ -32,13 +47,13 @@
   <div>
 
       <mat-form-field class="search">
-        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Type the user login to search">
+        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Type the author name to search">
       </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-      <ng-container matColumnDef="login">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header> Login </th>
-        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.login}} </td>
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header> Author </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.author}} </td>
       </ng-container>
 
       <ng-container matColumnDef="id">
@@ -53,7 +68,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"  showFirstLastButtons  aria-label="Select page of users">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"  showFirstLastButtons  aria-label="Select page of author comments">
     </mat-paginator>
 
   </div>

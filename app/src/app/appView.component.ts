@@ -14,7 +14,8 @@ export class AppViewComponent {
     service: false,
     contact: false,
     books: false,
-    artworks: false
+    artworks: false,
+    testimonial: false
   };
 
   constructor(private appService: AppService) {
@@ -27,7 +28,8 @@ export class AppViewComponent {
       service: false,
       contact: false,
       books: false,
-      artworks: false
+      artworks: false,
+      testimonial: false
     };
 
     return this.display[view] = true;

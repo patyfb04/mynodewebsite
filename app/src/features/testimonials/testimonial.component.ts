@@ -1,17 +1,19 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { TestimonialService } from './testimonial.service';
 import { Testimonial } from './testimonial';
-import { Observable } from 'rxjs';
+import { Client } from './../clients/client';
+import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
+import { ClientService } from './../clients/client.service';
 
 @Component({
-  selector: 'Testimonials-view',
-  templateUrl: './Testimonial.component.html',
-  styleUrls: ['./Testimonial.component.sass']
+  selector: 'testimonial-view',
+  templateUrl: './testimonial.component.html',
+  styleUrls: ['./testimonial.component.sass']
 })
 export class TestimonialComponent implements OnInit {
   public displayedColumns: string[] = ['author', 'id'];
@@ -19,8 +21,11 @@ export class TestimonialComponent implements OnInit {
   public isEdit: boolean = false;
   public myForm: FormGroup;
   public selectedId : any;
-  public Testimonials: Observable<any>;
+  public testimonials: Observable<any>;
   public dataSource: MatTableDataSource<Testimonial>;
+  public clientId: number = 0;
+  public filteredOptions: Observable<any>;
+  public author = new FormControl();
 
   @ViewChild(MatPaginator,  {static: false}) 
   set paginator(value: MatPaginator) {
@@ -37,9 +42,10 @@ export class TestimonialComponent implements OnInit {
   }
 
   constructor(private activateRoute: ActivatedRoute, 
-              private TestimonialService: TestimonialService) {
+              private testimonialService: TestimonialService,
+              private clientService: ClientService) {
 
-    this.Testimonials = new Observable<any>();
+    this.testimonials = new Observable<any>();
     this.dataSource = new MatTableDataSource<Testimonial>();
 
     this.myForm = new FormGroup({
@@ -48,12 +54,32 @@ export class TestimonialComponent implements OnInit {
       display: new FormControl(false)
     });
 
+    
+    this.filteredOptions = this.author.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(val => {
+        return this.filter(val || '')
+      })
+    )
+
   }
+
+    //AUTOCOMPLETE /DROPDOWNS----------------
+
+    filter(val: string): Observable<any> {
+      return this.clientService.getAll()
+        .pipe(
+          map(response => response.filter((option: Client) => {
+            return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+          }))
+        )
+    }
 
   public ngOnInit(): void {
     this.loadData();
   }
-
 
   public displayForm(eventName: any, id: any) {
     this.display = eventName == 'edit' ? true : !this.display;
@@ -73,19 +99,19 @@ export class TestimonialComponent implements OnInit {
 
   public create(Testimonial: Testimonial) {
     delete Testimonial['id'];
-    this.TestimonialService.create(Testimonial).subscribe((result: any) => {
+    this.testimonialService.create(Testimonial).subscribe((result: any) => {
       this.loadData();
     })
   }
 
   public update(Testimonial: Testimonial) {
-    this.TestimonialService.update(Testimonial).subscribe((result: any) => {
+    this.testimonialService.update(Testimonial).subscribe((result: any) => {
       this.loadData();
     })
   }
 
   public delete(id: number) {
-      this.TestimonialService.delete({id: id}).subscribe((result: any) => {
+      this.testimonialService.delete({id: id}).subscribe((result: any) => {
         this.loadData();
       })
   }
@@ -95,7 +121,7 @@ export class TestimonialComponent implements OnInit {
   }
 
   public initForm(id: number) {
-    this.TestimonialService.getById(id).subscribe((result: any) => {
+    this.testimonialService.getById(id).subscribe((result: any) => {
       if(result.length > 0) 
       {
         this.myForm.patchValue({
@@ -107,8 +133,15 @@ export class TestimonialComponent implements OnInit {
   }
 
   public loadData() {
-    this.TestimonialService.getAll().subscribe((result: any) => {
-       this.dataSource.data = result;
+    this.testimonialService.getAll().subscribe((result: any) => {
+      this.dataSource.data = result;
+      this.dataSource.data.forEach((testimonial: Testimonial) => {
+       this.clientService.getById(testimonial.clientId).subscribe((result1: any) => {
+         if(result1[0] != undefined) {
+          testimonial.authorName = result1[0].name;
+         }
+       });
+     });
     })
   }
 
@@ -116,5 +149,9 @@ export class TestimonialComponent implements OnInit {
     const element = event.currentTarget as HTMLInputElement;
     const value = element.value;
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  public onAuthorChange(option: Client) {
+    this.clientId = option.id === undefined ? 0 : option.id;
   }
 }

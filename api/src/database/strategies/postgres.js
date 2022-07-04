@@ -417,8 +417,8 @@ class PostGresDB extends ICrud {
             bookDeliverable : this._bookDeliverable,
             bookPaymentBalance: this._bookPaymentBalance,
             contact : this._contact,
-            service : this.service,
-            testimonial: this.testimonial
+            service : this._service,
+            testimonial: this._testimonial
         }
     }
 

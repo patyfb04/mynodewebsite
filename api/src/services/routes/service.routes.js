@@ -1,10 +1,10 @@
 const BaseRoute = require('./base/base.route')
 
-class TestimonialRoutes extends BaseRoute{
+class ServiceRoutes extends BaseRoute{
     constructor(db){
         super()
         this.db = db
-        this.entityName = 'testimonial'
+        this.entityName = 'service'
     }
 
     list() {
@@ -30,4 +30,4 @@ class TestimonialRoutes extends BaseRoute{
 
 }
 
-module.exports = TestimonialRoutes
+module.exports = ServiceRoutes

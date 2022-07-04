@@ -25,6 +25,9 @@ const BookRoutes = require('./services/routes/book.routes')
 const BookDeliverableRoutes = require('./services/routes/bookDeliverable.routes')
 const BookPaymentBalanceRoutes = require('./services/routes/bookPaymentBalance.routes')
 const ArtworkRoutes = require('./services/routes/artwork.routes')
+const TestimonialRoutes = require('./services/routes/testimonial.routes')
+const ContactRoutes = require('./services/routes/contact.routes')
+const ServiceRoutes = require('./services/routes/service.routes')
 
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
@@ -42,6 +45,9 @@ async function main() {
     const bookDeliverableRoutes = mapRoutes(new BookDeliverableRoutes(contextDB), BookDeliverableRoutes.methods())
     const bookPaymentBalanceRoutes = mapRoutes(new BookPaymentBalanceRoutes(contextDB), BookPaymentBalanceRoutes.methods())
     const artworkRoutes = mapRoutes(new ArtworkRoutes(contextDB), ArtworkRoutes.methods())
+    const testimonialRoutes = mapRoutes(new TestimonialRoutes(contextDB), TestimonialRoutes.methods())
+    const contactRoutes = mapRoutes(new ContactRoutes(contextDB), ContactRoutes.methods())
+    const serviceRoutes = mapRoutes(new ServiceRoutes(contextDB), ServiceRoutes.methods())
 
     const allRoutes = [
         ...userRoutes,
@@ -49,7 +55,10 @@ async function main() {
         ...bookRoutes,
         ...bookDeliverableRoutes,
         ...bookPaymentBalanceRoutes,
-        ...artworkRoutes
+        ...artworkRoutes,
+        ...testimonialRoutes,
+        ...contactRoutes,
+        ...serviceRoutes
     ]
 
     await contextDB.connect()
