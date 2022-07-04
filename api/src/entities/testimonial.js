@@ -1,7 +1,7 @@
 class Testimonial {
-    constructor({id, comment, comment, display}){
+    constructor({id, clientId, comment, display}){
             this.id = id
-            this.author = author
+            this.clientId = clientId
             this.comment = comment
             this.display = display
     }

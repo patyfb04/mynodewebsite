@@ -27,7 +27,7 @@
   <div>
     <label>
       Comment:
-      <input formControlName="comment" placeholder="Author Comment" type="text">
+      <textarea formControlName="comment" placeholder="Author Comment" rows="5"></textarea>
     </label>
   </div>
   <div>
@@ -54,6 +54,11 @@
       <ng-container matColumnDef="author">
         <th mat-header-cell *matHeaderCellDef  mat-sort-header> Author </th>
         <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.author}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="display">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Display </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.display ? 'visible' : 'hidden' }} </td>
       </ng-container>
 
       <ng-container matColumnDef="id">

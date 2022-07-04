@@ -1,60 +1,63 @@
-import { Component, OnInit,ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TestimonialService } from './testimonial.service';
+import { ClientService } from './../clients/client.service';
 import { Testimonial } from './testimonial';
 import { Client } from './../clients/client';
 import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource, } from '@angular/material/table';
-import { ClientService } from './../clients/client.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, } from '@angular/material/table';
+import { ThisReceiver } from '@angular/compiler';
+
 
 @Component({
   selector: 'testimonial-view',
-  templateUrl: './testimonial.component.html',
-  styleUrls: ['./testimonial.component.sass']
+  templateUrl: './Testimonial.component.html',
+  styleUrls: ['./Testimonial.component.sass']
 })
 export class TestimonialComponent implements OnInit {
-  public displayedColumns: string[] = ['author', 'id'];
+  public isAdmin: boolean = false;
+  public displayedColumns: string[] = ['author', 'display', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
   public myForm: FormGroup;
-  public selectedId : any;
-  public testimonials: Observable<any>;
+  public selectedId: any;
   public dataSource: MatTableDataSource<Testimonial>;
-  public clientId: number = 0;
-  public filteredOptions: Observable<any>;
-  public author = new FormControl();
 
-  @ViewChild(MatPaginator,  {static: false}) 
+  public author = new FormControl();
+  public options = [];
+  public filteredOptions: Observable<any>;
+  public selectedClient: Client;
+
+
+  @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
-    if (this.dataSource){
+    if (this.dataSource) {
       this.dataSource.paginator = value;
     }
   }
 
-  @ViewChild(MatSort,{static: false})
+  @ViewChild(MatSort, { static: false })
   set sort(value: MatSort) {
-    if (this.dataSource){
+    if (this.dataSource) {
       this.dataSource.sort = value;
     }
   }
 
-  constructor(private activateRoute: ActivatedRoute, 
-              private testimonialService: TestimonialService,
-              private clientService: ClientService) {
-
-    this.testimonials = new Observable<any>();
+  constructor(private activateRoute: ActivatedRoute,
+    private testimonialService: TestimonialService,
+    private clientService: ClientService) {
+    this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
     this.dataSource = new MatTableDataSource<Testimonial>();
 
     this.myForm = new FormGroup({
+      display: new FormControl(false),
       author: new FormControl(''),
-      comment: new FormControl(''),
-      display: new FormControl(false)
+      comment: new FormControl('')
     });
 
-    
     this.filteredOptions = this.author.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -63,27 +66,36 @@ export class TestimonialComponent implements OnInit {
         return this.filter(val || '')
       })
     )
-
   }
 
-    //AUTOCOMPLETE /DROPDOWNS----------------
+  //AUTOCOMPLETE /DROPDOWNS----------------
 
-    filter(val: string): Observable<any> {
-      return this.clientService.getAll()
-        .pipe(
-          map(response => response.filter((option: Client) => {
-            return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
-          }))
-        )
-    }
+  filter(val: string): Observable<any> {
+    return this.clientService.getAll()
+      .pipe(
+        map(response => response.filter((option: Client) => {
+          return option.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+        }))
+      )
+  }
 
   public ngOnInit(): void {
     this.loadData();
   }
 
+  public onAuthorChange(option: Client) {
+    this.selectedClient = option;
+  }
+
+  //TABLE ---------------------------------------------------
+
   public displayForm(eventName: any, id: any) {
     this.display = eventName == 'edit' ? true : !this.display;
     this.isEdit = eventName == 'edit' ? true : false;
+
+    if(!this.display) {
+      this.clearForm();
+    }
 
     if (eventName == 'edit') {
       this.initForm(id);
@@ -95,25 +107,39 @@ export class TestimonialComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
+    const testimonial = new Testimonial(0, form.value.author, form.value.comment, form.value.display);
+
+    if (this.isEdit) {
+      testimonial.id = this.selectedId;
+      this.update(testimonial);
+    }
+    else {
+      this.create(testimonial);
+      this.clearForm();
+    }
   }
 
-  public create(Testimonial: Testimonial) {
-    delete Testimonial['id'];
-    this.testimonialService.create(Testimonial).subscribe((result: any) => {
-      this.loadData();
-    })
+  public create(testimonial: Testimonial) {
+
+    delete testimonial['id'];
+    testimonial.author = this.selectedClient.name;
+    this.testimonialService.create(testimonial).subscribe((result1: any) => {
+        this.loadData();
+    });
   }
 
-  public update(Testimonial: Testimonial) {
-    this.testimonialService.update(Testimonial).subscribe((result: any) => {
-      this.loadData();
-    })
+  public update(testimonial: Testimonial) {
+      testimonial.author = this.selectedClient.name;
+      this.testimonialService.update(testimonial).subscribe((result1: any) => {
+        this.loadData();
+        this.display = false;
+      });
   }
 
   public delete(id: number) {
-      this.testimonialService.delete({id: id}).subscribe((result: any) => {
-        this.loadData();
-      })
+    this.testimonialService.delete({ id: id }).subscribe((result: any) => {
+      this.loadData();
+    })
   }
 
   public clearForm() {
@@ -122,26 +148,19 @@ export class TestimonialComponent implements OnInit {
 
   public initForm(id: number) {
     this.testimonialService.getById(id).subscribe((result: any) => {
-      if(result.length > 0) 
-      {
+      if (result.length > 0) {
         this.myForm.patchValue({
-          login: result[0].login,
-          password: result[0].password
+          comment: result[0].comment,
+          display: result[0].display,
+          author: result[0].author
         });
       }
     })
   }
 
   public loadData() {
-    this.testimonialService.getAll().subscribe((result: any) => {
+    this.testimonialService.getAll().subscribe((result: Testimonial[]) => {
       this.dataSource.data = result;
-      this.dataSource.data.forEach((testimonial: Testimonial) => {
-       this.clientService.getById(testimonial.clientId).subscribe((result1: any) => {
-         if(result1[0] != undefined) {
-          testimonial.authorName = result1[0].name;
-         }
-       });
-     });
     })
   }
 
@@ -151,7 +170,4 @@ export class TestimonialComponent implements OnInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  public onAuthorChange(option: Client) {
-    this.clientId = option.id === undefined ? 0 : option.id;
-  }
 }
