@@ -17,6 +17,7 @@ import { BookDeliverableComponent } from './../features/bookDeliverables/bookDel
 import { ArtworkComponent } from './../features/artworks/artwork.component';
 import { ServiceComponent } from './../features/service/service.component';
 import { ContactComponent } from './../features/contact/contact.component';
+import { TestimonialComponent } from './../features/testimonials/testimonial.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
@@ -27,6 +28,8 @@ import { BookDeliverableService } from './../features/bookDeliverables/bookDeliv
 import { ArtworkService } from './../features/artworks/artwork.service';
 import { ServiceService } from './../features/service/service.service';
 import { ContactService } from './../features/contact/contact.service';
+import { TestimonialService } from './../features/testimonials/testimonial.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -41,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BookDeliverableComponent,
     ArtworkComponent,
     ServiceComponent,
-    ContactComponent
+    ContactComponent,
+    TestimonialComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
               BookDeliverableService,
               ArtworkService,
               ServiceService,
-              ContactService],
+              ContactService,
+              TestimonialService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

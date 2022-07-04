@@ -5,7 +5,7 @@
     "build": "ng serve",
     "server": "node ../api/src/api.js",
     "sass": "node-sass src/styles.sass -src/assets/styles/main.css",
-    "start": "concurrently \"npm run build\" \"npm run server\""
+    "start": "concurrently \"npm run sass\" \"npm run build\" \"npm run server\""
   },
   "private": true,
   "dependencies": {

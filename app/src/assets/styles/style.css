@@ -484,7 +484,7 @@ a:active,a:focus {
 }
 /*--------------------------------------------------------------6.3 Menus--------------------------------------------------------------*/
 
-.admin-navigation {
+/* .admin-navigation {
 	background-color: #fff;
 	font-size: 14px;
 	font-weight: 700;
@@ -493,9 +493,9 @@ a:active,a:focus {
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	text-transform: uppercase;
-}
+} */
 
-.admin-navigation a {
+/* .admin-navigation a {
 	text-decoration:none;
 	color:black;
 }
@@ -509,9 +509,9 @@ display:inline;
 float:left;
 margin:0 1em;
 position:relative;
-}
-.admin-navigation ul ul {
-display:none;
+} */
+/* .admin-navigation ul ul {
+
 text-transform:none;
 box-shadow:none;
 opacity:0.9;
@@ -525,16 +525,17 @@ padding-top:35px;
 transition:all 0.3s;
 font-weight:400;
 background-color:#fff;
-}
+} */
+/* 
 .admin-navigation ul ul li {
 margin:0;
 width:150px;
 }
 .admin-navigation ul li:hover>ul {
 display: block;
-}
+} */
 
-.menu {
+/* .menu {
 	display:table;
 	margin:0 auto;
 }
@@ -584,7 +585,7 @@ display: block;
 }
 .main-navigation ul li:hover>ul {
 	display: block;
-}
+} */
 /* Small menu */
 .menu-toggle {
 	display: none;

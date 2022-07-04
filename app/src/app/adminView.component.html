@@ -1,19 +1,27 @@
 
-<h3>ADMINISTRATION</h3>
+<h3 (click)="displayView($event, 'home')" style="cursor: pointer">ADMINISTRATION</h3>
 
 <nav class="admin-navigation">
-    <div class="menu-menu-1-container">
-        <ul id="menu-menu-1" class="menu">
-            <li><a href="#" (click)="displayView($event, 'home')">Home</a></li>
-            <li><a href="#" (click)="displayView($event, 'users')">Users</a></li>
-            <li><a href="#" (click)="displayView($event, 'clients')">Clients</a></li>
-            <li><a href="#" (click)="displayView($event, 'artworks')">Artworks</a></li>
-            <li><a href="#" (click)="displayView($event, 'books')">Books</a></li>
-            <li><a href="#" (click)="displayView($event, 'bookDeliverables')">Book Deliverables</a></li>
-            <li><a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a></li>
-        </ul>
-    </div>
-    </nav>
+    
+    <div class="navbar">
+        <a href="#" (click)="displayView($event, 'home')">Home</a>
+        <a href="#" (click)="displayView($event, 'users')">Users</a>
+        <a href="#" (click)="displayView($event, 'clients')">Clients</a>
+        <a href="#" (click)="displayView($event, 'artworks')">Artworks</a>
+        <div class="subnav">
+          <button class="subnavbtn">Book Management</button>
+          <div class="subnav-content">
+            <a href="#" (click)="displayView($event, 'books')">Books</a>
+            <a href="#" (click)="displayView($event, 'bookDeliverables')">Book Deliverables</a>
+            <a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a>
+          </div>
+        </div> 
+        <a href="#" (click)="displayView($event, 'testimonials')">Testimonials</a>
+        <a href="#" (click)="displayView($event, 'service')">Service</a>
+        <a href="#" (click)="displayView($event, 'contact')">Contact</a>
+      </div>
+
+</nav>
 
 <div *ngIf="display.home">
         HOME
@@ -25,3 +33,4 @@
 <books-view  *ngIf="display.books"></books-view>
 <book-payment-balances-view  *ngIf="display.bookPaymentBalances"></book-payment-balances-view>
 <book-deliverable-view  *ngIf="display.bookDeliverables"></book-deliverable-view>
+<testimonial-view  *ngIf="display.testimonials"></testimonial-view>

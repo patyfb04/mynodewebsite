@@ -21,7 +21,7 @@ form
   margin-bottom: 10px
 
 input
-   margin-bottom:10px
+   margin-bottom: 10px
    
 input[type="text"]  
    padding:    10px
@@ -46,12 +46,9 @@ input[type="file"]
     display: inline-block
     padding: 6px 12px
     cursor: pointer
-
+ 
 button
     border-radius: 5px
-
-
-// angular material --------
 
 ::ng-deep td.mat-cell:last-of-type
    text-align: right!important
@@ -63,6 +60,54 @@ button
 ::ng-deep .mat-form-field
    width: 98%
 
+.admin-navigation .navbar 
+  overflow: hidden
+  background-color: #333
+
+.admin-navigation .navbar a
+  float: left 
+  font-size: 14px
+  color: white
+  text-align: center
+  padding: 14px 14px
+  text-decoration: none
+
+.subnav
+  float: left
+  overflow: hidden
+
+.admin-navigation .navbar .subnav .subnavbtn 
+  font-size: 14px 
+  border: none
+  outline: none
+  color: white
+  padding: 14px 14px
+  background-color: inherit
+  font-family: inherit
+  margin: 0
+
+.admin-navigation .navbar a:hover, .admin-navigation .navbar .subnav:hover .subnavbtn 
+  background-color: #cccccc
+  color: black
+
+.admin-navigation .navbar .subnav-content
+  display: none
+  position: absolute
+  background-color: #cccccc
+  z-index: 1
+
+.admin-navigation .navbar .subnav-content a
+  float: left
+  color: white
+  text-decoration: none
+
+.admin-navigation .navbar .subnav-content a:hover
+  background-color: #eee
+  color: black
+
+.admin-navigation .navbar .subnav:hover .subnav-content
+  display: block
+  background-color: #333333
 
 
 
