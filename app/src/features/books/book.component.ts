@@ -9,6 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class BookComponent implements OnInit {
 
   public filename: string = 'Upload File';
   public serverUrl: string = "http://localhost:5000/src/assets/books/";
+  public image: string="";
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -61,7 +63,8 @@ export class BookComponent implements OnInit {
     this.myForm = new FormGroup({
       title: new FormControl(''),
       link: new FormControl(''),
-      thumbnail: new FormControl('')
+      thumbnail: new FormControl(''),
+      author: new FormControl('')
     });
 
     this.filteredOptions = this.author.valueChanges.pipe(
@@ -119,6 +122,10 @@ export class BookComponent implements OnInit {
     this.display = eventName == 'edit' ? true : !this.display;
     this.isEdit = eventName == 'edit' ? true : false;
 
+    if(!this.display) {
+      this.clearForm();
+    }
+
     if (eventName == 'edit') {
       this.initForm(id);
       this.selectedId = id;
@@ -142,23 +149,24 @@ export class BookComponent implements OnInit {
   }
 
   public create(book: Book) {
+   // this.clearForm();
+
     delete book['id'];
     book.clientId = this.clientId;
     book.status = this.status;
 
     const formData = new FormData();
     const file = this.myForm.get('thumbnail')?.value;
-
     formData.append('file', file, this.filename);
 
     book.thumbnail = this.filename;
 
     if (formData.get('file') != null) {
-      console.log('FORM DATA FROM ANGULAR => ',formData.get('file'));
       this.bookService.uploadFile(formData).subscribe((result: any) => {
-        // this.bookService.create(book).subscribe((result1: any) => {
-        //   this.loadData();
-        // });
+        this.bookService.create(book).subscribe((result1: any) => {
+          this.loadData();
+          this.filename = "";
+        });
       });
     }
   }
@@ -166,13 +174,12 @@ export class BookComponent implements OnInit {
   public update(book: Book) {
     book.clientId = this.clientId;
     book.status = this.status;
-
-    const formData = new FormData();
-    formData.append('file', this.myForm.get('fileSource')?.value);
-
-    this.bookService.update(book).subscribe((result: any) => {
-      this.loadData();
-    })
+    book.clientId = this.clientId;
+    book.status = this.status;
+    book.thumbnail = this.image;
+      this.bookService.update(book).subscribe((result1: any) => {
+        this.loadData();
+      });
   }
 
   public delete(id: number) {
@@ -189,31 +196,36 @@ export class BookComponent implements OnInit {
   public initForm(id: number) {
     this.bookService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
+         this.image = result[0].thumbnail
+
         this.myForm.patchValue({
           title: result[0].title,
-          link: result[0].link,
-          thumbnail: result[0].thumbnail
+          link: result[0].link
         });
 
         this.bookStatus.setValue(result[0].status);
+        this.myForm.patchValue({
+          bookStatus: result[0].status
+        });
 
         this.clientService.getById(result[0].clientId).subscribe((result1: any) => {
           this.author.setValue(result1[0].name);
+
+          this.myForm.patchValue({
+            author: result[0].author
+          });
         })
       }
     })
   }
 
-
   public loadData() {
-
     this.bookService.getAll().subscribe((result: Book[]) => {
       this.dataSource.data = result;
-
-      this.dataSource.data.forEach((book: Book) => {
+       this.dataSource.data.forEach((book: Book) => {
         this.clientService.getById(book.clientId).subscribe((result1: any) => {
           book.authorName = result1[0].name;
-        })
+        });
       });
     })
   }
