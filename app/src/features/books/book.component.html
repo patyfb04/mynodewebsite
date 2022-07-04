@@ -23,7 +23,7 @@
 
       <div class="form-group" *ngIf="isEdit">
         <label for="image_thumb">Book Cover Image:</label>
-        <img src="./../../assets/img/{{image}}" width="200px" name="image_thumb">
+        <img src="./../../assets/img/{{image}}" width="200px" name="image_thumb" *ngIf="image != null">
       </div> 
 
       <div>

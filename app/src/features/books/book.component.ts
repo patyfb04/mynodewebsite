@@ -149,24 +149,31 @@ export class BookComponent implements OnInit {
   }
 
   public create(book: Book) {
-   // this.clearForm();
 
     delete book['id'];
     book.clientId = this.clientId;
     book.status = this.status;
 
-    const formData = new FormData();
     const file = this.myForm.get('thumbnail')?.value;
-    formData.append('file', file, this.filename);
-
-    book.thumbnail = this.filename;
-
-    if (formData.get('file') != null) {
+   
+    if (file != null) 
+    {
+      const formData = new FormData();
+      formData.append('file', file, this.filename);
+      book.thumbnail = this.filename;
+      
       this.bookService.uploadFile(formData).subscribe((result: any) => {
         this.bookService.create(book).subscribe((result1: any) => {
           this.loadData();
           this.filename = "";
         });
+      });
+    }
+    else 
+    {
+      this.bookService.create(book).subscribe((result1: any) => {
+        this.loadData();
+        this.filename = "";
       });
     }
   }
