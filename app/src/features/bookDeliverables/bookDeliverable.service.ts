@@ -19,15 +19,15 @@ export class BookDeliverableService extends BaseService{
         return this.httpClient.get<any>(this.rootURL +'bookDeliverable/'+ id, this.requestOptions);
     }
 
-    public create(client : BookDeliverable): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'bookDeliverable/create', client, this.requestOptions);
+    public create(bookdeliverable : BookDeliverable): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'bookDeliverable/create', bookdeliverable, this.requestOptions);
     }
 
-    public update(client : BookDeliverable): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'bookDeliverable/update', client, this.requestOptions);
+    public update(bookdeliverable : BookDeliverable): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'bookDeliverable/update', bookdeliverable, this.requestOptions);
     }
 
-    public delete(id: number): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'bookDeliverable/delete/' +id, this.requestOptions);
+    public delete(bookdeliverable : any): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'bookDeliverable/delete', bookdeliverable, this.requestOptions);
     }
 }

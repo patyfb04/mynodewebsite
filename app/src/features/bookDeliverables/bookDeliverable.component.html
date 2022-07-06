@@ -1,6 +1,127 @@
-<div>
-   BOOK DELIVERABLE PAGE
-<br>
-  response: {{ bookDeliverableList | json }}
+<div class="bookClass">
+  <div>
+    <h4>BOOKS DELIVERABLES </h4>
+    <img class="icon-button right" src="./../../assets/icons/add-create-new.svg" *ngIf="!display"
+      (click)="displayForm('create', 0)" />
+    <img class="icon-button right" src="./../../assets/icons/close-delete-minus.svg" *ngIf="display"
+      (click)="displayForm('create', 0)" />
+  </div>
+
+  <div *ngIf="display">
+    {{ isEdit? 'Edit': 'Create '}} Book
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" >
+
+      <div>
+        <label>
+          Book:
+          <mat-form-field>
+            <input type="text" placeholder="Enter book title" [formControl]="book" matInput [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title"
+                (onSelectionChange)="onBookChange(option)">
+                {{option.title}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+        </label>
+      </div>
+      <div>
+        <label>
+          Description:
+          <input formControlName="description" placeholder="Book deliverable description" type="text">
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Status:
+          <mat-form-field appearance="fill">
+            <select matNativeControl required #mySelect [formControl]="bookDeliverableStatus"
+              (change)="onStatusChange(mySelect.value)">
+              <option value="sketch">Sketch</option>
+              <option value="in_process">In Process</option>
+              <option value="delivered">Delivered</option>
+              <option value="revision">Revision</option>
+            </select>
+          </mat-form-field>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Amount Paid:
+          <input formControlName="amount" placeholder="Book Amount Paid" type="text">
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Link:
+          <input formControlName="link" placeholder="Book Deliverable Link" type="text">
+        </label>
+      </div>
+
+      <button type="submit">Save</button> &nbsp;
+      <button type="reset" *ngIf="!isEdit">Clear</button>
+      <button type="button" *ngIf="isEdit" (click)="display = false">Cancel</button>
+    </form>
+  </div>
+
+  <div>
+    <mat-form-field class="search">
+      <input matInput type="text" (keyup)="doFilter($event)"
+        placeholder="Type the book deliverable description, status, book title, or link to search">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" [ngClass]="'grid'" matSort>
+
+      <ng-container matColumnDef="book">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Title </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.bookTitle}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount Paid </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.amount  | currency : 'CAD'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="modifiedDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified Date </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.modifiedDate }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Link </th>
+        <td mat-cell *matCellDef="let element"> 
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)" 
+           *ngIf="element.link != null" style="cursor: pointer"/>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/draw-edit-new.svg"
+            (click)="displayForm('edit',element.id)" /> &nbsp;
+          <img alt="delete" class="icon-button table" src="./../../assets/icons/cancel-close-delete.svg"
+            (click)="delete(element.id)" />
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of book deliverables">
+    </mat-paginator>
+
+  </div>
 
 </div>
