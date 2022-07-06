@@ -19,15 +19,19 @@ export class ArtworkService extends BaseService{
         return this.httpClient.get<any>(this.rootURL +'artwork/'+ id, this.requestOptions);
     }
 
-    public create(client : Artwork): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'artwork/create', client, this.requestOptions);
+    public create(artwork : Artwork): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'artwork/create', artwork, this.requestOptions);
     }
 
-    public update(client : Artwork): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'artwork/update', client, this.requestOptions);
+    public update(artwork : Artwork): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'artwork/update', artwork, this.requestOptions);
     }
 
-    public delete(id: number): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'artwork/delete/' +id, this.requestOptions);
+    public delete(artwork : any): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'artwork/delete', artwork, this.requestOptions);
+    }
+
+    public uploadFile(formData : FormData): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'artwork/upload', formData);
     }
 }

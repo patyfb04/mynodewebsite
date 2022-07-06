@@ -1,6 +1,6 @@
 export class Artwork {
     public id? : number;
-    public clientId : number;
+    public clientId? : number;
     public title : string;
     public  description  : string;
     public  link  : string;
