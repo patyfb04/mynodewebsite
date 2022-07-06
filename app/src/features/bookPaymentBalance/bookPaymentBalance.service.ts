@@ -19,15 +19,15 @@ export class BookPaymentBalanceService extends BaseService{
         return this.httpClient.get<any>(this.rootURL +'bookPaymentBalance/'+ id, this.requestOptions);
     }
 
-    public create(client : BookPaymentBalance): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'bookPaymentBalance/create', client, this.requestOptions);
+    public create(bookPaymentBalance : BookPaymentBalance): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'bookPaymentBalance/create', bookPaymentBalance, this.requestOptions);
     }
 
-    public update(client : BookPaymentBalance): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'bookPaymentBalance/update', client, this.requestOptions);
+    public update(bookPaymentBalance : BookPaymentBalance): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'bookPaymentBalance/update', bookPaymentBalance, this.requestOptions);
     }
 
-    public delete(id: number): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'bookPaymentBalance/delete/' +id, this.requestOptions);
+    public delete(bookPaymentBalance : any): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'bookPaymentBalance/delete', bookPaymentBalance, this.requestOptions);
     }
 }

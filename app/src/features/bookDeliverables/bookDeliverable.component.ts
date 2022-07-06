@@ -10,6 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
 import { ThisReceiver } from '@angular/compiler';
+import { BookPaymentBalanceService } from './../bookPaymentBalance/bookPaymentBalance.service';
+import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
 
 @Component({
   selector: 'book-deliverable-view',
@@ -50,8 +52,8 @@ export class BookDeliverableComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
     private bookDeliverableService: BookDeliverableService,
-    private bookService: BookService,) {
-    this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
+    private bookService: BookService,
+    private bookPaymentBalanceService : BookPaymentBalanceService) {
     this.dataSource = new MatTableDataSource<BookDeliverable>();
 
     this.myForm = new FormGroup({
@@ -135,6 +137,7 @@ public create(bookdeliverable: BookDeliverable) {
 
     this.bookDeliverableService.create(bookdeliverable).subscribe((result1: any) => {
       this.loadData();
+      this.updateBookPayments(bookdeliverable);
     });
   
 }
@@ -144,6 +147,7 @@ public update(bookdeliverable: BookDeliverable) {
   bookdeliverable.status = this.status;
     this.bookDeliverableService.update(bookdeliverable).subscribe((result1: any) => {
       this.loadData();
+      this.updateBookPayments(bookdeliverable);
     });
 }
 
@@ -158,7 +162,25 @@ public clearForm() {
   this.myForm.reset();
 }
 
+// update book payment balance
+public updateBookPayments(bookDeliverable: BookDeliverable) {
 
+  this.bookPaymentBalanceService.getAll().subscribe((result : any) => {
+    var filterByBook = result.filter(function(bookpayment : BookPaymentBalance){
+        return bookpayment.bookId == bookDeliverable.bookId
+    });
+
+    console.log(filterByBook);
+
+    if(filterByBook) {
+      var total = parseFloat(filterByBook[0].totalAmountPaid) + parseFloat(bookDeliverable.amount.toString());
+      var paymentUpdate = new BookPaymentBalance(filterByBook[0].id, filterByBook[0].bookId, total, new Date());
+      this.bookPaymentBalanceService.update(paymentUpdate).subscribe((result1: any) => {
+      });
+    }
+  })
+
+}
 
   public initForm(id: number) {
     this.bookDeliverableService.getById(id).subscribe((result: any) => {
