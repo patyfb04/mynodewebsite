@@ -10,7 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
 import { ThisReceiver } from '@angular/compiler';
-
+import { BookPaymentBalanceService } from './../bookPaymentBalance/bookPaymentBalance.service';
+import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
 
 @Component({
   selector: 'books-view',
@@ -56,7 +57,8 @@ export class BookComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
     private bookService: BookService,
-    private clientService: ClientService) {
+    private clientService: ClientService,
+    private bookPaymentBalanceService : BookPaymentBalanceService) {
     this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
     this.dataSource = new MatTableDataSource<Book>();
 
@@ -166,6 +168,7 @@ export class BookComponent implements OnInit {
         this.bookService.create(book).subscribe((result1: any) => {
           this.loadData();
           this.filename = "";
+          this.createBookPayments(book);
         });
       });
     }
@@ -174,6 +177,7 @@ export class BookComponent implements OnInit {
       this.bookService.create(book).subscribe((result1: any) => {
         this.loadData();
         this.filename = "";
+        this.createBookPayments(book);
       });
     }
   }
@@ -193,12 +197,43 @@ export class BookComponent implements OnInit {
 
     this.bookService.delete({ id: id }).subscribe((result: any) => {
       this.loadData();
+      this.deleteBookPayments(id);
     })
   }
 
   public clearForm() {
     this.myForm.reset();
   }
+
+
+// update book payment balance
+public createBookPayments(book: Book) {
+      this.bookService.getAll().subscribe((result : Book[]) => {
+        var result_sort = result.sort(function(a: Book, b: Book){
+          var id1 =  a.id != null ? a.id : 0;
+          var id2 =  b.id != null ? b.id : 0;
+          return id2 - id1
+        });
+
+        var lastRow = result_sort[0];
+          var paymentCreate = new BookPaymentBalance(0, (lastRow.id != null? lastRow.id : 0), 0, new Date());
+          this.bookPaymentBalanceService.create(paymentCreate).subscribe((result1: any) => {
+          });
+      }) 
+}
+
+public deleteBookPayments(id: number){
+  this.bookPaymentBalanceService.getAll().subscribe((result : any) => {
+    var filterByBook = result.filter(function(bookpayment : BookPaymentBalance){
+        return bookpayment.bookId == id
+    });
+
+    if(filterByBook) {
+      this.bookPaymentBalanceService.delete(filterByBook[0].id).subscribe((result1: any) => {
+      });
+    }
+  })
+}
 
   public initForm(id: number) {
     this.bookService.getById(id).subscribe((result: any) => {

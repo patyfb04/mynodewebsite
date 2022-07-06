@@ -170,8 +170,6 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
         return bookpayment.bookId == bookDeliverable.bookId
     });
 
-    console.log(filterByBook);
-
     if(filterByBook) {
       var total = parseFloat(filterByBook[0].totalAmountPaid) + parseFloat(bookDeliverable.amount.toString());
       var paymentUpdate = new BookPaymentBalance(filterByBook[0].id, filterByBook[0].bookId, total, new Date());
@@ -179,7 +177,6 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
       });
     }
   })
-
 }
 
   public initForm(id: number) {
