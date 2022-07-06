@@ -231,7 +231,9 @@ export class BookComponent implements OnInit {
       this.dataSource.data = result;
        this.dataSource.data.forEach((book: Book) => {
         this.clientService.getById(book.clientId).subscribe((result1: any) => {
-          book.authorName = result1[0].name;
+          if(result1[0] != undefined) {
+            book.authorName = result1[0].name;
+          } 
         });
       });
     })

@@ -30,6 +30,7 @@ export class TestimonialComponent implements OnInit {
   public options = [];
   public filteredOptions: Observable<any>;
   public selectedClient: Client;
+  public authorName?: string = '';
 
 
   @ViewChild(MatPaginator, { static: false })
@@ -89,7 +90,7 @@ export class TestimonialComponent implements OnInit {
 
   //TABLE ---------------------------------------------------
 
-  public displayForm(eventName: any, id: any) {
+  public displayForm(eventName: any, id: any, author?: string) {
     this.display = eventName == 'edit' ? true : !this.display;
     this.isEdit = eventName == 'edit' ? true : false;
 
@@ -98,8 +99,9 @@ export class TestimonialComponent implements OnInit {
     }
 
     if (eventName == 'edit') {
-      this.initForm(id);
+      this.authorName = author;
       this.selectedId = id;
+      this.initForm(id);
     } else {
       this.clearForm();
     }
@@ -154,6 +156,8 @@ export class TestimonialComponent implements OnInit {
           display: result[0].display,
           author: result[0].author
         });
+
+        this.author.setValue(result[0].author);
       }
     })
   }
@@ -161,6 +165,7 @@ export class TestimonialComponent implements OnInit {
   public loadData() {
     this.testimonialService.getAll().subscribe((result: Testimonial[]) => {
       this.dataSource.data = result;
+
     })
   }
 
