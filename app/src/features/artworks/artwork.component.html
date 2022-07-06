@@ -21,11 +21,6 @@
         <input formControlName="thumbnail" id="thumbnail" name="thumbnail" type="file" class="form-control" (change)="onFileThumbChange($event)">
       </div> 
 
-      <div class="form-group" *ngIf="isEdit">
-        <label for="image_thumb">Artwork Thumbnail Image:</label>
-        <img src="./../../assets/img/{{image_thumbnail}}" width="200px" name="image_thumb" *ngIf="image != null">
-      </div> 
-
       <div class="form-group" *ngIf="!isEdit" style="margin-top:10px">
         <label for="file">Artwork Image:</label>
         <label for="image" class="file-upload">
@@ -36,10 +31,9 @@
       </div> 
 
       <div class="form-group" *ngIf="isEdit">
-        <label for="image_thumb">Artwork Thumbnail Image:</label>
-        <img src="./../../assets/img/{{image}}" width="200px" name="image" *ngIf="image != null">
+        <label for="image_thumb">Artwork Thumbnail:</label>
+        <img src="./../../assets/img/{{image_thumbnail}}" width="200px" name="image_thumb" *ngIf="image_thumbnail != null">
       </div> 
-
 
       <div>
         <label>
@@ -80,7 +74,16 @@
       <div>
         <label>
           Category:
-          <input formControlName="category" placeholder="Artwork Category" type="text">
+          <mat-form-field appearance="fill">
+            <select matNativeControl required #mySelect [formControl]="category"
+              (change)="onCategoryChange(mySelect.value)">
+              <option value="children">Children</option>
+              <option value="cartoon">Cartoon</option>
+              <option value="realistic">Realistic/Semi-Realistic</option>
+              <option value="vectorial">Vectorial</option>
+              <option value="general">General</option>
+            </select>
+          </mat-form-field>
         </label>
       </div>
 
@@ -94,7 +97,7 @@
       <div>
         <label>
           Total Paid:
-          <input formControlName="paid" placeholder="Artwork Price" type="text">
+          <input formControlName="totalPaid" placeholder="Artwork Price" type="text">
         </label>
       </div>
 
@@ -127,23 +130,33 @@
       </ng-container>
 
       <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
         <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.title}} </td>
       </ng-container>
 
       <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.category }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.category}} </td>
       </ng-container>
 
       <ng-container matColumnDef="tools">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.tools }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tools </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.tools}} </td>
       </ng-container>
 
       <ng-container matColumnDef="createdDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.createdDate }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{ element.createdDate | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="display">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Display </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{ element.display ? 'visible' : 'hidden'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalPaid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Paid </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{ element.totalPaid | currency:' CAD'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="link">

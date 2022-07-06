@@ -73,6 +73,7 @@ class BaseRoute {
             method: 'POST',
             handler: (request, response) => {
                 console.log('DATA =>', request.files.file)
+                console.log('DATA THUMB =>', request.files.file_thumbnail)
 
                 const path = "src\\assets\\img\\"
                 const newPath = path +""+ request.files.file.originalFilename;
@@ -81,6 +82,16 @@ class BaseRoute {
                     if (err) throw err;
                     console.log('File Renamed.');
                 });
+
+                if(request.files.file_thumbnail != null) 
+                {
+                    const newThumbnailPath = path +""+ request.files.file_thumbnail.originalFilename;
+
+                    fs.rename(request.files.file_thumbnail.path, newThumbnailPath, function (err) {
+                        if (err) throw err;
+                        console.log('Thumbnail File Renamed.');
+                    });
+                }
 
                 return new Promise((resolve, reject) => {
                     resolve(1);

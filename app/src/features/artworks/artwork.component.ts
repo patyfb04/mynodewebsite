@@ -19,7 +19,7 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class ArtworkComponent implements OnInit {
   public isAdmin: boolean = false;
-  public displayedColumns: string[] = ['thumbnail', 'title', 'category', 'tools', 'createdDate', 'link', 'id'];
+  public displayedColumns: string[] = ['thumbnail', 'title', 'category', 'tools', 'createdDate', 'display', 'totalPaid', 'link', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
   public myForm: FormGroup;
@@ -31,8 +31,8 @@ export class ArtworkComponent implements OnInit {
   public filteredOptions: Observable<any>;
   public clientId: number = 0;
 
-  public bookStatus = new FormControl();
-  public status: string = '';
+  public category = new FormControl();
+  public categoryName: string = '';
 
   public filename: string = 'Upload File';
   public filename_thumbnail: string = 'Upload File';
@@ -71,8 +71,7 @@ export class ArtworkComponent implements OnInit {
       client: new FormControl(''),
       description: new FormControl(''),
       tools: new FormControl(''),
-      category: new FormControl(''),
-      paid: new FormControl(''),
+      totalPaid: new FormControl(''),
       display: new FormControl('')
     });
 
@@ -105,8 +104,8 @@ export class ArtworkComponent implements OnInit {
     this.clientId = option.id === undefined ? 0 : option.id;
   }
 
-  public onStatusChange(option: string) {
-    this.status = option;
+  public onCategoryChange(option: string) {
+    this.categoryName = option;
   }
 
   //FILE UPLOAD ----------------------------
@@ -172,6 +171,7 @@ export class ArtworkComponent implements OnInit {
 
     delete artwork['id'];
     artwork.clientId = this.clientId;
+    artwork.category = this.categoryName;
 
     const file_thumb = this.myForm.get('thumbnail')?.value;
     const file= this.myForm.get('image')?.value;
@@ -184,7 +184,7 @@ export class ArtworkComponent implements OnInit {
 
       artwork.thumbnail = this.filename_thumbnail;
       artwork.image = this.filename;
-      
+
       this.artworkService.uploadFile(formData).subscribe((result: any) => {
         this.artworkService.create(artwork).subscribe((result1: any) => {
           this.loadData();
@@ -205,7 +205,7 @@ export class ArtworkComponent implements OnInit {
 
   public update(artwork: Artwork) {
     artwork.clientId = this.clientId;
-    artwork.clientId = this.clientId;
+    artwork.category = this.categoryName;
     artwork.thumbnail = this.image_thumbnail;
     artwork.image = this.image;
       this.artworkService.update(artwork).subscribe((result1: any) => {
@@ -226,7 +226,8 @@ export class ArtworkComponent implements OnInit {
   public initForm(id: number) {
     this.artworkService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
-         this.image = result[0].thumbnail
+         this.image_thumbnail = result[0].thumbnail;
+         this.image = result[0].image;
 
         this.myForm.patchValue({
           title: result[0].title,
@@ -234,15 +235,21 @@ export class ArtworkComponent implements OnInit {
           tools: result[0].tools,
           category: result[0].category,
           display: result[0].display,
-          paid: result[0].totalPaid,
+          totalPaid: result[0].totalPaid,
           link: result[0].link
+        });
+
+        this.category.setValue(result[0].category);
+        
+        this.myForm.patchValue({
+          category: result[0].category
         });
 
         this.clientService.getById(result[0].clientId).subscribe((result1: any) => {
           if(result1[0] != undefined) {
             this.client.setValue(result1[0].name);
             this.myForm.patchValue({
-              author: result[0].author
+              clientId: result[0].id
             });
           }
         })

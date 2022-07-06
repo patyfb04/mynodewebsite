@@ -29,6 +29,10 @@ class ArtworkRoutes extends BaseRoute{
         return  super.delete(this.entityName)
     }
 
+    upload(){
+        return  super.upload(this.entityName)
+    }
+
 }
 
 module.exports = ArtworkRoutes
