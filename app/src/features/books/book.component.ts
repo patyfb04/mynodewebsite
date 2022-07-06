@@ -12,6 +12,8 @@ import { MatTableDataSource, } from '@angular/material/table';
 import { ThisReceiver } from '@angular/compiler';
 import { BookPaymentBalanceService } from './../bookPaymentBalance/bookPaymentBalance.service';
 import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
+import { BookDeliverableService } from './../bookDeliverables/bookDeliverable.service';
+import { BookDeliverable } from '../bookDeliverables/bookDeliverable';
 
 @Component({
   selector: 'books-view',
@@ -58,7 +60,8 @@ export class BookComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
     private bookService: BookService,
     private clientService: ClientService,
-    private bookPaymentBalanceService : BookPaymentBalanceService) {
+    private bookPaymentBalanceService : BookPaymentBalanceService,
+    private bookDeliverableService : BookDeliverableService) {
     this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
     this.dataSource = new MatTableDataSource<Book>();
 
@@ -200,6 +203,7 @@ export class BookComponent implements OnInit {
     this.bookService.delete({ id: id }).subscribe((result: any) => {
       this.loadData();
       this.deleteBookPayments(id);
+      this.deleteBookDeliverables(id);
     })
   }
 
@@ -241,6 +245,21 @@ public deleteBookPayments(id: number){
   })
 }
 
+public deleteBookDeliverables(id: number){
+  const bookId = id;
+  this.bookDeliverableService.getAll().subscribe((result : any) => {
+    var filterByBook = result.filter(function(bookDeliverable : BookDeliverable){
+        return parseInt(bookDeliverable.bookId.toString()) == bookId
+    });
+   
+    if(filterByBook[0]) 
+    {
+      var id = parseInt(filterByBook[0].id);
+      this.bookDeliverableService.delete({ id: id }).subscribe((result1: any) => {
+      });
+    }
+  })
+}
   public initForm(id: number) {
     this.bookService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {

@@ -138,6 +138,7 @@ public create(bookdeliverable: BookDeliverable) {
     this.bookDeliverableService.create(bookdeliverable).subscribe((result1: any) => {
       this.loadData();
       this.updateBookPayments(bookdeliverable);
+      this.display=false;
     });
   
 }
