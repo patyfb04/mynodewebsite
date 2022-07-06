@@ -166,6 +166,7 @@ export class BookComponent implements OnInit {
       
       this.bookService.uploadFile(formData).subscribe((result: any) => {
         this.bookService.create(book).subscribe((result1: any) => {
+          this.display = false;
           this.loadData();
           this.filename = "";
           this.createBookPayments(book);
@@ -190,6 +191,7 @@ export class BookComponent implements OnInit {
     book.thumbnail = this.image;
       this.bookService.update(book).subscribe((result1: any) => {
         this.loadData();
+        this.display = false;
       });
   }
 
@@ -217,19 +219,23 @@ public createBookPayments(book: Book) {
 
         var lastRow = result_sort[0];
           var paymentCreate = new BookPaymentBalance(0, (lastRow.id != null? lastRow.id : 0), 0, new Date());
+          delete paymentCreate['id'];
           this.bookPaymentBalanceService.create(paymentCreate).subscribe((result1: any) => {
           });
       }) 
 }
 
 public deleteBookPayments(id: number){
+  const bookId = id;
   this.bookPaymentBalanceService.getAll().subscribe((result : any) => {
     var filterByBook = result.filter(function(bookpayment : BookPaymentBalance){
-        return bookpayment.bookId == id
+        return parseInt(bookpayment.bookId.toString()) == bookId
     });
-
-    if(filterByBook) {
-      this.bookPaymentBalanceService.delete(filterByBook[0].id).subscribe((result1: any) => {
+   
+    if(filterByBook[0] != undefined) 
+    {
+      var id = parseInt(filterByBook[0].id.trim());
+      this.bookPaymentBalanceService.delete({ id: id }).subscribe((result1: any) => {
       });
     }
   })

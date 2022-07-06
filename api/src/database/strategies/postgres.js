@@ -317,7 +317,7 @@ class PostGresDB extends ICrud {
         //BOOK Payment
           this._bookPaymentBalance = this._driver.define('bookPaymentBalance', {
                 id: {
-                    type: Sequelize.INTEGER,
+                    type: Sequelize.BIGINT,
                     required: true,
                     primaryKey: true,
                     autoIncrement: true
