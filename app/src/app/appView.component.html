@@ -4,6 +4,7 @@
         <a href="#"(click)="displayView($event, 'artworks')">Artworks</a>
         <a href="#" (click)="displayView($event, 'books')">Books</a>
         <a href="#" (click)="displayView($event, 'service')">Service</a>
+        <a href="#" (click)="displayView($event, 'testimonial')">Testimonials</a>
         <a href="#" (click)="displayView($event, 'contact')">Contact</a>
       </div>
 </nav>
@@ -17,3 +18,4 @@ HOME
 <books-view  *ngIf="display.books" ></books-view>
 <service-view  *ngIf="display.service"></service-view>
 <contact-view  *ngIf="display.contact"></contact-view>
+<testimonial-view  *ngIf="display.testimonial"></testimonial-view>

@@ -26,6 +26,8 @@ export class ArtworkComponent implements OnInit {
   public selectedId: any;
   public dataSource: MatTableDataSource<Artwork>;
 
+  public artworkList: Artwork[];
+
   public client = new FormControl();
   public options = [];
   public filteredOptions: Observable<any>;
@@ -259,6 +261,7 @@ export class ArtworkComponent implements OnInit {
 
   public loadData() {
     this.artworkService.getAll().subscribe((result: Artwork[]) => {
+      this.artworkList = result;
       this.dataSource.data = result;
        this.dataSource.data.forEach((artwork: Artwork) => {
         this.clientService.getById(artwork.clientId != null ? artwork.clientId : 0).subscribe((result1: any) => {
@@ -279,4 +282,5 @@ export class ArtworkComponent implements OnInit {
   public goToUrl(url: string) {
     window.open(url, '_blank')
   }
+
 }

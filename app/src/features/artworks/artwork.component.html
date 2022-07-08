@@ -6,7 +6,6 @@
     <img class="icon-button right" src="./../../assets/icons/close-delete-minus.svg" *ngIf="display"
       (click)="displayForm('create', 0)" />
   </div>
-
   <div *ngIf="display">
     {{ isEdit? 'Edit': 'Create '}} Book
 
@@ -113,7 +112,6 @@
       <button type="button" *ngIf="isEdit" (click)="display = false">Cancel</button>
     </form>
   </div>
-
   <div>
     <mat-form-field class="search">
       <input matInput type="text" (keyup)="doFilter($event)"
@@ -185,10 +183,7 @@
     </mat-paginator>
 
   </div>
-
-
 </div>
-
 
 
 <div *ngIf="!isAdmin">
@@ -211,16 +206,17 @@
         
         <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
          
-          <div class="item children col-sm-6 col-md-4 col-lg-2 mb-4">
+          <div class="item {{artwork.category}} col-sm-6 col-md-4 col-lg-2 mb-4" *ngFor="let artwork of artworkList; let i = index">
             <a href="art.html?type=digital&art=turtle" class="item-wrap fancybox">
               <div class="work-info">
-                <h3>Little Turtle</h3>
-                <span>Children's  Illustration</span>
+                <h3>{{artwork.title}}</h3>
+                <span>{{artwork.description}}</span>
               </div>
-              <img class="img-fluid" src="assets/img/d-turtle-small.jpg">
+              <img class="img-fluid" src="assets/img/{{artwork.thumbnail}}">
             </a>
+
           </div>
-          
+
         </div>
       </div>
     </section>
