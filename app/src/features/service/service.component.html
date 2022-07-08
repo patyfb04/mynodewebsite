@@ -4,8 +4,12 @@
     </div>
 
 
-
- <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+<div class="notification"  *ngIf="submitResult != ''">
+   <div class="close" (click)="closeNotification()">x</div> 
+   {{submitResult}}
+</div>
+ 
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
    <div>
      <label>
        Description:

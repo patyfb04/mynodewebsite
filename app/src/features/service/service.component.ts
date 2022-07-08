@@ -13,6 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ServiceComponent implements OnInit {
   public serviceModel: Service;
   public myForm: FormGroup;
+  public submitResult: string = '';
 
   constructor(private activateRoute: ActivatedRoute, private serviceService: ServiceService) {
  
@@ -30,14 +31,14 @@ export class ServiceComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
+    this.submitResult = '';
     const service = new Service(this.serviceModel.id ? this.serviceModel.id : 0, form.value.description);
-    console.log('model =>', service)
     this.update(service);
   }
 
   public update(service: Service) {
-    console.log('UPDATE =>',service);
     this.serviceService.update(service).subscribe((result1: any) => {
+      this.submitResult = 'Service info updated sucessfully!';
       this.loadData();
     });
   }
@@ -56,5 +57,9 @@ export class ServiceComponent implements OnInit {
     this.serviceService.getAll().subscribe((result: Service[]) => {
      this.serviceModel = result[0];
     })
+  }
+
+  public closeNotification(){
+    this.submitResult = ''
   }
 }
