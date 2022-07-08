@@ -112,6 +112,10 @@ export class TestimonialComponent implements OnInit {
     const testimonial = new Testimonial(0, form.value.author, form.value.comment, form.value.display);
 
     if (this.isEdit) {
+      var author = this.getByName(form.value.author);
+      if(author != null){
+        testimonial.author = author.name;
+      }
       testimonial.id = this.selectedId;
       this.update(testimonial);
     }
@@ -131,8 +135,8 @@ export class TestimonialComponent implements OnInit {
   }
 
   public update(testimonial: Testimonial) {
-      testimonial.author = this.selectedClient.name;
-      this.testimonialService.update(testimonial).subscribe((result1: any) => {
+        testimonial.author = this.selectedClient != undefined ? this.selectedClient.name : testimonial.author;
+        this.testimonialService.update(testimonial).subscribe((result1: any) => {
         this.loadData();
         this.display = false;
       });
@@ -165,8 +169,22 @@ export class TestimonialComponent implements OnInit {
   public loadData() {
     this.testimonialService.getAll().subscribe((result: Testimonial[]) => {
       this.dataSource.data = result;
-
     })
+  }
+
+  public getByName(author: string) : any {
+    this.clientService.getAll().subscribe((result: Client[]) => {
+      var filtered =  result.filter(function(elem) {
+        return elem.name == author
+      });
+
+      if(filtered.length > 0){
+        return filtered[0];
+      }
+      else {
+        return null;
+      }
+    });
   }
 
   public doFilter = (event: Event) => {
