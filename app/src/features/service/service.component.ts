@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from './service.service';
+import { Service } from './service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,7 +18,8 @@ export class ServiceComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.serviceService.getAll().subscribe((result) => {
+    this.serviceService.getAll().subscribe((result : any) => {
+      console.log(result)
       this.serviceDescription = result[0];
     })
 

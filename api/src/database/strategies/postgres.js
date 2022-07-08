@@ -344,25 +344,7 @@ class PostGresDB extends ICrud {
         //CONTACT
         this._contact = this._driver.define('contact', {
             id: {
-                type: Sequelize.INTEGER,
-                required: true,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            description: {
-                type: Sequelize.STRING
-            }
-        }, {
-            tableName: 'user',
-            freezeTableName: false,
-            timestamps: false
-        })
-        await this._contact.sync()
-
-         //SERVICE
-         this._service = this._driver.define('service', {
-            id: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.BIGINT,
                 required: true,
                 primaryKey: true,
                 autoIncrement: true
@@ -375,11 +357,29 @@ class PostGresDB extends ICrud {
                 required: true
             }
         }, {
-            tableName: 'user',
+            tableName: 'contact',
             freezeTableName: false,
             timestamps: false
         })
         await this._contact.sync()
+
+         //SERVICE
+         this._service = this._driver.define('service', {
+            id: {
+                type: Sequelize.BIGINT,
+                required: true,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            description: {
+                type: Sequelize.STRING
+            }
+        }, {
+            tableName: 'service',
+            freezeTableName: false,
+            timestamps: false
+        })
+        await this._service.sync()
 
         // TESTIMONIAL
         this._testimonial = this._driver.define('testimonial', {
