@@ -4,7 +4,6 @@
 <nav class="admin-navigation">
     
     <div class="navbar">
-        <!-- <a href="#" (click)="displayView($event, 'home')">Home</a> -->
         <a href="#" (click)="displayView($event, 'users')" style="margin-left: 120px;">Users</a>
         <a href="#" (click)="displayView($event, 'clients')">Clients</a>
         <a href="#" (click)="displayView($event, 'artworks')">Artworks</a>
@@ -22,10 +21,6 @@
       </div>
 
 </nav>
-
-<div *ngIf="display.home">
-   
-</div>
 
 <clients-view *ngIf="display.clients"></clients-view>
 <users-view  *ngIf="display.users"></users-view>
