@@ -3,9 +3,8 @@ export class Service {
     public description : string;
     public email : string;
 
-    constructor(id:number, description: string, email : string){
+    constructor(id:number, description: string){
             this.id = id
-            this.description = description,
-            this.email = email
+            this.description = description
     }
 }
