@@ -34,7 +34,7 @@ export class ServiceComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     const service = new Service(0, form.value.description);
-    this.update(service);
+    this.update(this.serviceModel);
   }
 
   public update(service: Service) {
