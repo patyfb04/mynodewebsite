@@ -11,13 +11,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./service.component.sass']
 })
 export class ServiceComponent implements OnInit {
-  public serviceDescription: Observable<any>;
   public serviceModel: Service;
   public myForm: FormGroup;
 
   constructor(private activateRoute: ActivatedRoute, private serviceService: ServiceService) {
-    this.serviceDescription = new Observable<any>();
-
+ 
     this.myForm = new FormGroup({
       description: new FormControl('')
     });
@@ -27,17 +25,18 @@ export class ServiceComponent implements OnInit {
 
   public ngOnInit(): void {
     this.serviceService.getAll().subscribe((result: any) => {
-      this.serviceDescription = result[0];
-      console.log(this.serviceDescription)
+      this.serviceModel = result[0];
     })
   }
 
   onSubmit(form: FormGroup) {
-    const service = new Service(0, form.value.description);
-    this.update(this.serviceModel);
+    const service = new Service(this.serviceModel.id ? this.serviceModel.id : 0, form.value.description);
+    console.log('model =>', service)
+    this.update(service);
   }
 
   public update(service: Service) {
+    console.log('UPDATE =>',service);
     this.serviceService.update(service).subscribe((result1: any) => {
       this.loadData();
     });
