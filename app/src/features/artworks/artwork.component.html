@@ -1,3 +1,4 @@
+<!------------------ ADMIN ------------------------>
 <div *ngIf="isAdmin">
   <div>
     <h4>ARTWORKS </h4>
@@ -185,7 +186,7 @@
   </div>
 </div>
 
-
+<!------------------ ARTWORKS ------------------------>
 <div *ngIf="!isAdmin && !isDetail">
   <main id="main">
     <section class="section site-portfolio">
@@ -220,18 +221,39 @@
     </section>
   </main>
 </div>
-
+<!------------------ DETAILS ------------------------>
 <div *ngIf="!isAdmin && isDetail">
-
-  
-  <div class="container">
-   
     <div class="row align-items-center">
       <div class="col-md-6" data-aos="fade-up">
-      <a href="#" (click)="isDetail=false"> &#8617; BACK </a>
+          <a href="#" (click)="isDetail=false"> &#8617; BACK </a>
       </div>
     </div>
- some artwork
-</div>
+
+ <section class="section1">
+  <div class="container">
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-6" data-aos="fade-up">
+        <h2 id="title2">{{selectedArtwork.title}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section pb-0">
+    <div class="container">
+      <div class="row align-items-stretch">
+        <div class="col-md-8" data-aos="fade-up">
+          <img id="img" alt="{{selectedArtwork.title}}" class="img-fluid" src="./../../assets/img/{{selectedArtwork.image}}">
+        </div>
+        <div class="col-md-3 ml-auto" data-aos="fade-up" data-aos-delay="100">
+          <div class="sticky-content">
+            <h4 class="h4 mb-3">Description</h4>
+            <p class="mb-4"><span class="text-muted" id="subtype">{{selectedArtwork.description}}</span></p>
+
+            <h4 class="h4 mb-3">Resources Used</h4>
+             {{selectedArtwork.tools}}
+          </div>
+        </div>
+      </div>
+    </div>
 
 </div>

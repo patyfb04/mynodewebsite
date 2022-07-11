@@ -26,6 +26,7 @@ export class ArtworkComponent implements OnInit {
   public isEdit: boolean = false;
   public myForm: FormGroup;
   public selectedId: any;
+  public selectedArtwork: Artwork;
   public dataSource: MatTableDataSource<Artwork>;
 
   public artworkList: Artwork[];
@@ -290,6 +291,7 @@ export class ArtworkComponent implements OnInit {
 //------------ app view ------------------
 
   public artworkDetails(artwork: Artwork){
+    this.selectedArtwork = artwork;
     this.isDetail = true;
   }
 
