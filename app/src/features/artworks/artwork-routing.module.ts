@@ -12,5 +12,4 @@ export const adminRoutes: Routes = [
 
 export const appRoutes: Routes = [
   { path: 'artworks', component: ArtworkComponent},
-  { path: 'artwork/:id', component: ArtworkComponent}
 ];

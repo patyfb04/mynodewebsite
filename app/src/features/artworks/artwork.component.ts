@@ -9,6 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
+import {Router} from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
 
 
@@ -19,6 +20,7 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class ArtworkComponent implements OnInit {
   public isAdmin: boolean = false;
+  public isDetail: boolean = false;
   public displayedColumns: string[] = ['thumbnail', 'title', 'category', 'tools', 'createdDate', 'display', 'totalPaid', 'link', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
@@ -62,7 +64,8 @@ export class ArtworkComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
     private artworkService: ArtworkService,
-    private clientService: ClientService) {
+    private clientService: ClientService,
+    private route:Router) {
     this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
     this.dataSource = new MatTableDataSource<Artwork>();
 
@@ -287,7 +290,7 @@ export class ArtworkComponent implements OnInit {
 //------------ app view ------------------
 
   public artworkDetails(artwork: Artwork){
-    
+    this.isDetail = true;
   }
 
   public filterByStyle(val: string) {
