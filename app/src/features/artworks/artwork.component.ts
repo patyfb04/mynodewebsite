@@ -41,7 +41,8 @@ export class ArtworkComponent implements OnInit {
   public image: string="";
   public image_thumbnail: string="";
   public serverUrl: string = "http://localhost:5000/src/assets/artworks/";
-
+  
+  public selectedCategory: string ='';
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -283,4 +284,13 @@ export class ArtworkComponent implements OnInit {
     window.open(url, '_blank')
   }
 
+//------------ app view ------------------
+
+  public artworkDetails(artwork: Artwork){
+    
+  }
+
+  public filterByStyle(val: string) {
+    this.selectedCategory = val;
+  }
 }

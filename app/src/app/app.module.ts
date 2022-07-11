@@ -31,6 +31,8 @@ import { ServiceService } from './../features/service/service.service';
 import { ContactService } from './../features/contact/contact.service';
 import { TestimonialService } from './../features/testimonials/testimonial.service';
 
+import { ArtworFilterPipe } from '../features/artworks/pipes/filter-array';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -46,7 +48,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ArtworkComponent,
     ServiceComponent,
     ContactComponent,
-    TestimonialComponent
+    TestimonialComponent,
+    ArtworFilterPipe
   ],
   imports: [
     BrowserModule,
