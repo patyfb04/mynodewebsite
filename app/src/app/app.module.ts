@@ -32,6 +32,7 @@ import { ContactService } from './../features/contact/contact.service';
 import { TestimonialService } from './../features/testimonials/testimonial.service';
 
 import { ArtworFilterPipe } from '../features/artworks/pipes/filter-array';
+import { SafePipe } from '../common/pipes/safe-pipe';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -49,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ServiceComponent,
     ContactComponent,
     TestimonialComponent,
-    ArtworFilterPipe
+    ArtworFilterPipe,
+    SafePipe
   ],
   imports: [
     BrowserModule,

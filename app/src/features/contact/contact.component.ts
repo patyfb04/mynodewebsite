@@ -15,9 +15,10 @@ export class ContactComponent implements OnInit {
   public contactModel: Contact;
   public myForm: FormGroup;
   public submitResult: string = '';
-
+  public isAdmin: boolean = false;
+  
   constructor(private activateRoute: ActivatedRoute, private contactService: ContactService) {
- 
+    this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
     this.myForm = new FormGroup({
       description: new FormControl(''),
       email: new FormControl('')
