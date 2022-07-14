@@ -28,6 +28,8 @@ export class BookComponent implements OnInit {
   public myForm: FormGroup;
   public selectedId: any;
   public dataSource: MatTableDataSource<Book>;
+  public bookPublishedList: Book[];
+  public bookInProgressList: Book[];
 
   public author = new FormControl();
   public options = [];
@@ -36,6 +38,7 @@ export class BookComponent implements OnInit {
 
   public bookStatus = new FormControl();
   public status: string = '';
+  public selectedStatus: string ='';
 
   public filename: string = 'Upload File';
   public serverUrl: string = "http://localhost:5000/src/assets/books/";
@@ -80,6 +83,7 @@ export class BookComponent implements OnInit {
         return this.filter(val || '')
       })
     )
+    
   }
 
   //AUTOCOMPLETE /DROPDOWNS----------------
@@ -288,6 +292,7 @@ public deleteBookDeliverables(id: number){
 
   public loadData() {
     this.bookService.getAll().subscribe((result: Book[]) => {
+      this.bookPublishedList = result.filter(c=>  c.status == "Published");
       this.dataSource.data = result;
        this.dataSource.data.forEach((book: Book) => {
         this.clientService.getById(book.clientId).subscribe((result1: any) => {
@@ -307,5 +312,9 @@ public deleteBookDeliverables(id: number){
 
   public goToUrl(url: string) {
     window.open(url, '_blank')
+  }
+
+  public filterByStatus(val: string) {
+    this.selectedStatus = val;
   }
 }

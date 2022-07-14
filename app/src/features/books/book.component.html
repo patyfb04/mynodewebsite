@@ -135,7 +135,38 @@
 </div>
 
 <div *ngIf="!isAdmin">
-  BOOK PAGE IN WEBSITE
-  <br>
+
+  <main id="main">
+    <section class="section site-portfolio1">
+      <div class="container1">
+        <div class="row mt-4 align-items-center" id="menu-top1">
+
+          <div class="col-md-12 col-lg-12 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
+            <div id="filters" class="filters">
+              <a href="#" (click)="filterByStatus('published')" [ngClass]="{'active-category': selectedStatus == 'published' || selectedStatus == ''}">Published</a>
+              <a href="#" (click)="filterByStatus('inprogress')"  [ngClass]="{'active-category': selectedStatus == 'inprogress'}">In Progress</a>
+            </div>
+          </div>
+        </div>
+
+          <div id="portfolio-grid1">
+            <div class="item  col-sm-6 col-md-4 col-lg-2 mb-4" *ngFor="let book of bookPublishedList; let i = index">
+              <a href="#" class="item-wrap fancybox" (click)="$event.preventDefault();goToUrl(book.link)">
+                <div class="work-info">
+                  <h3>{{book.title}}</h3>
+                </div>
+                <img class="img-fluid" src="assets/img/{{book.thumbnail}}">
+              </a>
+            </div>
+          </div>
+          
+      </div>
+    </section>
+  </main>
+
+  
+  
+
+
 
 </div>
