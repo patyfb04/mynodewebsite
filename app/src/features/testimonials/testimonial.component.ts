@@ -25,6 +25,7 @@ export class TestimonialComponent implements OnInit {
   public myForm: FormGroup;
   public selectedId: any;
   public dataSource: MatTableDataSource<Testimonial>;
+  public testimonialsList : Testimonial[];
 
   public author = new FormControl();
   public options = [];
@@ -169,6 +170,7 @@ export class TestimonialComponent implements OnInit {
   public loadData() {
     this.testimonialService.getAll().subscribe((result: Testimonial[]) => {
       this.dataSource.data = result;
+      this.testimonialsList = result;
     })
   }
 
