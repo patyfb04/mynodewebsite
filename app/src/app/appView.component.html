@@ -1,11 +1,11 @@
 <nav class="admin-navigation">
     <div class="navbar">
-        <a href="#" href="/" style="margin-left: 200px;">Home</a>
-        <a href="#"(click)="displayView($event, 'artworks')">Artworks</a>
-        <a href="#" (click)="displayView($event, 'books')">Books</a>
-        <a href="#" (click)="displayView($event, 'service')">Service</a>
-        <a href="#" (click)="displayView($event, 'testimonial')">Testimonials</a>
-        <a href="#" (click)="displayView($event, 'contact')">Contact</a>
+        <a href="#" href="/" style="margin-left: 200px;" [ngClass]="{'active': !display.artworks && !display.books && !display.service && !display.contact && !display.testimonial}">Home</a>
+        <a href="#"(click)="displayView($event, 'artworks')" [ngClass]="{'active': display.artworks}">Artworks</a>
+        <a href="#" (click)="displayView($event, 'books')" [ngClass]="{'active': display.books}">Books</a>
+        <a href="#" (click)="displayView($event, 'service')" [ngClass]="{'active': display.service}">Service</a>
+        <a href="#" (click)="displayView($event, 'testimonial')" [ngClass]="{'active': display.testimonial}">Testimonials</a>
+        <a href="#" (click)="displayView($event, 'contact')" [ngClass]="{'active': display.contact}">Contact</a>
       </div>
 </nav>
 
@@ -17,5 +17,5 @@ HOME
 <artworks-view  *ngIf="display.artworks"></artworks-view>
 <books-view  *ngIf="display.books" ></books-view>
 <service-view  *ngIf="display.service"></service-view>
-<contact-view  *ngIf="display.contact"></contact-view>
 <testimonial-view  *ngIf="display.testimonial"></testimonial-view>
+<contact-view  *ngIf="display.contact"></contact-view>
