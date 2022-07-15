@@ -135,12 +135,10 @@
 </div>
 
 <div *ngIf="!isAdmin">
-
   <main id="main">
     <section class="section site-portfolio1">
       <div class="container1">
         <div class="row mt-4 align-items-center" id="menu-top1">
-
           <div class="col-md-12 col-lg-12 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
             <div id="filters" class="filters">
               <a href="#" (click)="filterByStatus('published')" [ngClass]="{'active-category': selectedStatus == 'published' || selectedStatus == ''}">Published</a>

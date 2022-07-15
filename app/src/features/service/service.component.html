@@ -1,9 +1,9 @@
-<div>
+<div *ngIf="isAdmin">
    <div>
       <h4>SERVICE </h4>
     </div>
 
-<div *ngIf="isAdmin">
+<div>
   <div class="notification"  *ngIf="submitResult != ''">
     <div class="close" (click)="closeNotification()">x</div> 
     {{submitResult}}
@@ -28,10 +28,10 @@
     <button type="reset">Clear</button>
   </form>
 </div>
+</div>
 
 <div *ngIf="!isAdmin">
   <div [innerHTML]="serviceModel.description | safehtml"></div>
 </div>
 
 
-</div>
