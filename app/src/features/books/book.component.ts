@@ -293,6 +293,7 @@ public deleteBookDeliverables(id: number){
   public loadData() {
     this.bookService.getAll().subscribe((result: Book[]) => {
       this.bookPublishedList = result.filter(c=>  c.status == "Published");
+      this.bookInProgressList = result.filter(c=>  c.status == "In Progress");
       this.dataSource.data = result;
        this.dataSource.data.forEach((book: Book) => {
         this.clientService.getById(book.clientId).subscribe((result1: any) => {
