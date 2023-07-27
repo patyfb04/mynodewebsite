@@ -33,8 +33,10 @@ import { TestimonialService } from './../features/testimonials/testimonial.servi
 
 import { ArtworFilterPipe } from '../features/artworks/pipes/filter-array';
 import { SafePipe } from '../common/pipes/safe-pipe';
-
+import {EncrDecrService} from '../common/services/encr-decr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocalStorageService } from 'src/common/services/localStorage.service';
+import { LoginComponent } from 'src/features/login/login.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ServiceComponent,
     ContactComponent,
     TestimonialComponent,
+    LoginComponent,
     ArtworFilterPipe,
     SafePipe
   ],
@@ -62,9 +65,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     EditorModule
   ],
-  providers: [AppService, 
-              UserService, 
-              ClientService, 
+  providers: [AppService,
+              UserService,
+              ClientService,
               BookService,
               BookPaymentBalanceService,
               BookDeliverableService,
@@ -72,6 +75,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
               ServiceService,
               ContactService,
               TestimonialService,
+              EncrDecrService,
+              LocalStorageService,
               { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

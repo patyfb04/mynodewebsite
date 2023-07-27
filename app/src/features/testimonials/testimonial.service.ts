@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseService } from 'src/common/services/BaseService';
+import { BaseService } from 'src/common/services/base-service.service';
 import  { Testimonial }  from './testimonial';
 
 @Injectable()

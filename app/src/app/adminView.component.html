@@ -1,8 +1,11 @@
 
-<h3 (click)="displayView($event, 'home')" style="cursor: pointer">ADMINISTRATION</h3>
+<div id="admin_title">
+  <span (click)="displayView($event, 'home')" style="cursor: pointer" class="title">ADMINISTRATION</span>
+  <span *ngIf="!display.login"><a href="#" (click)="logout($event)"  class="logout">Logout</a></span>
+</div>
 
-<nav class="admin-navigation">
-    
+
+<nav class="admin-navigation" *ngIf="!display.login">
     <div class="navbar">
         <a href="#" (click)="displayView($event, 'users')" style="margin-left: 120px;">Users</a>
         <a href="#" (click)="displayView($event, 'clients')">Clients</a>
@@ -14,7 +17,7 @@
             <a href="#" (click)="displayView($event, 'bookDeliverables')">Book Deliverables</a>
             <a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a>
           </div>
-        </div> 
+        </div>
         <a href="#" (click)="displayView($event, 'testimonial')">Testimonials</a>
         <a href="#" (click)="displayView($event, 'service')">Service</a>
         <a href="#" (click)="displayView($event, 'contact')">Contact</a>
@@ -22,7 +25,7 @@
 
 </nav>
 
-
+<login-view *ngIf="display.login" (authResult)="authorization($event)"></login-view>
 <clients-view *ngIf="display.clients"></clients-view>
 <users-view  *ngIf="display.users"></users-view>
 <artworks-view  *ngIf="display.artworks"></artworks-view>

@@ -7,6 +7,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
+import { EncrDecrService } from 'src/common/services/encr-decr.service';
+import { LocalStorageService } from 'src/common/services/localStorage.service';
 
 @Component({
   selector: 'users-view',
@@ -22,7 +24,7 @@ export class UserComponent implements OnInit {
   public users: Observable<any>;
   public dataSource: MatTableDataSource<User>;
 
-  @ViewChild(MatPaginator,  {static: false}) 
+  @ViewChild(MatPaginator,  {static: false})
   set paginator(value: MatPaginator) {
     if (this.dataSource){
       this.dataSource.paginator = value;
@@ -36,8 +38,10 @@ export class UserComponent implements OnInit {
     }
   }
 
-  constructor(private activateRoute: ActivatedRoute, 
-              private userService: UserService) {
+  constructor(private activateRoute: ActivatedRoute,
+              private userService: UserService,
+              private encrDecrService: EncrDecrService,
+              private localStorageService: LocalStorageService) {
 
     this.users = new Observable<any>();
     this.dataSource = new MatTableDataSource<User>();
@@ -81,12 +85,16 @@ export class UserComponent implements OnInit {
 
   public create(user: User) {
     delete user['id'];
+    var encryptedPass = this.encrDecrService.encrypt(user.login, user.password);
+    user.password = encryptedPass
     this.userService.create(user).subscribe((result: any) => {
       this.loadData();
     })
   }
 
   public update(user: User) {
+    var encryptedPass = this.encrDecrService.encrypt(user.login, user.password);
+    user.password = encryptedPass
     this.userService.update(user).subscribe((result: any) => {
       this.loadData();
     })
@@ -104,11 +112,11 @@ export class UserComponent implements OnInit {
 
   public initForm(id: number) {
     this.userService.getById(id).subscribe((result: any) => {
-      if(result.length > 0) 
+      if(result.length > 0)
       {
         this.myForm.patchValue({
           login: result[0].login,
-          password: result[0].password
+          password: ""
         });
       }
     })

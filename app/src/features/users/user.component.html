@@ -19,7 +19,7 @@
   <div>
     <label>
       Password:
-      <input formControlName="password" placeholder="Your password" type="text">
+      <input formControlName="password" placeholder="Your password" type="password">
     </label>
   </div>
   <button type="submit">Save</button> &nbsp;
@@ -43,7 +43,7 @@
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element" > 
+        <td mat-cell *matCellDef="let element" >
          <img alt="edit" class="icon-button table" src="./../../assets/icons/draw-edit-new.svg" (click)="displayForm('edit',element.id)"/> &nbsp;
          <img alt="delete" class="icon-button table" src="./../../assets/icons/cancel-close-delete.svg" (click)="delete(element.id)"/>
         </td>

@@ -1,0 +1,25 @@
+
+  <div>
+    <div class="notification" *ngIf="submitResult != ''">
+      <div class="close" (click)="closeNotification()">x</div>
+      {{ submitResult }}
+    </div>
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <div>
+        <label>
+          Login:
+          <input formControlName="login" placeholder="login" type="text" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Password:
+          <input formControlName="password" placeholder="password" type="password" />
+        </label>
+      </div>
+      <button type="submit">Submit</button> &nbsp;
+      <button type="reset">Clear</button>
+    </form>
+  </div>
+
