@@ -1,0 +1,6 @@
+{
+    "host":"localhost",
+    "database":"patriciaDB",
+    "user":"postgres",
+    "password":"123456"
+}

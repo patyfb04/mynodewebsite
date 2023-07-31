@@ -1,6 +1,7 @@
 const ICrud = require('./interfaces/ICrud')
 const Sequelize = require('sequelize')
 const { Op } = require("sequelize")
+const config = require('./config.stage.json');
 
 class PostGresDB extends ICrud {
     constructor() {
@@ -105,14 +106,19 @@ class PostGresDB extends ICrud {
 
     async connect() {
     this._driver = new Sequelize(
-            'patriciaDB',
-            'postgres',
-            '123456',
+            config.database,
+            config.user,
+            config.password,
             {
-                host: 'localhost',
+                host: config.host,
                 dialect: 'postgres',
                 quoteIdentifiers: true,
-                operatorsAlieases: false
+                operatorsAlieases: false,
+                protocol: "postgres",
+                dialectOptions: {
+                    app: "psql",
+                    ssl: "true"
+                },
             }
         )
 

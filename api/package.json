@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx mocha -w -parallel ./src/tests/*.test.js",
     "test:cov": "npx nyc npx mocha --parallel ./src/tests/*.test.js",
-    "server": "node ./src/api.js"
+    "server": "node ./src/api.js [env=local]"
   },
   "keywords": [],
   "author": "",
