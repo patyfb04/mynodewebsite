@@ -7,7 +7,6 @@
     "test": "npx mocha -w -parallel ./src/tests/*.test.js",
     "test:cov": "npx nyc npx mocha --parallel ./src/tests/*.test.js",
     "dev": "node ./src/api.js env=local",
-    "stage": "node ./src/api.js env=stage",
     "prod": "node ./src/api.js env=prod"
   },
   "keywords": [],
