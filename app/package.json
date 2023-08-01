@@ -7,7 +7,8 @@
     "server_dev": "node ../api/src/api.js env=dev",
     "sass": "node-sass src/styles.sass -src/assets/styles/main.css",
     "start": "concurrently \"npm run sass\" \"npm run build\" \"npm run server\"",
-    "start_dev": "concurrently \"npm run sass\" \"npm run build\" \"npm run server_dev\""
+    "start_dev": "concurrently \"npm run sass\" \"npm run build\" \"npm run server_dev\"",
+    "start_prod": "concurrently \"npm run sass\" \"npm run build\""
   },
   "private": true,
   "dependencies": {
