@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.0.0",
   "scripts": {
+    "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "server": "node ../api/src/api.js env=prod",
