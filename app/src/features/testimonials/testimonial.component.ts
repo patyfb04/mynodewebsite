@@ -9,13 +9,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
-import { ThisReceiver } from '@angular/compiler';
-
 
 @Component({
   selector: 'testimonial-view',
-  templateUrl: './Testimonial.component.html',
-  styleUrls: ['./Testimonial.component.sass']
+  templateUrl: './testimonial.component.html',
+  styleUrls: ['./testimonial.component.sass']
 })
 export class TestimonialComponent implements OnInit {
   public isAdmin: boolean = false;

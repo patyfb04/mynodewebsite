@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class BaseService {
-    public rootURL: string = "http://localhost:5000/";
+    public rootURL: string = "https://patriciabraga-api.onrender.com/";
     public requestOptions : any;
     public requestOptionsFile : any;
 

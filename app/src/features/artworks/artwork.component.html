@@ -15,25 +15,25 @@
       <div class="form-group" *ngIf="!isEdit">
         <label for="file">Artwork Thumbnail:</label>
         <label for="thumbnail" class="file-upload">
-          <img alt="edit" class="icon-button table" src="./../../assets/icons/backup-cloud-server.svg"/> 
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/backup-cloud-server.svg"/>
           {{ filename_thumbnail }}
          </label>
         <input formControlName="thumbnail" id="thumbnail" name="thumbnail" type="file" class="form-control" (change)="onFileThumbChange($event)">
-      </div> 
+      </div>
 
       <div class="form-group" *ngIf="!isEdit" style="margin-top:10px">
         <label for="file">Artwork Image:</label>
         <label for="image" class="file-upload">
-          <img alt="edit" class="icon-button table" src="./../../assets/icons/backup-cloud-server.svg"/> 
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/backup-cloud-server.svg"/>
           {{ filename }}
          </label>
         <input formControlName="image" id="image" name="image" type="file" class="form-control" (change)="onFileChange($event)">
-      </div> 
+      </div>
 
       <div class="form-group" *ngIf="isEdit">
         <label for="image_thumb">Artwork Thumbnail:</label>
         <img src="./../../assets/img/{{image_thumbnail}}" width="200px" name="image_thumb" *ngIf="image_thumbnail != null">
-      </div> 
+      </div>
 
       <div>
         <label>
@@ -79,6 +79,7 @@
               (change)="onCategoryChange(mySelect.value)">
               <option value="children">Children</option>
               <option value="cartoon">Cartoon</option>
+              <option value="watercolor">Watercolor</option>
               <option value="realistic">Realistic/Semi-Realistic</option>
               <option value="vectorial">Vectorial</option>
               <option value="general">General</option>
@@ -160,8 +161,8 @@
 
       <ng-container matColumnDef="link">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Link </th>
-        <td mat-cell *matCellDef="let element"> 
-          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)" 
+        <td mat-cell *matCellDef="let element">
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)"
            *ngIf="element.link != null" style="cursor: pointer"/>
         </td>
       </ng-container>
@@ -198,6 +199,7 @@
               <a href="#" (click)="filterByStyle('')" [ngClass]="{'active-category': selectedCategory == ''}">All Styles</a>
               <a href="#" (click)="filterByStyle('children')"  [ngClass]="{'active-category': selectedCategory == 'children'}">Children's Illustration</a>
               <a href="#" (click)="filterByStyle('cartoon')"  [ngClass]="{'active-category': selectedCategory == 'cartoon'}">Cartoon Art</a>
+              <a href="#" (click)="filterByStyle('watercolor')"  [ngClass]="{'active-category': selectedCategory == 'watercolor'}">Watercolor</a>
               <a href="#" (click)="filterByStyle('realistic')"  [ngClass]="{'active-category': selectedCategory == 'realistic'}">Realism/Semi-Realism</a>
               <a href="#" (click)="filterByStyle('vector')"  [ngClass]="{'active-category': selectedCategory == 'vector'}">Vector Art</a>
               <a href="#" (click)="filterByStyle('general')"  [ngClass]="{'active-category': selectedCategory == 'general'}">General</a>
@@ -206,7 +208,7 @@
         </div>
 
         <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-         
+
           <div class="item {{artwork.category}} col-sm-6 col-md-4 col-lg-2 mb-4" *ngFor="let artwork of artworkList | artworkFilter:selectedCategory; let i = index">
             <a href="#" class="item-wrap fancybox" (click)="$event.preventDefault();artworkDetails(artwork)">
               <div class="work-info">

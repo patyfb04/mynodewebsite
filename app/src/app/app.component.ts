@@ -10,7 +10,7 @@ import { EncrDecrService } from 'src/common/services/encr-decr.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent  implements OnInit{
+export class AppComponent{
 
   public isAdmin : boolean = false;
 
@@ -23,11 +23,4 @@ export class AppComponent  implements OnInit{
     });
   }
 
-  ngOnInit() {
-    var encrypted = this.EncrDecr.encrypt('123456$#@$^@1ERF', 'password@123456');
-    var decrypted = this.EncrDecr.decrypt('123456$#@$^@1ERF', encrypted);
-
-    console.log('Encrypted :' + encrypted);
-    console.log('Decrypted :' + decrypted);
-  }
 }

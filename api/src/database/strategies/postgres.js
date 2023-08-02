@@ -1,7 +1,8 @@
 const ICrud = require('./interfaces/ICrud')
 const Sequelize = require('sequelize')
 const { Op } = require("sequelize")
-const config = require('./config.stage.json');
+const config_dev = require('./config.json')
+const config_prod = require('./config.prod.json')
 
 class PostGresDB extends ICrud {
     constructor() {
@@ -105,12 +106,17 @@ class PostGresDB extends ICrud {
     }
 
     async connect() {
-    this._driver = new Sequelize(
-            config.database,
-            config.user,
-            config.password,
+
+    let conf = process.argv[2].split('=')[1]
+
+    if(conf == "prod")
+    {
+        this._driver = new Sequelize(
+            config_prod.database,
+            config_prod.user,
+            config_prod.password,
             {
-                host: config.host,
+                host: config_prod.host,
                 dialect: 'postgres',
                 quoteIdentifiers: true,
                 operatorsAlieases: false,
@@ -121,7 +127,21 @@ class PostGresDB extends ICrud {
                 },
             }
         )
-
+    }
+    else
+    {
+        this._driver = new Sequelize(
+            config_dev.database,
+            config_dev.user,
+            config_dev.password,
+            {
+                host: config_dev.host,
+                dialect: 'postgres',
+                quoteIdentifiers: true,
+                operatorsAlieases: false
+            }
+        )
+    }
        await this.defineModels()
     }
 
@@ -413,7 +433,6 @@ class PostGresDB extends ICrud {
         } )
 
     await this._testimonial.sync()
-
 
         this.entities = {
             user : this._user,
