@@ -18,7 +18,7 @@ import { BookDeliverableComponent } from './../features/bookDeliverables/bookDel
 import { ArtworkComponent } from './../features/artworks/artwork.component';
 import { ServiceComponent } from './../features/service/service.component';
 import { ContactComponent } from './../features/contact/contact.component';
-import { TestimonialComponent } from './../features/testimonials/testimonial.component';
+// import { TestimonialComponent } from './../features/testimonials/testimonial.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
