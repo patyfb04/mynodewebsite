@@ -12,8 +12,8 @@ import { MatTableDataSource, } from '@angular/material/table';
 
 @Component({
   selector: 'testimonial-view',
-  templateUrl: './Testimonial.component.html',
-  styleUrls: ['./Testimonial.component.sass']
+  templateUrl: './testimonial.component.html',
+  styleUrls: ['./testimonial.component.sass']
 })
 export class TestimonialComponent implements OnInit {
   public isAdmin: boolean = false;
