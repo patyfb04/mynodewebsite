@@ -51,7 +51,7 @@ import { LoginComponent } from 'src/features/login/login.component';
     ArtworkComponent,
     ServiceComponent,
     ContactComponent,
-    TestimonialComponent,
+    // TestimonialComponent,
     LoginComponent,
     ArtworFilterPipe,
     SafePipe
