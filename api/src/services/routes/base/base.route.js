@@ -99,6 +99,47 @@ class BaseRoute {
             }
         }
     }
+
+    sendEmail() {
+        return {
+            path: '/sendForm',
+            method: 'POST',
+            handler: (request, response) => {
+                console.log('Message =>',  request.body)
+
+                var transport = nodemailer.createTransport({
+                    host: "sandbox.smtp.mailtrap.io",
+                    port: 2525,
+                    auth: {
+                    user: "e21f178f268a87",
+                    pass: "b5c9ab295b570a"
+                    }
+                })
+
+                message = {
+                    from: "from-example@email.com",
+                    to: "to-example@email.com",
+                    subject: "Subject",
+                    text: "Hello SMTP Email"
+            }
+
+            // transporter.sendMail(message, function(err, info) {
+            //         if (err) {
+            //             return new Promise((resolve, reject) => {
+            //                 resolve(0);
+            //             })
+            //         } else {
+            //             return new Promise((resolve, reject) => {
+            //                 resolve(1);
+            //             })
+            //         }
+            //     })
+                return new Promise((resolve, reject) => {
+                    resolve(1);
+                })
+            }
+        }
+    }
 }
 
 module.exports = BaseRoute

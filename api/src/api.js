@@ -6,6 +6,7 @@ const path = require('path')
 const app = express()
 const  multipart  =  require('connect-multiparty');
 const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' });
+const nodemailer = require('nodemailer');
 
 app.use(bodyParser.raw())
 app.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }))
@@ -48,6 +49,7 @@ async function main() {
     const testimonialRoutes = mapRoutes(new TestimonialRoutes(contextDB), TestimonialRoutes.methods())
     const contactRoutes = mapRoutes(new ContactRoutes(contextDB), ContactRoutes.methods())
     const serviceRoutes = mapRoutes(new ServiceRoutes(contextDB), ServiceRoutes.methods())
+    const formRoute = mapRoutes(new ServiceRoutes(contextDB), ServiceRoutes.methods())
 
     const allRoutes = [
         ...userRoutes,
@@ -58,7 +60,8 @@ async function main() {
         ...artworkRoutes,
         ...testimonialRoutes,
         ...contactRoutes,
-        ...serviceRoutes
+        ...serviceRoutes,
+        ...formRoute
     ]
 
     await contextDB.connect()
