@@ -11,8 +11,8 @@
 /* BASIC */
 body {
   font: normal 18px/22px "Varela Round", sans-serif;
-  background-color: #e9ffff;
   color: #2e2e2e;
+  background-color: white
 }
 h1, h2 {
   font-family: "Signika", sans-serif;
@@ -50,7 +50,11 @@ a:link, a:visited, a:hover, a:active {
   margin: 0 auto;
   padding-top:30px;
 }
-
+.page-content.admin {
+  width: 100%;
+  margin: 0 auto;
+  padding-top:90px;
+}
 .page-content h1 {
   color: #ff4392;
   text-transform: uppercase;

@@ -1,37 +1,106 @@
 
-<div id="admin_title">
-  <span (click)="displayView($event, 'home')" style="cursor: pointer" class="title">ADMINISTRATION</span>
-  <span *ngIf="!display.login"><a href="#" (click)="logout($event)"  class="logout">Logout</a></span>
-</div>
+<login-view *ngIf="display.login" (authResult)="authorization($event)"></login-view>
 
-
-<nav class="admin-navigation" *ngIf="!display.login">
-    <div class="navbar">
-        <a href="#" (click)="displayView($event, 'users')" style="margin-left: 120px;">Users</a>
-        <a href="#" (click)="displayView($event, 'clients')">Clients</a>
-        <a href="#" (click)="displayView($event, 'artworks')">Artworks</a>
-        <div class="subnav">
-          <button class="subnavbtn">Book Management</button>
-          <div class="subnav-content">
-            <a href="#" (click)="displayView($event, 'books')">Books</a>
-            <a href="#" (click)="displayView($event, 'bookDeliverables')">Book Deliverables</a>
-            <a href="#" (click)="displayView($event, 'bookPaymentBalances')">Book Payment Balance</a>
-          </div>
-        </div>
-        <a href="#" (click)="displayView($event, 'testimonial')">Testimonials</a>
-        <a href="#" (click)="displayView($event, 'service')">Service</a>
-        <a href="#" (click)="displayView($event, 'contact')">Contact</a>
+<nav class="fixed-nav-bar"  *ngIf="!display.login">
+  <div class="row">
+    <div class="column logo">
+      <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
+    </div>
+    <div class="column menu">
+      <div id="menu" class="menu">
+        <ul class="menu-items">
+          <li>
+            <a
+              href="#"
+              style="margin-left: 200px"
+              (click)="displayView($event, 'home')"
+              [ngClass]="{
+                active:
+                  !display.artworks &&
+                  !display.books &&
+                  !display.service &&
+                  !display.contact &&
+                  !display.testimonial
+              }"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'artworks')"
+              [ngClass]="{ active: display.artworks }"
+              >Artworks</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'books')"
+              [ngClass]="{ active: display.books }"
+              >Books</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'service')"
+              [ngClass]="{ active: display.service }"
+              >Service</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'testimonial')"
+              [ngClass]="{ active: display.testimonial }"
+              >Testimonials</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'contact')"
+              [ngClass]="{ active: display.contact }"
+              >Contact</a
+            >
+          </li>
+        </ul>
       </div>
-
+    </div>
+    <div class="column social">
+      <a href="http://www.instagram.com/patriciabraga.art" target="_blank">
+        <img src="../assets/icons/instagram.png" width="20" height="20" />
+        &nbsp;
+      </a>
+      <a
+        href="http://www.facebook.com/profile.php?id=100095416392578"
+        target="_blank"
+      >
+        <img src="../assets/icons/facebook.png" width="20" height="20" /> &nbsp;
+      </a>
+      <a href="https://www.behance.net/patriciabraga_art" target="_blank">
+        <img src="../assets/icons/behance.png" width="20" height="20" /> &nbsp;
+      </a>
+    </div>
+  </div>
 </nav>
 
-<login-view *ngIf="display.login" (authResult)="authorization($event)"></login-view>
-<clients-view *ngIf="display.clients"></clients-view>
-<users-view  *ngIf="display.users"></users-view>
-<artworks-view  *ngIf="display.artworks"></artworks-view>
-<books-view  *ngIf="display.books"></books-view>
-<book-payment-balances-view  *ngIf="display.bookPaymentBalances"></book-payment-balances-view>
-<book-deliverable-view  *ngIf="display.bookDeliverables"></book-deliverable-view>
-<testimonial-view  *ngIf="display.testimonial"></testimonial-view>
-<contact-view  *ngIf="display.contact"></contact-view>
-<service-view  *ngIf="display.service"></service-view>
+<section class="page-content admin" *ngIf="!display.login">
+  <div class="three-columns-grid">
+    <div></div>
+    <div>
+      <clients-view *ngIf="display.clients"></clients-view>
+      <users-view  *ngIf="display.users"></users-view>
+      <artworks-view  *ngIf="display.artworks"></artworks-view>
+      <books-view  *ngIf="display.books"></books-view>
+      <book-payment-balances-view  *ngIf="display.bookPaymentBalances"></book-payment-balances-view>
+      <book-deliverable-view  *ngIf="display.bookDeliverables"></book-deliverable-view>
+      <testimonial-view  *ngIf="display.testimonial"></testimonial-view>
+      <contact-view  *ngIf="display.contact"></contact-view>
+      <service-view  *ngIf="display.service"></service-view>
+
+    </div>
+    <div></div>
+  </div>
+</section>
