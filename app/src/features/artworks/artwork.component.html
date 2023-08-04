@@ -419,8 +419,7 @@
                 *ngFor="
                   let artwork of artworkList | artworkFilter : selectedCategory;
                   let i = index
-                "
-              >
+                ">
                 <a
                   href="#"
                   class="item-wrap fancybox"
@@ -446,14 +445,13 @@
 </div>
 <!------------------ DETAILS ------------------------>
 <div *ngIf="!isAdmin && isDetail">
-  <div class="row align-items-center">
-    <div class="col-md-6" data-aos="fade-up">
-      <a href="#" (click)="isDetail = false"> &#8617; BACK </a>
-    </div>
-  </div>
-
   <section class="section1">
     <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6" data-aos="fade-up">
+          <a href="#" (click)="isDetail = false"> &#8617; BACK </a>
+        </div>
+      </div>
       <div class="row mb-4 align-items-center">
         <div class="col-md-6" data-aos="fade-up">
           <h2 id="title2">{{ selectedArtwork.title }}</h2>

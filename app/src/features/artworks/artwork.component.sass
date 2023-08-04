@@ -1,10 +1,7 @@
 .site-portfolio
-    .container
-      #menu-top
-        margin-top: -130px
+     margin-top: -135px
 
 #portfolio-grid
-    margin-top: -770px
     width: 100%
     text-align: center
 
@@ -14,6 +11,8 @@
     vertical-align: top
     text-align: center
     margin: 2%
+    margin-right:5%
+    height: 215px
 
 .item
   border: none
@@ -39,44 +38,52 @@
         opacity: 0
         transition: .3s all ease-in-out
 
-
 .item
     .item-wrap
+        background-color: #9fd1de
+        width:250px
+        header: 250px
         img
-           width: 200px
+           width: 250px
 
 .item
     .item-wrap
         .work-info
             position: absolute
-            top: 50%
-            width: 100%
+            width: 250px
+            height: 250px
             text-align: center
             z-index: 3
-            transform: translateY(-50%)
             color: #fff
             opacity: 0
             visibility: hidden
-            margin-top: 20px
             transition: .3s all ease
 
+.item
+    .item-wrap
+        .work-info
+          margin-top: 0
+        h3
+          font-size: 20px
+          margin-bottom: 0
+          text-align: center
+          color: white
+
+.item
+    .item-wrap
+      width: 250px
+      height: 250px
 
 .item
     .item-wrap
         .work-info
-          h3
-            font-size: 20px
-            margin-bottom: 0
-            text-align: center
             color: white
-
-.item
-    .item-wrap
-        .work-info
+            padding-top: 40%
             span
                 font-size: 14px
                 text-transform: uppercase
                 letter-spacing: .2rem
+                font-weight: bold
 .item
     .item-wrap:hover
         text-decoration: none
@@ -87,13 +94,15 @@
 
 .item
     .item-wrap:hover:after
-        opacity: 1
+        background: #9fd1de
+        opacity: 0.8
         visibility: visible
 
 .item .item-wrap:hover .work-info
-  margin-top: 60px
+  margin-top: 40%
   opacity: 1
   visibility: visible
+  margin-top: 0
 
 .filters a
   text-decoration: none
@@ -145,3 +154,9 @@
   float: left
   margin-bottom: 50px
   margin-right: 20px
+
+.section1
+  .container
+    margin-top: 20px
+    h2
+      color: #ff4392!important
