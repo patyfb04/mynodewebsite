@@ -39,12 +39,35 @@ export class AdminViewComponent implements OnInit {
               }
 
   ngOnInit(): void {
-
+    let authorized = this.localStorageService.get("authorized")
+    if(authorized == null || authorized == undefined)
+    {
+      this.display  = {
+        home: false,
+        users: false,
+        clients : false,
+        books: false,
+        artworks: false,
+        bookPaymentBalance: false,
+        testimonial: false,
+        contact : false,
+        service: false,
+        login: true
+      }
+      this.displayView(null,'login')
+    } else
+    {
+      let currentPage = this.localStorageService.get("adminPage")
+      this.displayView(null, currentPage)
+    }
   }
 
-  public displayView(event: Event, view: any)
+  public displayView(event: Event | null, view: any)
   {
-    event.preventDefault();
+    if(event != null)
+    {
+      event.preventDefault();
+    }
     this.display  = {
       home: false,
       users: false,
@@ -58,6 +81,7 @@ export class AdminViewComponent implements OnInit {
       login: false
     }
 
+    this.localStorageService.set("adminPage", view)
     return this.display[view] = true
   }
 

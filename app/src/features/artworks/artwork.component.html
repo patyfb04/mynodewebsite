@@ -15,8 +15,8 @@
       (click)="displayForm('create', 0)"
     />
   </div>
-  <div *ngIf="display">
-    {{ isEdit ? "Edit" : "Create " }} Book
+  <div *ngIf="display" class="form_title">
+    {{ isEdit ? "Edit" : "Create " }} Artwork
 
     <form
       [formGroup]="myForm"
