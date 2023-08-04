@@ -12,7 +12,7 @@ export class FormInfoService extends BaseService{
     }
 
     public sendEmail(formInfo : FormInfo): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'email', formInfo, this.requestOptions);
+        return this.httpClient.post<any>(this.rootURL +'sendForm', formInfo, this.requestOptions);
     }
 
 }

@@ -28,6 +28,10 @@ class ServiceRoutes extends BaseRoute{
         return  super.delete(this.entityName)
     }
 
+    sendEmail() {
+        return  super.sendEmail()
+    }
+
 }
 
 module.exports = ServiceRoutes

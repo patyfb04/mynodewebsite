@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../src/environments/environment';
 
 @Injectable()
 export class BaseService {
-    public rootURL: string = "https://patriciabraga-api.onrender.com/";
+    public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
     public requestOptions : any;
     public requestOptionsFile : any;
 
     constructor() {
+        console.log('API =>', this.rootURL)
 
         this.requestOptions = {
             headers: new HttpHeaders({

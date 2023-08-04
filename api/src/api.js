@@ -5,8 +5,7 @@ var cors = require('cors')
 const path = require('path')
 const app = express()
 const  multipart  =  require('connect-multiparty');
-const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' });
-const nodemailer = require('nodemailer');
+const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' })
 
 app.use(bodyParser.raw())
 app.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }))

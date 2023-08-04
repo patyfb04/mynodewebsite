@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "prod": "ng serve --configuration=production",
+    "dev": "ng serve",
     "server": "node ../api/src/api.js env=prod",
     "server_dev": "node ../api/src/api.js env=dev",
     "sass": "node-sass src/styles.sass -src/assets/styles/main.css",
     "start_dev": "concurrently \"npm run sass\" \"npm run build\" \"npm run server_dev\"",
-    "start_prod": "concurrently \"npm run sass\" \"npm run build\""
+    "build": "concurrently \"npm run sass\" \"ng build\""
   },
   "private": true,
   "dependencies": {

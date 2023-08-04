@@ -1,4 +1,5 @@
 var fs = require('fs');
+const nodemailer = require('nodemailer')
 
 class BaseRoute {
     static methods() {
@@ -101,6 +102,7 @@ class BaseRoute {
     }
 
     sendEmail() {
+        console.log('send email')
         return {
             path: '/sendForm',
             method: 'POST',
@@ -116,27 +118,13 @@ class BaseRoute {
                     }
                 })
 
-                message = {
-                    from: "from-example@email.com",
-                    to: "to-example@email.com",
-                    subject: "Subject",
-                    text: "Hello SMTP Email"
+                var message = {
+                    from: request.body.email,
+                    to: "patyfb04@gmail.com",
+                    subject: "Patricia Braga - Contact Form from " + request.body.name,
+                    text:  request.body.message
             }
-
-            // transporter.sendMail(message, function(err, info) {
-            //         if (err) {
-            //             return new Promise((resolve, reject) => {
-            //                 resolve(0);
-            //             })
-            //         } else {
-            //             return new Promise((resolve, reject) => {
-            //                 resolve(1);
-            //             })
-            //         }
-            //     })
-                return new Promise((resolve, reject) => {
-                    resolve(1);
-                })
+                return transport.sendMail(message)
             }
         }
     }
