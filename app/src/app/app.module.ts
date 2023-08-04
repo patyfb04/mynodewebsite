@@ -19,6 +19,7 @@ import { ArtworkComponent } from './../features/artworks/artwork.component';
 import { ServiceComponent } from './../features/service/service.component';
 import { ContactComponent } from './../features/contact/contact.component';
 import { TestimonialComponent } from './../features/testimonials/testimonial.component';
+import { FormInfoComponent } from './../features/formInfo/formInfo.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
@@ -30,6 +31,7 @@ import { ArtworkService } from './../features/artworks/artwork.service';
 import { ServiceService } from './../features/service/service.service';
 import { ContactService } from './../features/contact/contact.service';
 import { TestimonialService } from './../features/testimonials/testimonial.service';
+import { FormInfoService } from './../features/formInfo/formInfo.service';
 
 import { ArtworFilterPipe } from '../features/artworks/pipes/filter-array';
 import { SafePipe } from '../common/pipes/safe-pipe';
@@ -53,6 +55,7 @@ import { LoginComponent } from 'src/features/login/login.component';
     ContactComponent,
     TestimonialComponent,
     LoginComponent,
+    FormInfoComponent,
     ArtworFilterPipe,
     SafePipe
   ],
@@ -76,6 +79,7 @@ import { LoginComponent } from 'src/features/login/login.component';
               ContactService,
               TestimonialService,
               EncrDecrService,
+              FormInfoService,
               LocalStorageService,
               { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
               { provide: LocationStrategy, useClass: HashLocationStrategy }],

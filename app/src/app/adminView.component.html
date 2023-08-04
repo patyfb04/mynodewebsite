@@ -65,23 +65,15 @@
               >Contact</a
             >
           </li>
+          <li>
+            <a
+              href="#"
+              (click)="logout($event)"
+              >Logout</a
+            >
+          </li>
         </ul>
       </div>
-    </div>
-    <div class="column social">
-      <a href="http://www.instagram.com/patriciabraga.art" target="_blank">
-        <img src="../assets/icons/instagram.png" width="20" height="20" />
-        &nbsp;
-      </a>
-      <a
-        href="http://www.facebook.com/profile.php?id=100095416392578"
-        target="_blank"
-      >
-        <img src="../assets/icons/facebook.png" width="20" height="20" /> &nbsp;
-      </a>
-      <a href="https://www.behance.net/patriciabraga_art" target="_blank">
-        <img src="../assets/icons/behance.png" width="20" height="20" /> &nbsp;
-      </a>
     </div>
   </div>
 </nav>
@@ -90,6 +82,9 @@
   <div class="three-columns-grid">
     <div></div>
     <div>
+      <div *ngIf="display.home">
+        <h3>ADMINISTRATION</h3>
+      </div>
       <clients-view *ngIf="display.clients"></clients-view>
       <users-view  *ngIf="display.users"></users-view>
       <artworks-view  *ngIf="display.artworks"></artworks-view>
@@ -99,7 +94,6 @@
       <testimonial-view  *ngIf="display.testimonial"></testimonial-view>
       <contact-view  *ngIf="display.contact"></contact-view>
       <service-view  *ngIf="display.service"></service-view>
-
     </div>
     <div></div>
   </div>

@@ -16,7 +16,8 @@ export class AppViewComponent  implements OnInit{
     contact: false,
     books: false,
     artworks: false,
-    testimonial: false
+    testimonial: false,
+    formInfo: false
   };
 
   constructor(private appService: AppService,
@@ -38,12 +39,11 @@ export class AppViewComponent  implements OnInit{
       contact: false,
       books: false,
       artworks: false,
-      testimonial: false
+      testimonial: false,
+      formInfo: false
     };
 
     let currentPage = this.localStorageService.set("viewPage", view)
     return this.display[view] = true
-
-    return this.display[view] = true;
   }
 }

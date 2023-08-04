@@ -60,8 +60,14 @@
               href="#"
               (click)="displayView($event, 'contact')"
               [ngClass]="{ active: display.contact }"
-              >Contact</a
-            >
+              >Artist</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'formInfo')"
+              [ngClass]="{ active: display.formInfo }"
+              >Contact</a>
           </li>
         </ul>
       </div>
@@ -94,12 +100,12 @@
           !display.books &&
           !display.service &&
           !display.contact &&
-          !display.testimonial
-        "
-      >
-        <h1>Some text about me as illustrator</h1>
+          !display.testimonial &&
+          !display.formInfo
+        " class="home">
         <p>
-         write something here about hte published books, add a caroussel with some best images
+aaaaaaaa
+
         </p>
       </div>
       <artworks-view *ngIf="display.artworks"></artworks-view>
@@ -107,12 +113,13 @@
       <service-view *ngIf="display.service"></service-view>
       <testimonial-view *ngIf="display.testimonial"></testimonial-view>
       <contact-view *ngIf="display.contact"></contact-view>
+      <form-info-view *ngIf="display.formInfo"></form-info-view>
     </div>
     <div></div>
   </div>
 </section>
 
-<section class="page-content">
+<section class="page-content-footer">
   <div class="footer">
     <div class="three-columns-grid">
       <div></div>

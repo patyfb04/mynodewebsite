@@ -49,6 +49,7 @@ a:link, a:visited, a:hover, a:active {
   width: 100%;
   margin: 0 auto;
   padding-top:30px;
+  min-height: 645px;
 }
 .page-content.admin {
   width: 100%;
@@ -58,7 +59,9 @@ a:link, a:visited, a:hover, a:active {
 .page-content h1 {
   color: #ff4392;
   text-transform: uppercase;
-  padding-top:70px;
+}
+.home{
+  padding-top:30px;
 }
 .page-contenth2 a:link, .page-content h2 a:visited  {
   color: #464646;
@@ -141,6 +144,9 @@ a:link, a:visited, a:hover, a:active {
   padding-top: 15px;
 }
 
+.column.logout{
+  padding-top: 25px;
+}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -179,12 +185,12 @@ a.logo, a:visited.logo {
   margin-top: 20px;
 }
 
-.page-content .footer{
+.page-content-footer .footer{
   background-color: #ff9cc6;
   min-height: 200px;
   color: white;
 }
-.page-content .footer h1{
+.page-content-footer .footer h1{
   color: white!important;
 }
 
