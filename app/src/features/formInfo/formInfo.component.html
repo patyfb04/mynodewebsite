@@ -6,6 +6,12 @@
         <h3>Let's get in touch!</h3>
         Send me a message, let's discuss about your projects and ideas and I'll reply it very soon.
       </div>
+
+      <div class="notification" *ngIf="submitResult">
+        <div class="close" (click)="closeNotification()">x</div>
+        {{ submitResultMessage }}
+      </div>
+
       <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
         <div>
           <label>

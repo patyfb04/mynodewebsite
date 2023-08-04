@@ -18,6 +18,8 @@ export class FormInfoComponent implements OnInit {
   public myForm: FormGroup;
   public selectedId: any;
   public dataSource: MatTableDataSource<FormInfo>;
+  public submitResult: boolean = false;
+  public submitResultMessage: string = '';
 
   constructor(private activateRoute: ActivatedRoute,
     private formInfoService: FormInfoService) {
@@ -39,7 +41,14 @@ export class FormInfoComponent implements OnInit {
 
   public sendEmail(formInfo: FormInfo) {
     this.formInfoService.sendEmail(formInfo).subscribe((result: any) => {
-        console.log("email send");
+        console.log("email send",result.rejected.length <= 0);
+          this.submitResult = result.rejected.length <= 0;
+          this.submitResultMessage = result.rejected.length <= 0 ? 'Message submitted!' : 'Error: Message not submitted.';
     });
+  }
+
+  public closeNotification(){
+    this.submitResult = false
+    this.submitResultMessage = ''
   }
 }
