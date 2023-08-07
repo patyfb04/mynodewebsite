@@ -189,6 +189,7 @@ a.logo, a:visited.logo {
   background-color: #e7c6ff;
   min-height: 200px;
   color: #5e548e;
+  width: 100%;
 }
 .page-content-footer .footer h1{
   color: #5e548e!important;
@@ -198,49 +199,49 @@ a.logo, a:visited.logo {
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 800px) {
-  .menu {
-    position: relative;
-    width: 100%;
-  }
-  .sitename {
-    position: absolute;
-    top: 0;
-    left: 15px;
-    margin-left: 0px;
-  }
-  .menu-items {
+@media only screen and (width > 800px) {
+  .mobile {
     display: none;
-    width: 100%;
-    margin-top: 50px;
-    background-color: #008378;
   }
-  .menu-items li {
-    display: block;
+}
+
+@media only screen and (max-width: 800px) {
+  .desktop {
+    display: none;
+  }
+
+  .menu-items{
+    width: 100%;
+    display: inline-block;
     text-align: center;
   }
-  .show, .hide {
-    position: absolute;
-    top: 0;
-    right: 15px;
+
+  .column{
+    width: 100%;
+    text-align: center;
   }
-  .show {
-    display: inline-block;
+  .column img{
+    padding-top: 15px;
   }
-  .hide {
-    display: none;
+
+  .fixed-nav-bar a{
+    line-height: 35px;
   }
-  #menu:target .show {
-    display: none;
+  .fixed-nav-bar li{
+    line-height: 20px;
+    height: 20px;
   }
-  #menu:target .hide, #menu:target .menu-items {
-    display: inline-block;
+
+  .active {
+    color: #a8a0cf!important;
+    text-decoration: underline!important;
   }
+
+  /* .page-content{
+    margin-top: 130px;
+  } */
 }
 
 @media only screen and (max-width: 220px) {
-  .sitename, .show, .hide {
-    font-size: 14px;
-  }
-}
 
+}

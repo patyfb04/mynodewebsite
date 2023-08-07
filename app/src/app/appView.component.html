@@ -1,4 +1,4 @@
-<nav class="fixed-nav-bar">
+<nav class="fixed-nav-bar desktop">
   <div class="row">
     <div class="column logo">
       <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
@@ -9,23 +9,6 @@
           <div>
             <div id="menu" class="menu">
               <ul class="menu-items">
-                <!-- <li>
-                  <a
-                    href="#"
-                    href="/"
-                    style="margin-left: 200px"
-                    (click)="displayView($event, 'home')"
-                    [ngClass]="{
-                      active:
-                        !display.artworks &&
-                        !display.books &&
-                        !display.service &&
-                        !display.contact &&
-                        !display.testimonial
-                    }"
-                    >Home</a
-                  >
-                </li> -->
                 <li>
                   <a
                     href="#"
@@ -98,29 +81,76 @@
   </div>
 </nav>
 
+<nav class="fixed-nav-bar mobile">
+  <div class="row">
+    <div class="column">
+      <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <ul class="menu-items">
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'artworks')"
+            [ngClass]="{ active: display.artworks }"
+            >Artworks</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'books')"
+            [ngClass]="{ active: display.books }"
+            >Books</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'service')"
+            [ngClass]="{ active: display.service }"
+            >Service</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'testimonial')"
+            [ngClass]="{ active: display.testimonial }"
+            >Testimonials</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'artist')"
+            [ngClass]="{ active: display.artist }"
+            >Artist</a>
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'formInfo')"
+            [ngClass]="{ active: display.formInfo }"
+            >Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <section class="page-content">
   <div class="three-columns-grid">
     <div></div>
     <div>
-      <!-- <div
-        *ngIf="
-          !display.artworks &&
-          !display.books &&
-          !display.service &&
-          !display.contact &&
-          !display.testimonial &&
-          !display.formInfo
-        " class="home">
-        <p>
-
-        </p>
-      </div> -->
       <artworks-view *ngIf="display.artworks"></artworks-view>
-      <books-view *ngIf="display.books"></books-view>
+      <!-- <books-view *ngIf="display.books"></books-view>
       <service-view *ngIf="display.service"></service-view>
       <testimonial-view *ngIf="display.testimonial"></testimonial-view>
       <artist-view *ngIf="display.artist"></artist-view>
-      <form-info-view *ngIf="display.formInfo"></form-info-view>
+      <form-info-view *ngIf="display.formInfo"></form-info-view> -->
     </div>
     <div></div>
   </div>

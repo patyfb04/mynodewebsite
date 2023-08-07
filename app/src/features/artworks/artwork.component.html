@@ -336,7 +336,7 @@
 
 <!------------------ ARTWORKS ------------------------>
 <div *ngIf="!isAdmin && !isDetail">
-  <main id="main">
+  <main id="main" class="desktop">
     <div class="three-columns-grid">
       <div></div>
       <div>
@@ -442,6 +442,97 @@
       </div>
       <div></div>
     </div>
+  </main>
+  <main id="main" class="mobile">
+    <section class="section site-portfolio">
+      <div class="container">
+              <div id="filters" class="filters">
+                <a
+                  href="#"
+                  (click)="filterByStyle('')"
+                  [ngClass]="{ 'active-category': selectedCategory == '' }"
+                  >All Styles</a
+                >
+                <a
+                  href="#"
+                  (click)="filterByStyle('children')"
+                  [ngClass]="{
+                    'active-category': selectedCategory == 'children'
+                  }"
+                  >Children's Illustration</a
+                >
+                <a
+                  href="#"
+                  (click)="filterByStyle('cartoon')"
+                  [ngClass]="{
+                    'active-category': selectedCategory == 'cartoon'
+                  }"
+                  >Cartoon Art</a
+                >
+                <a
+                  href="#"
+                  (click)="filterByStyle('watercolor')"
+                  [ngClass]="{
+                    'active-category': selectedCategory == 'watercolor'
+                  }"
+                  >Watercolor</a
+                >
+                <a
+                  href="#"
+                  (click)="filterByStyle('realistic')"
+                  [ngClass]="{
+                    'active-category': selectedCategory == 'realistic'
+                  }"
+                  >Realism/Semi-Realism</a
+                >
+                <a
+                  href="#"
+                  (click)="filterByStyle('vector')"
+                  [ngClass]="{
+                    'active-category': selectedCategory == 'vector'
+                  }"
+                  >Vector Art</a
+                >
+                <a
+                  href="#"
+                  (click)="filterByStyle('general')"
+                  [ngClass]="{
+                    'active-category': selectedCategory == 'general'
+                  }"
+                  >General</a
+                >
+              </div>
+        <div
+          id="portfolio-grid"
+          class="row no-gutter"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div
+            class="item {{
+              artwork.category
+            }} col-sm-1 col-md-1 col-lg-2 mb-4"
+            *ngFor="
+              let artwork of artworkList | artworkFilter : selectedCategory;
+              let i = index
+            ">
+            <a
+              href="#"
+              class="item-wrap"
+              (click)="$event.preventDefault(); artworkDetails(artwork)"
+            >
+              <div class="">
+                <h3>{{ artwork.title }}</h3>
+              </div>
+              <img
+                class="img-fluid"
+                src="assets/img/{{ artwork.thumbnail }}"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 <!------------------ DETAILS ------------------------>
