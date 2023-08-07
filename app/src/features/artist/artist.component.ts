@@ -24,6 +24,7 @@ export class ArtistComponent {
       email: new FormControl('')
     });
 
+    this.artistModel = new Artist(0, "", "");
     this.artistService.getAll().subscribe((result: any) => {
       this.artistModel = result[0];
     })

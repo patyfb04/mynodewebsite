@@ -23,7 +23,7 @@ export class ServiceComponent {
     });
 
     this.initForm();
-
+    this.serviceModel = new Service(0,'');
     this.serviceService.getAll().subscribe((result: any) => {
       this.serviceModel = result[0];
     })
