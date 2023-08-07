@@ -58,8 +58,8 @@
           <li>
             <a
               href="#"
-              (click)="displayView($event, 'contact')"
-              [ngClass]="{ active: display.contact }"
+              (click)="displayView($event, 'artist')"
+              [ngClass]="{ active: display.artist }"
               >Artist</a>
           </li>
           <li>
@@ -112,7 +112,7 @@ aaaaaaaa
       <books-view *ngIf="display.books"></books-view>
       <service-view *ngIf="display.service"></service-view>
       <testimonial-view *ngIf="display.testimonial"></testimonial-view>
-      <contact-view *ngIf="display.contact"></contact-view>
+      <artist-view *ngIf="display.artist"></artist-view>
       <form-info-view *ngIf="display.formInfo"></form-info-view>
     </div>
     <div></div>

@@ -22,6 +22,7 @@
       [formGroup]="myForm"
       (ngSubmit)="onSubmit(myForm)"
       enctype="multipart/form-data"
+      class="myForm"
     >
       <div class="form-group" *ngIf="!isEdit">
         <label for="file">Artwork Thumbnail:</label>

@@ -60,9 +60,9 @@
           <li>
             <a
               href="#"
-              (click)="displayView($event, 'contact')"
-              [ngClass]="{ active: display.contact }"
-              >Contact</a
+              (click)="displayView($event, 'artist')"
+              [ngClass]="{ active: display.artist }"
+              >The Artist</a
             >
           </li>
           <li>
@@ -92,7 +92,7 @@
       <book-payment-balances-view  *ngIf="display.bookPaymentBalances"></book-payment-balances-view>
       <book-deliverable-view  *ngIf="display.bookDeliverables"></book-deliverable-view>
       <testimonial-view  *ngIf="display.testimonial"></testimonial-view>
-      <contact-view  *ngIf="display.contact"></contact-view>
+      <artist-view  *ngIf="display.artist"></artist-view>
       <service-view  *ngIf="display.service"></service-view>
     </div>
     <div></div>

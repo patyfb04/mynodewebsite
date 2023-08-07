@@ -10,21 +10,21 @@
   <div *ngIf="display">
     {{ isEdit? 'Edit': 'Create '}} Book
 
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" enctype="multipart/form-data">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" enctype="multipart/form-data" class="myForm">
 
       <div class="form-group" *ngIf="!isEdit">
         <label for="file">Book Cover Image:</label>
         <label for="thumbnail" class="file-upload">
-          <img alt="edit" class="icon-button table" src="./../../assets/icons/backup-cloud-server.svg"/> 
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/backup-cloud-server.svg"/>
           {{ filename }}
          </label>
         <input formControlName="thumbnail" id="thumbnail" name="thumbnail" type="file" class="form-control" (change)="onFileChange($event)">
-      </div> 
+      </div>
 
       <div class="form-group" *ngIf="isEdit">
         <label for="image_thumb">Book Cover Image:</label>
         <img src="./../../assets/img/{{image}}" width="200px" name="image_thumb" *ngIf="image != null">
-      </div> 
+      </div>
 
       <div>
         <label>
@@ -107,8 +107,8 @@
 
       <ng-container matColumnDef="link">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Link </th>
-        <td mat-cell *matCellDef="let element"> 
-          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)" 
+        <td mat-cell *matCellDef="let element">
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)"
            *ngIf="element.link != null" style="cursor: pointer"/>
         </td>
       </ng-container>
@@ -163,7 +163,7 @@
                 <li *ngFor="let book of bookInProgressList; let i = index"> {{book.title}} - written by {{book.authorName}}</li>
               </ul>
           </div>
-          
+
       </div>
     </section>
   </main>

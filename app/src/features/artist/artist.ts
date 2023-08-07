@@ -1,4 +1,4 @@
-export class Contact {
+export class Artist {
     public id? : number;
     public description : string;
     public email : string;

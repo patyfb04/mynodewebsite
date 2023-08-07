@@ -13,7 +13,7 @@ export class AppViewComponent  implements OnInit{
 
   public display: any = {
     service: false,
-    contact: false,
+    artist: false,
     books: false,
     artworks: false,
     testimonial: false,
@@ -36,7 +36,7 @@ export class AppViewComponent  implements OnInit{
     }
     this.display = {
       service: false,
-      contact: false,
+      artist: false,
       books: false,
       artworks: false,
       testimonial: false,

@@ -17,7 +17,7 @@ import { BookPaymentBalanceComponent } from './../features/bookPaymentBalance/bo
 import { BookDeliverableComponent } from './../features/bookDeliverables/bookDeliverable.component';
 import { ArtworkComponent } from './../features/artworks/artwork.component';
 import { ServiceComponent } from './../features/service/service.component';
-import { ContactComponent } from './../features/contact/contact.component';
+import { ArtistComponent } from '../features/artist/artist.component';
 import { TestimonialComponent } from './../features/testimonials/testimonial.component';
 import { FormInfoComponent } from './../features/formInfo/formInfo.component';
 
@@ -29,7 +29,7 @@ import { BookPaymentBalanceService } from './../features/bookPaymentBalance/book
 import { BookDeliverableService } from './../features/bookDeliverables/bookDeliverable.service';
 import { ArtworkService } from './../features/artworks/artwork.service';
 import { ServiceService } from './../features/service/service.service';
-import { ContactService } from './../features/contact/contact.service';
+import { ArtistService } from '../features/artist/artist.service';
 import { TestimonialService } from './../features/testimonials/testimonial.service';
 import { FormInfoService } from './../features/formInfo/formInfo.service';
 
@@ -52,7 +52,7 @@ import { LoginComponent } from 'src/features/login/login.component';
     BookDeliverableComponent,
     ArtworkComponent,
     ServiceComponent,
-    ContactComponent,
+    ArtistComponent,
     TestimonialComponent,
     LoginComponent,
     FormInfoComponent,
@@ -76,7 +76,7 @@ import { LoginComponent } from 'src/features/login/login.component';
               BookDeliverableService,
               ArtworkService,
               ServiceService,
-              ContactService,
+              ArtistService,
               TestimonialService,
               EncrDecrService,
               FormInfoService,

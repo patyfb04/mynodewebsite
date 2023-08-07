@@ -22,7 +22,7 @@ export class AdminViewComponent implements OnInit {
     artworks: false,
     bookPaymentBalance: false,
     testimonial: false,
-    contact : false,
+    artist : false,
     service: false
   };
 
@@ -50,7 +50,7 @@ export class AdminViewComponent implements OnInit {
         artworks: false,
         bookPaymentBalance: false,
         testimonial: false,
-        contact : false,
+        artist : false,
         service: false,
         login: true
       }
@@ -76,7 +76,7 @@ export class AdminViewComponent implements OnInit {
       artworks: false,
       bookPaymentBalance: false,
       testimonial: false,
-      contact : false,
+      artist : false,
       service: false,
       login: false
     }
@@ -111,7 +111,7 @@ export class AdminViewComponent implements OnInit {
       artworks: false,
       bookPaymentBalance: false,
       testimonial: false,
-      contact : false,
+      artist : false,
       service: false,
       login: true
     }

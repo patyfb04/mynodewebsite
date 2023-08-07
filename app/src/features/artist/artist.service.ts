@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/common/services/base-service.service';
-import  { Contact }  from './contact';
+import  { Artist }  from './artist';
 
 @Injectable()
-export class ContactService extends BaseService{
+export class ArtistService extends BaseService{
 
     constructor(private httpClient: HttpClient) {
        super();
@@ -19,7 +19,7 @@ export class ContactService extends BaseService{
         return this.httpClient.get<any>(this.rootURL +'contact/'+ id, this.requestOptions);
     }
 
-    public update(user : Contact): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'contact/update', user, this.requestOptions);
+    public update(artist : Artist): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'contact/update', artist, this.requestOptions);
     }
 }
