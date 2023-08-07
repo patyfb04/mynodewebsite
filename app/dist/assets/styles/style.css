@@ -32,7 +32,7 @@ p {
   margin: 20px 0;
 }
 a:link, a:visited, a:hover, a:active {
-  text-decoration: none;
+  text-decoration: none!important;
 }
 
 /* LAYOUT */
@@ -57,7 +57,7 @@ a:link, a:visited, a:hover, a:active {
   padding-top:90px;
 }
 .page-content h1 {
-  color: #ff4392;
+  color: #e7c6ff;
   text-transform: uppercase;
 }
 .home{
@@ -80,7 +80,7 @@ a:link, a:visited, a:hover, a:active {
   z-index: 9999;
   width: 100%;
   height: 100px;
-  background-color: #9fd1de;
+  background-color: #5e548e;
 }
 
 /* The element at the top of the page right after the fixed navigation bar
@@ -106,10 +106,10 @@ a:link, a:visited, a:hover, a:active {
   color: #ffffff;
 }
 .menu a:hover, .menu a:target,.menu a:active {
-  color: #ff4392;
+  color: #e7c6ff;
 }
 .active {
-  color: #ff4392!important;
+  color: #e7c6ff!important;
 }
 
 .menu-items {
@@ -186,12 +186,12 @@ a.logo, a:visited.logo {
 }
 
 .page-content-footer .footer{
-  background-color: #ff9cc6;
+  background-color: #e7c6ff;
   min-height: 200px;
-  color: white;
+  color: #5e548e;
 }
 .page-content-footer .footer h1{
-  color: white!important;
+  color: #5e548e!important;
 }
 
 .form_title {
