@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.sass']
 })
-export class ServiceComponent implements OnInit {
+export class ServiceComponent {
   public serviceModel: Service;
   public myForm: FormGroup;
   public submitResult: string = '';
@@ -21,11 +21,9 @@ export class ServiceComponent implements OnInit {
     this.myForm = new FormGroup({
       description: new FormControl('')
     });
-    
-    this.initForm();
-  }
 
-  public ngOnInit(): void {
+    this.initForm();
+
     this.serviceService.getAll().subscribe((result: any) => {
       this.serviceModel = result[0];
     })

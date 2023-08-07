@@ -38,7 +38,7 @@
 </div>
 
  <div *ngIf="!isAdmin">
-     <div [innerHTML]="artistModel.description | safehtml"></div>
+     <div [innerHTML]="artistModel.description | safehtml" *ngIf="artistModel.description != undefined"></div>
 </div>
 
 

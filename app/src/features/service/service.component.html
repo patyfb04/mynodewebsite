@@ -5,15 +5,15 @@
 
 <div>
   <div class="notification"  *ngIf="submitResult != ''">
-    <div class="close" (click)="closeNotification()">x</div> 
+    <div class="close" (click)="closeNotification()">x</div>
     {{submitResult}}
  </div>
-  
+
  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div>
       <label>
         Description:
-       
+
         <editor formControlName="description" apiKey="n29dmmqtea06eshezd2xm4vgr2zk9xyic9chg7z9os19xxzy"
         class="tiny"
         [init]="{
@@ -21,7 +21,7 @@
           toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
        }"
        ></editor>
- 
+
       </label>
     </div>
     <button type="submit">Save</button> &nbsp;
@@ -30,8 +30,8 @@
 </div>
 </div>
 
-<div *ngIf="!isAdmin">
-  <div [innerHTML]="serviceModel.description | safehtml"></div>
+<div *ngIf="!isAdmin" class="services">
+  <div [innerHTML]="serviceModel.description | safehtml" *ngIf="serviceModel.description != undefined"></div>
 </div>
 
 

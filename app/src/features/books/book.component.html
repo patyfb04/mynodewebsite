@@ -158,7 +158,7 @@
             </div>
           </div>
 <!-- in progress books -->
-          <div *ngIf="selectedStatus == 'inprogress'">
+          <div *ngIf="selectedStatus == 'inprogress'" class="in-progress">
               <ul>
                 <li *ngFor="let book of bookInProgressList; let i = index"> {{book.title}} - written by {{book.authorName}}</li>
               </ul>

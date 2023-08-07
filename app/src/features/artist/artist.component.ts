@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.sass']
 })
-export class ArtistComponent implements OnInit {
+export class ArtistComponent {
 
   public artistModel: Artist;
   public myForm: FormGroup;
@@ -24,13 +24,10 @@ export class ArtistComponent implements OnInit {
       email: new FormControl('')
     });
 
-    this.initForm();
-  }
-
-  public ngOnInit(): void {
     this.artistService.getAll().subscribe((result: any) => {
       this.artistModel = result[0];
     })
+    this.initForm();
   }
 
   onSubmit(form: FormGroup) {
