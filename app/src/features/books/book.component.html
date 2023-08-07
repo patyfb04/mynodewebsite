@@ -135,7 +135,7 @@
 </div>
 
 <div *ngIf="!isAdmin">
-  <main id="main">
+  <main id="main" class="desktop">
     <section class="section site-portfolio1">
       <div class="container1">
         <div class="row mt-4 align-items-center" id="menu-top1">
@@ -168,4 +168,32 @@
     </section>
   </main>
 
+  <main id="main" class="mobile">
+    <section class="section site-portfolio1">
+      <div class="container1">
+            <div id="filters" class="filters">
+              <a href="#" (click)="filterByStatus('published')" [ngClass]="{'active-category': selectedStatus == 'published' || selectedStatus == ''}">Published</a>
+              <a href="#" (click)="filterByStatus('inprogress')"  [ngClass]="{'active-category': selectedStatus == 'inprogress'}">In Progress</a>
+        </div>
+<!-- published books -->
+          <div id="portfolio-grid1" *ngIf="selectedStatus != 'inprogress'">
+            <div class="item  col-sm-6 col-md-4 col-lg-2 mb-4" *ngFor="let book of bookPublishedList; let i = index">
+              <a href="http://{{book.link}}" target="_blank" class="item-wrap fancybox">
+                <div class="work-info">
+                  <h3>{{book.title}}</h3>
+                </div>
+                <img class="img-fluid" src="assets/img/{{book.thumbnail}}">
+              </a>
+            </div>
+          </div>
+<!-- in progress books -->
+          <div *ngIf="selectedStatus == 'inprogress'" class="in-progress">
+              <ul>
+                <li *ngFor="let book of bookInProgressList; let i = index"> {{book.title}} - written by {{book.authorName}}</li>
+              </ul>
+          </div>
+
+      </div>
+    </section>
+  </main>
 </div>
