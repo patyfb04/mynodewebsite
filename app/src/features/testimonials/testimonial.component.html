@@ -80,12 +80,11 @@
 
 <div *ngIf="!isAdmin">
   <div id="portfolio-grid2">
-    <div class="testimonial" *ngFor="let testimonial of testimonialsList; let i = index">
+    <div class="testimonial" *ngFor="let testimonial of testimonialsList; let i = index" [ngClass]="{ even : (i % 2) == 0 }">
           <p>
             " {{testimonial.comment}} "<br>
             <span class="author">{{testimonial.author}}</span>
           </p>
     </div>
   </div>
-
 </div>

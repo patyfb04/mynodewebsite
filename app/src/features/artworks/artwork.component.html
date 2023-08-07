@@ -342,70 +342,70 @@
       <div>
         <section class="section site-portfolio">
           <div class="container">
-            <div class="row mt-4 align-items-center" id="menu-top">
-              <div
-                class="col-md-12 col-lg-12 text-start text-lg-end"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                <div id="filters" class="filters">
-                  <a
-                    href="#"
-                    (click)="filterByStyle('')"
-                    [ngClass]="{ 'active-category': selectedCategory == '' }"
-                    >All Styles</a
-                  >
-                  <a
-                    href="#"
-                    (click)="filterByStyle('children')"
-                    [ngClass]="{
-                      'active-category': selectedCategory == 'children'
-                    }"
-                    >Children's Illustration</a
-                  >
-                  <a
-                    href="#"
-                    (click)="filterByStyle('cartoon')"
-                    [ngClass]="{
-                      'active-category': selectedCategory == 'cartoon'
-                    }"
-                    >Cartoon Art</a
-                  >
-                  <a
-                    href="#"
-                    (click)="filterByStyle('watercolor')"
-                    [ngClass]="{
-                      'active-category': selectedCategory == 'watercolor'
-                    }"
-                    >Watercolor</a
-                  >
-                  <a
-                    href="#"
-                    (click)="filterByStyle('realistic')"
-                    [ngClass]="{
-                      'active-category': selectedCategory == 'realistic'
-                    }"
-                    >Realism/Semi-Realism</a
-                  >
-                  <a
-                    href="#"
-                    (click)="filterByStyle('vector')"
-                    [ngClass]="{
-                      'active-category': selectedCategory == 'vector'
-                    }"
-                    >Vector Art</a
-                  >
-                  <a
-                    href="#"
-                    (click)="filterByStyle('general')"
-                    [ngClass]="{
-                      'active-category': selectedCategory == 'general'
-                    }"
-                    >General</a
-                  >
+              <div class="three-columns-grid">
+                <div></div>
+                <div>
+                  <div id="filters" class="filters">
+                    <a
+                      href="#"
+                      (click)="filterByStyle('')"
+                      [ngClass]="{ 'active-category': selectedCategory == '' }"
+                      >All Styles</a
+                    >
+                    <a
+                      href="#"
+                      (click)="filterByStyle('children')"
+                      [ngClass]="{
+                        'active-category': selectedCategory == 'children'
+                      }"
+                      >Children's Illustration</a
+                    >
+                    <a
+                      href="#"
+                      (click)="filterByStyle('cartoon')"
+                      [ngClass]="{
+                        'active-category': selectedCategory == 'cartoon'
+                      }"
+                      >Cartoon Art</a
+                    >
+                    <a
+                      href="#"
+                      (click)="filterByStyle('watercolor')"
+                      [ngClass]="{
+                        'active-category': selectedCategory == 'watercolor'
+                      }"
+                      >Watercolor</a
+                    >
+                    <a
+                      href="#"
+                      (click)="filterByStyle('realistic')"
+                      [ngClass]="{
+                        'active-category': selectedCategory == 'realistic'
+                      }"
+                      >Realism/Semi-Realism</a
+                    >
+                    <a
+                      href="#"
+                      (click)="filterByStyle('vector')"
+                      [ngClass]="{
+                        'active-category': selectedCategory == 'vector'
+                      }"
+                      >Vector Art</a
+                    >
+                    <a
+                      href="#"
+                      (click)="filterByStyle('general')"
+                      [ngClass]="{
+                        'active-category': selectedCategory == 'general'
+                      }"
+                      >General</a
+                    >
+                  </div>
                 </div>
+                <div></div>
+
               </div>
-            </div>
+
 
             <div
               id="portfolio-grid"

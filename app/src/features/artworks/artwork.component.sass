@@ -165,3 +165,16 @@
 
 .mat-row:hover
   background: #f0dbff
+
+.container
+  width: 100%
+  .three-columns-grid
+      display: grid
+      grid-auto-rows: 1fr
+      grid-template-columns: 0fr 7fr 0fr
+
+.container
+  .three-columns-grid > *
+    margin-top: -15px
+    margin-bottom: -25px
+
