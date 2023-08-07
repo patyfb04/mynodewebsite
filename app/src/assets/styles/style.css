@@ -112,8 +112,14 @@ a:link, a:visited, a:hover, a:active {
   color: #e7c6ff!important;
 }
 
-.menu-items {
+.app-view .menu-items {
   display: inline-block;
+  padding-top: 15px;
+}
+
+.admin-view .menu-items {
+  display: inline-block;
+  padding-top: 25px;
 }
 
 .logo{
@@ -182,7 +188,6 @@ a.logo, a:visited.logo {
 
 .three-columns-grid > * {
   padding:1rem;
-  margin-top: 20px;
 }
 
 .page-content-footer .footer{

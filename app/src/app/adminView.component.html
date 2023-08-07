@@ -1,7 +1,7 @@
 
 <login-view *ngIf="display.login" (authResult)="authorization($event)"></login-view>
 
-<nav class="fixed-nav-bar"  *ngIf="!display.login">
+<nav class="fixed-nav-bar admin-view"  *ngIf="!display.login">
   <div class="row">
     <div class="column logo">
       <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
