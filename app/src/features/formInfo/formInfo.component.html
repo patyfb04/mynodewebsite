@@ -1,4 +1,4 @@
-<div class="contact-form">
+<div class="contact-form desktop">
   <div class="three-columns-grid">
     <div></div>
     <div>
@@ -52,3 +52,55 @@
     <div></div>
   </div>
 </div>
+
+
+<div class="contact-form mobile">
+
+      <div class="title">
+        <h3>Let's get in touch!</h3>
+        Send me a message, let's discuss about your projects and ideas and I'll reply it very soon.
+      </div>
+
+      <div class="notification" *ngIf="submitResult">
+        <div class="close" (click)="closeNotification()">x</div>
+        {{ submitResultMessage }}
+      </div>
+
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+        <div>
+          <label>
+            Name:
+            <input
+              formControlName="name"
+              placeholder="Enter your name"
+              type="text"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Message:
+            <textarea
+              formControlName="message"
+              placeholder="Enter your message"
+              rows="5"
+            ></textarea>
+          </label>
+        </div>
+        <div>
+          <label>
+            E-mail:
+            <input
+              formControlName="email"
+              placeholder="Enter your e-mail"
+              type="text"
+            />
+          </label>
+        </div>
+        <div class="buttons">
+          <button type="submit">Save</button> &nbsp;
+          <button type="reset">Clear</button>
+        </div>
+      </form>
+
+  </div>
