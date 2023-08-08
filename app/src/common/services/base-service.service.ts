@@ -4,7 +4,7 @@ import { environment } from '../../../src/environments/environment';
 
 @Injectable()
 export class BaseService {
-    public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
+    public rootURL: string = environment.production ? "http://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
     public requestOptions : any;
     public requestOptionsFile : any;
 
