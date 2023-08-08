@@ -188,7 +188,7 @@
       </button>
     </form>
   </div>
-  <div *ngIf="!loading">
+  <div>
     <mat-form-field class="search">
       <input
         matInput
@@ -330,7 +330,6 @@
     >
     </mat-paginator>
   </div>
-  <div *ngIf="loading">Loading...</div>
 </div>
 <!------------------ ARTWORKS ------------------------>
 <div *ngIf="!isAdmin && !isDetail">
@@ -409,7 +408,6 @@
               class="row no-gutter"
               data-aos="fade-up"
               data-aos-delay="200"
-              *ngIf="!loading"
             >
               <div
                 class="item {{
@@ -435,7 +433,6 @@
                 </a>
               </div>
             </div>
-            <div *ngIf="loading">Loading...</div>
           </div>
         </section>
       </div>
@@ -508,7 +505,6 @@
               class="row no-gutter"
               data-aos="fade-up"
               data-aos-delay="200"
-              *ngIf="!loading"
             >
               <div
                 class="item {{
@@ -534,7 +530,6 @@
                 </a>
               </div>
             </div>
-            <div *ngIf="loading">Loading...</div>
           </div>
         </section>
   </main>
