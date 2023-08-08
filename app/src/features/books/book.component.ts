@@ -5,7 +5,7 @@ import { Book } from './book';
 import { Client } from './../clients/client';
 import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
@@ -14,6 +14,7 @@ import { BookPaymentBalanceService } from './../bookPaymentBalance/bookPaymentBa
 import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
 import { BookDeliverableService } from './../bookDeliverables/bookDeliverable.service';
 import { BookDeliverable } from '../bookDeliverables/bookDeliverable';
+import { environment } from '../../../src/environments/environment';
 
 @Component({
   selector: 'books-view',
@@ -41,7 +42,8 @@ export class BookComponent implements OnInit {
   public selectedStatus: string ='';
 
   public filename: string = 'Upload File';
-  public serverUrl: string = "http://localhost:5000/src/assets/books/";
+  public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
+  public serverUrl: string = this.rootURL + "images";
   public image: string="";
 
   @ViewChild(MatPaginator, { static: false })
@@ -71,7 +73,7 @@ export class BookComponent implements OnInit {
     this.myForm = new FormGroup({
       title: new FormControl(''),
       link: new FormControl(''),
-      thumbnail: new FormControl(''),
+      thumbnail: new FormControl('', Validators.required),
       author: new FormControl('')
     });
 
@@ -83,7 +85,7 @@ export class BookComponent implements OnInit {
         return this.filter(val || '')
       })
     )
-    
+
   }
 
   //AUTOCOMPLETE /DROPDOWNS----------------
@@ -164,13 +166,13 @@ export class BookComponent implements OnInit {
     book.status = this.status;
 
     const file = this.myForm.get('thumbnail')?.value;
-   
-    if (file != null) 
+
+    if (file != null)
     {
       const formData = new FormData();
       formData.append('file', file, this.filename);
       book.thumbnail = this.filename;
-      
+
       this.bookService.uploadFile(formData).subscribe((result: any) => {
         this.bookService.create(book).subscribe((result1: any) => {
           this.display = false;
@@ -180,7 +182,7 @@ export class BookComponent implements OnInit {
         });
       });
     }
-    else 
+    else
     {
       this.bookService.create(book).subscribe((result1: any) => {
         this.loadData();
@@ -230,7 +232,7 @@ public createBookPayments(book: Book) {
           delete paymentCreate['id'];
           this.bookPaymentBalanceService.create(paymentCreate).subscribe((result1: any) => {
           });
-      }) 
+      })
 }
 
 public deleteBookPayments(id: number){
@@ -239,8 +241,8 @@ public deleteBookPayments(id: number){
     var filterByBook = result.filter(function(bookpayment : BookPaymentBalance){
         return parseInt(bookpayment.bookId.toString()) == bookId
     });
-   
-    if(filterByBook[0] != undefined) 
+
+    if(filterByBook[0] != undefined)
     {
       var id = parseInt(filterByBook[0].id.trim());
       this.bookPaymentBalanceService.delete({ id: id }).subscribe((result1: any) => {
@@ -255,8 +257,8 @@ public deleteBookDeliverables(id: number){
     var filterByBook = result.filter(function(bookDeliverable : BookDeliverable){
         return parseInt(bookDeliverable.bookId.toString()) == bookId
     });
-   
-    if(filterByBook[0]) 
+
+    if(filterByBook[0])
     {
       var id = parseInt(filterByBook[0].id);
       this.bookDeliverableService.delete({ id: id }).subscribe((result1: any) => {
@@ -299,7 +301,7 @@ public deleteBookDeliverables(id: number){
         this.clientService.getById(book.clientId).subscribe((result1: any) => {
           if(result1[0] != undefined) {
             book.authorName = result1[0].name;
-          } 
+          }
         });
       });
     })

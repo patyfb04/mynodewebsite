@@ -44,7 +44,7 @@ export class ArtworkComponent implements OnInit {
   public image: string="";
   public image_thumbnail: string="";
   public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
-  public serverUrl: string = this.rootURL + "src/assets/artworks/";
+  public serverUrl: string = this.rootURL + "images";
 
   public selectedCategory: string ='';
 

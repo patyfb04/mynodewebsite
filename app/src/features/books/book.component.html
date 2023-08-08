@@ -35,7 +35,6 @@
           {{ filename }}
         </label>
         <input
-          formControlName="thumbnail"
           id="thumbnail"
           name="thumbnail"
           type="file"
@@ -47,7 +46,7 @@
       <div class="form-group" *ngIf="isEdit">
         <label for="image_thumb">Book Cover Image:</label>
         <img
-          src="./../../assets/img/{{ image }}"
+          src="{{ serverUrl }}/{{ image }}"
           width="200px"
           name="image_thumb"
           *ngIf="image != null"
@@ -143,7 +142,7 @@
           (click)="displayForm('edit', element.id)"
         >
           <img
-            src="./../../assets/img/{{ element.thumbnail }}"
+            src="{{this.serverUrl}}/{{ element.thumbnail }}"
             width="30px"
             *ngIf="element.thumbnail !== null"
           />

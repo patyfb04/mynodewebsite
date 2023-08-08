@@ -76,7 +76,7 @@ class BaseRoute {
                 console.log('DATA =>', request.files.file)
                 console.log('DATA THUMB =>', request.files.file_thumbnail)
 
-                const path = "src\\assets\\img\\"
+                const path = "images\\"
                 const newPath = path +""+ request.files.file.originalFilename;
 
                 fs.rename(request.files.file.path, newPath, function (err) {
