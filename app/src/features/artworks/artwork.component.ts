@@ -28,7 +28,7 @@ export class ArtworkComponent implements OnInit {
   public selectedId: any;
   public selectedArtwork: Artwork;
   public dataSource: MatTableDataSource<Artwork>;
-
+  public loading :boolean = true;
   public artworkList: Artwork[];
 
   public client = new FormControl();
@@ -271,6 +271,7 @@ export class ArtworkComponent implements OnInit {
       this.dataSource.data = result;
        this.dataSource.data.forEach((artwork: Artwork) => {
         this.clientService.getById(artwork.clientId != null ? artwork.clientId : 0).subscribe((result1: any) => {
+          this.loading = false;
           if(result1[0] != undefined) {
             artwork.clientId = result1[0].id;
           }
