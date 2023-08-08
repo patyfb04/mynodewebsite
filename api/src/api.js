@@ -4,6 +4,8 @@ const multer = require('multer')
 var cors = require('cors')
 const path = require('path')
 const app = express()
+app.use(cors())
+app.options('*', cors())
 const  multipart  =  require('connect-multiparty');
 const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' })
 
