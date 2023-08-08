@@ -78,19 +78,18 @@ class BaseRoute {
 
                 const path = "images\\"
                 const newPath = path +""+ request.files.file.originalFilename;
-
+                
                 fs.rename(request.files.file.path, newPath, function (err) {
                     if (err) throw err;
-                    console.log('File Renamed.');
+                    console.log('File Renamed.', newPath);
                 });
 
                 if(request.files.file_thumbnail != null) 
                 {
                     const newThumbnailPath = path +""+ request.files.file_thumbnail.originalFilename;
-
                     fs.rename(request.files.file_thumbnail.path, newThumbnailPath, function (err) {
                         if (err) throw err;
-                        console.log('Thumbnail File Renamed.');
+                        console.log('Thumbnail File Renamed.', newThumbnailPath);
                     });
                 }
 
