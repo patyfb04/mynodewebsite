@@ -9,7 +9,7 @@
     {{submitResult}}
  </div>
 
- <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+ <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" *ngIf="artistModel.description != undefined">
     <div>
       <label>
         Description:

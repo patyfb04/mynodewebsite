@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
 import {Router} from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
-
+import { environment } from '../../../src/environments/environment';
 
 @Component({
   selector: 'artworks-view',
@@ -43,8 +43,9 @@ export class ArtworkComponent implements OnInit {
   public filename_thumbnail: string = 'Upload File';
   public image: string="";
   public image_thumbnail: string="";
-  public serverUrl: string = "http://localhost:5000/src/assets/artworks/";
-  
+  public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
+  public serverUrl: string = this.rootURL + "src/assets/artworks/";
+
   public selectedCategory: string ='';
 
   @ViewChild(MatPaginator, { static: false })
@@ -161,7 +162,7 @@ export class ArtworkComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.thumbnail, 
+    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.thumbnail,
                                 form.value.image, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
 
     if (this.isEdit) {
@@ -183,7 +184,7 @@ export class ArtworkComponent implements OnInit {
     const file_thumb = this.myForm.get('thumbnail')?.value;
     const file= this.myForm.get('image')?.value;
 
-    if (file != null && file_thumb != null) 
+    if (file != null && file_thumb != null)
     {
       const formData = new FormData();
       formData.append('file_thumbnail', file_thumb, this.filename_thumbnail);
@@ -200,7 +201,7 @@ export class ArtworkComponent implements OnInit {
         });
       });
     }
-    else 
+    else
     {
       this.artworkService.create(artwork).subscribe((result1: any) => {
           this.loadData();
@@ -247,7 +248,7 @@ export class ArtworkComponent implements OnInit {
         });
 
         this.category.setValue(result[0].category);
-        
+
         this.myForm.patchValue({
           category: result[0].category
         });
@@ -272,7 +273,7 @@ export class ArtworkComponent implements OnInit {
         this.clientService.getById(artwork.clientId != null ? artwork.clientId : 0).subscribe((result1: any) => {
           if(result1[0] != undefined) {
             artwork.clientId = result1[0].id;
-          } 
+          }
         });
       });
     })

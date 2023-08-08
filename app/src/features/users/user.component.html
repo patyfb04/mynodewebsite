@@ -9,7 +9,7 @@
 <div *ngIf="display">
 {{ isEdit? 'Edit': 'Create '}} User
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="myForm">
   <div>
     <label>
       Login:
