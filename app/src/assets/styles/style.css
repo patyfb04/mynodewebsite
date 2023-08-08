@@ -120,6 +120,7 @@ a:link, a:visited, a:hover, a:active {
 .admin-view .menu-items {
   display: inline-block;
   padding-top: 25px;
+  margin-left: -150px;
 }
 
 .logo{
@@ -215,7 +216,7 @@ a.logo, a:visited.logo {
     display: none;
   }
 
-  .menu-items{
+  .desktop .menu-items{
     width: 100%;
     display: inline-block;
     text-align: center;
@@ -242,9 +243,7 @@ a.logo, a:visited.logo {
     text-decoration: underline!important;
   }
 
-  /* .page-content{
-    margin-top: 130px;
-  } */
+
 }
 
 @media only screen and (max-width: 220px) {

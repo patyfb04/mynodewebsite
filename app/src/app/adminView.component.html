@@ -1,7 +1,7 @@
 
 <login-view *ngIf="display.login" (authResult)="authorization($event)"></login-view>
 
-<nav class="fixed-nav-bar admin-view"  *ngIf="!display.login">
+<nav class="fixed-nav-bar admin-view desktop"  *ngIf="!display.login">
   <div class="row">
     <div class="column logo">
       <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
@@ -20,9 +20,27 @@
                   !display.books &&
                   !display.service &&
                   !display.contact &&
+                  !display.client &&
+                  !display.users &&
                   !display.testimonial
               }"
               >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'users')"
+              [ngClass]="{ active: display.artworks }"
+              >Users</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              (click)="displayView($event, 'clients')"
+              [ngClass]="{ active: display.clients }"
+              >Clients</a
             >
           </li>
           <li>
@@ -74,6 +92,101 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+</nav>
+
+<nav class="fixed-nav-bar admin-view mobile">
+  <div class="row">
+    <div class="column">
+      <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <ul class="menu-items">
+        <li>
+          <a
+            href="#"
+            style="margin-left: 200px"
+            (click)="displayView($event, 'home')"
+            [ngClass]="{
+              active:
+                !display.artworks &&
+                !display.books &&
+                !display.service &&
+                !display.contact &&
+                !display.client &&
+                !display.users &&
+                !display.testimonial
+            }"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'users')"
+            [ngClass]="{ active: display.artworks }"
+            >Users</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'clients')"
+            [ngClass]="{ active: display.clients }"
+            >Clients</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'artworks')"
+            [ngClass]="{ active: display.artworks }"
+            >Artworks</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'books')"
+            [ngClass]="{ active: display.books }"
+            >Books</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'service')"
+            [ngClass]="{ active: display.service }"
+            >Service</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'testimonial')"
+            [ngClass]="{ active: display.testimonial }"
+            >Testimonials</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'artist')"
+            [ngClass]="{ active: display.artist }"
+            >The Artist</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="logout($event)"
+            >Logout</a
+          >
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
