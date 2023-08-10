@@ -9,7 +9,7 @@ app.options('*', cors())
 const  multipart  =  require('connect-multiparty');
 const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' })
 app.use(express.static('public'))
-app.use('/images', express.static('images'))
+app.use('/images', express.static('public'))
 
 app.use(bodyParser.raw())
 app.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }))
