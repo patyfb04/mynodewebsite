@@ -4,6 +4,9 @@ const multer = require('multer')
 var cors = require('cors')
 const path = require('path')
 const app = express()
+app.use(express.static('public'));
+app.use('/images', express.static('images'))
+
 app.use(cors())
 app.options('*', cors())
 const  multipart  =  require('connect-multiparty');
@@ -16,8 +19,7 @@ app.use(express.urlencoded({ limit: '50mb' }))
 
 const upload = multer({ dest: './images/' })
 
-app.use(express.static('public'));
-app.use('/images', express.static('images'))
+
 
 const PORT = 5000
 const PostGresDB = require('./database/strategies/postgres')
