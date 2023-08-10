@@ -8,8 +8,6 @@ app.use(cors())
 app.options('*', cors())
 const  multipart  =  require('connect-multiparty');
 const  multipartMiddleware  =  multipart({ uploadDir:  './src/assets/img' })
-app.use('/static', express.static('public'))
-
 app.use(bodyParser.raw())
 app.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -17,6 +15,9 @@ app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb' }))
 
 const upload = multer({ dest: './images/' })
+
+app.use(express.static('public'));
+app.use('/images', express.static('images'))
 
 const PORT = 5000
 const PostGresDB = require('./database/strategies/postgres')
