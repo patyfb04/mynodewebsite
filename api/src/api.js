@@ -4,7 +4,7 @@ const multer = require('multer')
 var cors = require('cors')
 const path = require('path')
 const app = express()
-app.use(express.static('public'));
+app.use(express.static('public'))
 app.use('/images', express.static('images'))
 
 app.use(cors())
@@ -17,8 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb' }))
 
-const upload = multer({ dest: './images/' })
+const config_dev = require('./database/strategies/config.json')
+const config_prod = require('./database/strategies/config.prod.json')
 
+let conf = process.argv[2].split('=')[1]
+let img_path = conf == "prod" ? '/opt/render/project/src/api/images/' : './images/'
+
+const upload = multer({ dest: img_path })
 
 
 const PORT = 5000
@@ -37,8 +42,8 @@ const ServiceRoutes = require('./services/routes/service.routes')
 
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
+    console.log('img path =>', img_path)
 })
-
 
 
 async function main() {
