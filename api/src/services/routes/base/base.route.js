@@ -80,8 +80,8 @@ class BaseRoute {
                 let conf = process.argv[2].split('=')[1]
                 let img_path = conf == "prod" ? path.join(__dirname, 'images') : "images\\"
 
-                const path = img_path
-                const newPath = path +""+ request.files.file.originalFilename;
+                const image_path = img_path
+                const newPath = image_path +""+ request.files.file.originalFilename;
                 
                 fs.rename(request.files.file.path, newPath, function (err) {
                     if (err) throw err;
