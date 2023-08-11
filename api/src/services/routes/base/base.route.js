@@ -76,7 +76,10 @@ class BaseRoute {
                 console.log('DATA =>', request.files.file)
                 console.log('DATA THUMB =>', request.files.file_thumbnail)
 
-                const path = "images\\"
+                let conf = process.argv[2].split('=')[1]
+                let img_path = conf == "prod" ? '\\opt\\render\\project\\src\\api\\images\\' : "images\\"
+
+                const path = img_path
                 const newPath = path +""+ request.files.file.originalFilename;
                 
                 fs.rename(request.files.file.path, newPath, function (err) {

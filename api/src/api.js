@@ -17,15 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb' }))
 
-const config_dev = require('./database/strategies/config.json')
-const config_prod = require('./database/strategies/config.prod.json')
-
-let conf = process.argv[2].split('=')[1]
-let img_path = conf == "prod" ? '/opt/render/project/src/api/images/' : './images/'
-
-const upload = multer({ dest: img_path })
-
-
 const PORT = 5000
 const PostGresDB = require('./database/strategies/postgres')
 const ContextStrategy = require('./database/strategies/base/contextStrategy')
@@ -42,7 +33,6 @@ const ServiceRoutes = require('./services/routes/service.routes')
 
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
-    console.log('img path =>', img_path)
 })
 
 
