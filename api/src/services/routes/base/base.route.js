@@ -78,7 +78,7 @@ class BaseRoute {
                 console.log('DATA THUMB =>', request.files.file_thumbnail)
 
                 let conf = process.argv[2].split('=')[1]
-                let img_path = conf == "prod" ? path.join(__dirname, 'images') : "images\\"
+                let img_path = conf == "prod" ? path.join(path, 'images') : "images\\"
 
                 const image_path = img_path
                 const newPath = image_path +""+ request.files.file.originalFilename;
