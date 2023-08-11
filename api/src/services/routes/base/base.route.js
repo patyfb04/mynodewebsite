@@ -1,7 +1,5 @@
 var fs = require('fs');
 const nodemailer = require('nodemailer')
-const config_dev = require('./database/strategies/config.json')
-const config_prod = require('./database/strategies/config.prod.json')
 
 class BaseRoute {
     static methods() {
@@ -79,7 +77,7 @@ class BaseRoute {
                 console.log('DATA THUMB =>', request.files.file_thumbnail)
 
                 let conf = process.argv[2].split('=')[1]
-                let img_path = conf == "prod" ? "opt\\render\\project\\src\\api\\images\\" : "images\\"
+                let img_path = conf == "prod" ? "\\" : "images\\"
 
                 const path = "images\\"
                 const newPath = path +""+ request.files.file.originalFilename;
