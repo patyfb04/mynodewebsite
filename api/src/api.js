@@ -8,7 +8,7 @@ const app = express()
 console.log('PATH=>',path.join('/opt/render/project/src/api/', 'images'))
 
 app.use('/images', express.static('images'))
-app.use('/data/images', express.static('images'))
+app.use('/data/images', express.static('data/images'))
 
 app.use(cors())
 app.options('*', cors())
