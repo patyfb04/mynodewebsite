@@ -81,6 +81,7 @@ export class ArtworkComponent implements OnInit {
       display: new FormControl('')
     });
 
+    this.filterByStyle('');
     this.filteredOptions = this.client.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
