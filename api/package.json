@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1436.0",
     "body-parser": "^1.20.2",
     "connect-busboy": "^1.0.0",
     "connect-multiparty": "^2.2.0",
