@@ -1,5 +1,12 @@
 var fs = require('fs');
 const nodemailer = require('nodemailer')
+const AWS = require('aws-sdk')
+const s3 = new AWS.S3({
+    accessKeyId: "AKIAVSNCYTOJI3D6NSWW",
+    secretAccessKey: "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",
+    });
+
+const BUCKET = 'pb-images-bucket'
 
 class BaseRoute {
     static methods() {
@@ -73,31 +80,76 @@ class BaseRoute {
             path: '/' + entityName + '/upload',
             method: 'POST',
             handler: (request, response) => {
-                console.log('DATA =>', request.files.file)
-                console.log('DATA THUMB =>', request.files.file_thumbnail)
+                console.log('FILE =>', request.files.file)
+                console.log('FILE NAME =>', request.files.file.originalFilename)
+                console.log('FILE THUMB =>', request.files.file_thumbnail)
+                console.log('FILE THUMB NAME=>', request.files.file_thumbnail.originalFilename)
 
-                let conf = process.argv[2].split('=')[1]
-                let img_path = conf == "prod" ? '\\data\\images\\' : "images\\"
+                // let conf = process.argv[2].split('=')[1]
+                // let img_path = conf == "prod" ? '\\data\\images\\' : "images\\"
 
-                const path = img_path
-                const newPath = path +""+ request.files.file.originalFilename; 
+                // const path = img_path
+                // const newPath = path +""+ request.files.file.originalFilename; 
                 
-                fs.rename(request.files.file.path, newPath, function (err) {
-                    if (err) throw err;
-                    console.log('File Renamed.', newPath);
-                });
+                // fs.rename(request.files.file.path, newPath, function (err) {
+                //     if (err) throw err;
+                //     console.log('File Renamed.', newPath);
+                // });
+
+                // if(request.files.file_thumbnail != null) 
+                // {
+                //     const newThumbnailPath = path +""+ request.files.file_thumbnail.originalFilename;
+                //     fs.rename(request.files.file_thumbnail.path, newThumbnailPath, function (err) {
+                //         if (err) throw err;
+                //         console.log('Thumbnail File Renamed.', newThumbnailPath);
+                //     });
+                // }
+
+                const file = fs.readFileSync(file)
+                const fileName = request.files.file.originalFilename;
+                const fileThumb = fs.readFileSync(request.files.file_thumbnail)
+                const fileThumbName =  request.files.file_thumbnail.originalFilename;
+
+                const uploadParamsFile = {
+                    Bucket: BUCKET,
+                    Key: fileName,
+                    Body: file
+                    };
+
+                let uploaded_file = false
+                s3.upload(uploadParamsFile, function (err, data) 
+                {
+                    if (err) {
+                        uploaded_file = 0
+                    }
+                    if (data) 
+                    {
+                        uploaded_file = 1
+                    }
+                }) 
 
                 if(request.files.file_thumbnail != null) 
                 {
-                    const newThumbnailPath = path +""+ request.files.file_thumbnail.originalFilename;
-                    fs.rename(request.files.file_thumbnail.path, newThumbnailPath, function (err) {
-                        if (err) throw err;
-                        console.log('Thumbnail File Renamed.', newThumbnailPath);
-                    });
+                    const uploadParamsFileThumb = {
+                        Bucket: BUCKET,
+                        Key: fileThumbName,
+                        Body: fileThumb
+                        };
+
+                    s3.upload(uploadParamsFileThumb, function (err, data) 
+                    {
+                        if (err) {
+                            uploaded_file = 0
+                        }
+                        if (data) 
+                        {
+                            uploaded_file = 1
+                        }
+                    })
                 }
 
                 return new Promise((resolve, reject) => {
-                    resolve(1);
+                    resolve(uploaded_file);
                 })
             }
         }
