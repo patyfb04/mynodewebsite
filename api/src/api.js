@@ -2,7 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const multer = require('multer')
 var cors = require('cors')
-const path = require('path')
 const app = express()
 
 app.use('/images', express.static('images'))
