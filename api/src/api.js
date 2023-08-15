@@ -6,8 +6,9 @@ const path = require('path')
 const app = express()
 
 console.log('PATH=>',path.join('/opt/render/project/src/api/', 'images'))
-app.use(express.static('public'))
+
 app.use('/images', express.static('images'))
+app.use('/data/images', express.static('images'))
 
 app.use(cors())
 app.options('*', cors())
