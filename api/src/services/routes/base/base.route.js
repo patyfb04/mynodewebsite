@@ -80,7 +80,7 @@ class BaseRoute {
                 let img_path = conf == "prod" ? '\\opt\\render\\project\\src\\api\\images\\' : "images\\"
 
                 const path = img_path
-                const newPath = path +""+ request.files.file.originalFilename;
+                const newPath = path +""+ request.files.file.originalFilename; 
                 
                 fs.rename(request.files.file.path, newPath, function (err) {
                     if (err) throw err;
