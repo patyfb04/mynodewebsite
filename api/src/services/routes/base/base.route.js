@@ -113,39 +113,6 @@ class BaseRoute {
                     }
                 }) 
 
-                if(request.files.file_thumbnail != null) 
-                {
-                    console.log('FILE THUMB =>', request.files.file_thumbnail)
-                    console.log('FILE THUMB NAME=>', request.files.file_thumbnail.originalFilename)
-   
-                    const newThumbnailPath = path.resolve(__dirname, "../../../../images/" + request.files.file_thumbnail.originalFilename)
-
-                    fs.rename(request.files.file_thumbnail.path, newThumbnailPath, function (err) {
-                        if (err) throw err;
-                        console.log('Thumbnail File Renamed.', newThumbnailPath);
-                    })
-
-                    const fileThumb = fs.readFileSync(newPath)
-                    const fileThumbName =  request.files.file_thumbnail.originalFilename;
-
-                    const uploadParamsFileThumb = {
-                        Bucket: BUCKET,
-                        Key: fileThumbName,
-                        Body: fileThumb
-                        };
-
-                    s3.upload(uploadParamsFileThumb, function (err, data) 
-                    {
-                        if (err) {
-                            console.log('error uploading thumbnail')
-                        }
-                        if (data) 
-                        {
-                            console.log('uploaded thumbnail')
-                        }
-                    })
-                }
-
                 return new Promise((resolve, reject) => {
                     resolve(1);
                 })

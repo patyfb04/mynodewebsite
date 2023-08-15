@@ -24,25 +24,6 @@
       enctype="multipart/form-data"
       class="myForm"
     >
-      <div class="form-group" *ngIf="!isEdit">
-        <label for="file">Artwork Thumbnail:</label>
-        <label for="thumbnail" class="file-upload">
-          <img
-            alt="edit"
-            class="icon-button table"
-            src="./../../assets/icons/backup-cloud-server.svg"
-          />
-          {{ filename_thumbnail }}
-        </label>
-        <input
-          id="thumbnail"
-          name="thumbnail"
-          type="file"
-          class="form-control"
-          (change)="onFileThumbChange($event)"
-        />
-      </div>
-
       <div class="form-group" *ngIf="!isEdit" style="margin-top: 10px">
         <label for="file">Artwork Image:</label>
         <label for="image" class="file-upload">
@@ -63,12 +44,12 @@
       </div>
 
       <div class="form-group" *ngIf="isEdit">
-        <label for="image_thumb">Artwork Thumbnail:</label>
+        <label for="image">Artwork:</label>
         <img
-          src="{{serverUrl}}/{{ image_thumbnail }}"
+          src="{{s3BucketURL}}/{{ image }}"
           width="200px"
-          name="image_thumb"
-          *ngIf="image_thumbnail != null"
+          name="image"
+          *ngIf="image != null"
         />
       </div>
 
@@ -205,17 +186,17 @@
       [ngClass]="'grid'"
       matSort
     >
-      <ng-container matColumnDef="thumbnail">
-        <th mat-header-cell *matHeaderCellDef>Thumbnail</th>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
         <td
           mat-cell
           *matCellDef="let element"
           (click)="displayForm('edit', element.id)"
         >
           <img
-            src="{{serverUrl}}/{{ element.thumbnail }}"
+            src="{{s3BucketURL}}/{{ element.image }}"
             width="30px"
-            *ngIf="element.thumbnail !== null"
+            *ngIf="element.image !== null"
           />
         </td>
       </ng-container>
@@ -428,7 +409,7 @@
                   </div>
                   <img
                     class="img-fluid"
-                    src="{{serverUrl}}/{{ artwork.thumbnail }}"
+                    src="{{s3BucketURL}}/{{ artwork.image }}"
                   />
                 </a>
               </div>
@@ -525,7 +506,7 @@
                   </div>
                   <img
                     class="img-fluid"
-                    src="assets/img/{{ artwork.thumbnail }}"
+                    src="assets/img/{{ artwork.image }}"
                   />
                 </a>
               </div>
@@ -559,7 +540,7 @@
               id="img"
               alt="{{ selectedArtwork.title }}"
               class="img-fluid"
-              src="{{serverUrl}}/{{ selectedArtwork.image }}"
+              src="{{s3BucketURL}}/{{ selectedArtwork.image }}"
             />
           </div>
           <div class="col-md-3 ml-auto" data-aos="fade-up" data-aos-delay="100">

@@ -21,7 +21,7 @@ import { environment } from '../../../src/environments/environment';
 export class ArtworkComponent implements OnInit {
   public isAdmin: boolean = false;
   public isDetail: boolean = false;
-  public displayedColumns: string[] = ['thumbnail', 'title', 'category', 'tools', 'createdDate', 'display', 'totalPaid', 'link', 'id'];
+  public displayedColumns: string[] = ['image', 'title', 'category', 'tools', 'createdDate', 'display', 'totalPaid', 'link', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
   public myForm: FormGroup;
@@ -40,11 +40,10 @@ export class ArtworkComponent implements OnInit {
   public categoryName: string = '';
 
   public filename: string = 'Upload File';
-  public filename_thumbnail: string = 'Upload File';
   public image: string="";
-  public image_thumbnail: string="";
   public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
   public serverUrl: string = this.rootURL + "images";
+  public s3BucketURL = "http://pb-images-bucket.s3.ca-central-1.amazonaws.com";
 
   public selectedCategory: string ='';
 
@@ -74,7 +73,6 @@ export class ArtworkComponent implements OnInit {
     this.myForm = new FormGroup({
       title: new FormControl(''),
       link: new FormControl(''),
-      thumbnail: new FormControl(''),
       image: new FormControl(''),
       client: new FormControl(''),
       description: new FormControl(''),
@@ -122,16 +120,6 @@ export class ArtworkComponent implements OnInit {
     return this.myForm.controls;
   }
 
-  onFileThumbChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.filename_thumbnail = file.name;
-      this.myForm.patchValue({
-        thumbnail: file
-      });
-    }
-  }
-
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -162,7 +150,7 @@ export class ArtworkComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.thumbnail,
+    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.image,
                                 form.value.image, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
 
     if (this.isEdit) {
@@ -181,22 +169,18 @@ export class ArtworkComponent implements OnInit {
     artwork.clientId = this.clientId;
     artwork.category = this.categoryName;
 
-    const file_thumb = this.myForm.get('thumbnail')?.value;
     const file= this.myForm.get('image')?.value;
 
-    if (file != null && file_thumb != null)
+    if (file != null)
     {
       const formData = new FormData();
-      formData.append('file_thumbnail', file_thumb, this.filename_thumbnail);
       formData.append('file', file, this.filename);
 
-      artwork.thumbnail = this.filename_thumbnail;
       artwork.image = this.filename;
-
+      artwork.thumbnail = this.filename;
       this.artworkService.uploadFile(formData).subscribe((result: any) => {
         this.artworkService.create(artwork).subscribe((result1: any) => {
           this.loadData();
-          this.filename_thumbnail = "";
           this.filename = "";
         });
       });
@@ -205,7 +189,6 @@ export class ArtworkComponent implements OnInit {
     {
       this.artworkService.create(artwork).subscribe((result1: any) => {
           this.loadData();
-          this.filename_thumbnail = "";
           this.filename = "";
       });
     }
@@ -214,7 +197,6 @@ export class ArtworkComponent implements OnInit {
   public update(artwork: Artwork) {
     artwork.clientId = this.clientId;
     artwork.category = this.categoryName;
-    artwork.thumbnail = this.image_thumbnail;
     artwork.image = this.image;
       this.artworkService.update(artwork).subscribe((result1: any) => {
         this.loadData();
@@ -234,7 +216,6 @@ export class ArtworkComponent implements OnInit {
   public initForm(id: number) {
     this.artworkService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
-         this.image_thumbnail = result[0].thumbnail;
          this.image = result[0].image;
 
         this.myForm.patchValue({
