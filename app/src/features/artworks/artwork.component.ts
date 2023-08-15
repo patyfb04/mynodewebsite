@@ -249,7 +249,7 @@ export class ArtworkComponent implements OnInit {
 
   public loadData() {
     this.artworkService.getAll().subscribe((result: Artwork[]) => {
-      this.artworkList = result;
+      this.artworkList = result.filter(c=> c.display);
       this.dataSource.data = result;
        this.dataSource.data.forEach((artwork: Artwork) => {
         this.clientService.getById(artwork.clientId != null ? artwork.clientId : 0).subscribe((result1: any) => {
