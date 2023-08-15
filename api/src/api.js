@@ -5,8 +5,6 @@ var cors = require('cors')
 const path = require('path')
 const app = express()
 
-console.log('PATH=>', path)
-
 app.use('/images', express.static('images'))
 app.use('/data/images', express.static('data/images'))
 
