@@ -3,8 +3,8 @@ const path = require('path')
 const nodemailer = require('nodemailer')
 const AWS = require('aws-sdk')
 const s3 = new AWS.S3({
-    accessKeyId: "AKIAVSNCYTOJI3D6NSWW",
-    secretAccessKey: "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",
+    accessKeyId: "AKIAVSNCYTOJJHUR6L4S",
+    secretAccessKey: "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",
     });
 
 const BUCKET = 'pb-images-bucket'
