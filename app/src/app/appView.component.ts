@@ -27,6 +27,9 @@ export class AppViewComponent  implements OnInit{
 
   ngOnInit(): void {
       let currentPage = this.localStorageService.get("viewPage")
+      if(currentPage == null || currentPage == undefined) {
+        currentPage = "artworks"
+      }
       this.displayView(null, currentPage)
   }
 
