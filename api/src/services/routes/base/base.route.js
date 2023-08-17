@@ -86,7 +86,7 @@ class BaseRoute {
 
                 let conf = process.argv[2].split('=')[1]
 
-                const newPath = conf != "prod" ? 'images\\': path.resolve(__dirname, "/data/images/" + request.files.file.originalFilename)
+                const newPath = conf != "prod" ? 'images\\': path.resolve("/opt/render/project/src/api/data/images/" + request.files.file.originalFilename)
 
                 fs.rename(request.files.file.path, newPath, function (err) {
                     if (err) throw err;
