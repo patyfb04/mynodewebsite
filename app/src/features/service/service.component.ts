@@ -22,16 +22,20 @@ export class ServiceComponent {
       description: new FormControl('')
     });
 
-    this.initForm();
-    this.serviceModel = new Service(0,'');
+
+    this.serviceModel = new Service(1,'');
     this.serviceService.getAll().subscribe((result: any) => {
       this.serviceModel = result[0];
+      this.initForm();
     })
   }
 
   onSubmit(form: FormGroup) {
     this.submitResult = '';
-    const service = new Service(this.serviceModel.id ? this.serviceModel.id : 0, form.value.description);
+
+    console.log('this.serviceModel', this.serviceModel)
+
+    const service = new Service(this.serviceModel.id ? this.serviceModel.id : 1, form.value.description);
     this.update(service);
   }
 

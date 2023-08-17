@@ -9,7 +9,7 @@
     {{submitResult}}
  </div>
 
- <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" *ngIf="artistModel.description != undefined">
+ <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div>
       <label>
         Description:
@@ -17,9 +17,7 @@
         <editor formControlName="description" apiKey="n29dmmqtea06eshezd2xm4vgr2zk9xyic9chg7z9os19xxzy"
         class="tiny"
         [init]="{
-          base_url: '/tinymce',
-          suffix: '.min',
-          plugins: [ 'lists link image table code help wordcount'],
+          plugins: [ 'lists link image paste help wordcount' ],
           toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
        }"
        ></editor>
