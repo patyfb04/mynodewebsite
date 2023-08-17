@@ -41,10 +41,9 @@ export class BookComponent implements OnInit {
   public status: string = '';
   public selectedStatus: string ='';
 
-  public filename: string = 'Upload File';
   public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
   public serverUrl: string = this.rootURL + "images";
-  public image: string="";
+  public thumbnail: string="";
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -60,8 +59,6 @@ export class BookComponent implements OnInit {
     }
   }
 
-  @ViewChild('fileInput') fileInput: ElementRef;
-
   constructor(private activateRoute: ActivatedRoute,
     private bookService: BookService,
     private clientService: ClientService,
@@ -73,7 +70,7 @@ export class BookComponent implements OnInit {
     this.myForm = new FormGroup({
       title: new FormControl(''),
       link: new FormControl(''),
-      thumbnail: new FormControl('', Validators.required),
+      thumbnail: new FormControl(''),
       author: new FormControl('')
     });
 
@@ -111,21 +108,6 @@ export class BookComponent implements OnInit {
     this.status = option;
   }
 
-  //FILE UPLOAD ----------------------------
-
-  get f() {
-    return this.myForm.controls;
-  }
-
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.filename = file.name;
-      this.myForm.patchValue({
-        thumbnail: file
-      });
-    }
-  }
 
   //TABLE ---------------------------------------------------
 
@@ -147,7 +129,7 @@ export class BookComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const book = new Book(0, form.value.author, form.value.title, form.value.status, form.value.link, form.value.thumbnail);
+    const book = new Book(0, form.value.author, form.value.title, form.value.status, form.value.link, form.value.url);
 
     if (this.isEdit) {
       book.id = this.selectedId;
@@ -164,32 +146,11 @@ export class BookComponent implements OnInit {
     delete book['id'];
     book.clientId = this.clientId;
     book.status = this.status;
-
-    const file = this.myForm.get('thumbnail')?.value;
-
-    if (file != null)
-    {
-      const formData = new FormData();
-      formData.append('file', file, this.filename);
-      book.thumbnail = this.filename;
-
-      this.bookService.uploadFile(formData).subscribe((result: any) => {
-        this.bookService.create(book).subscribe((result1: any) => {
-          this.display = false;
-          this.loadData();
-          this.filename = "";
-          this.createBookPayments(book);
-        });
-      });
-    }
-    else
-    {
       this.bookService.create(book).subscribe((result1: any) => {
         this.loadData();
-        this.filename = "";
         this.createBookPayments(book);
       });
-    }
+
   }
 
   public update(book: Book) {
@@ -197,7 +158,7 @@ export class BookComponent implements OnInit {
     book.status = this.status;
     book.clientId = this.clientId;
     book.status = this.status;
-    book.thumbnail = this.image;
+    book.thumbnail = this.thumbnail;
       this.bookService.update(book).subscribe((result1: any) => {
         this.loadData();
         this.display = false;
@@ -269,13 +230,14 @@ public deleteBookDeliverables(id: number){
   public initForm(id: number) {
     this.bookService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
-         this.image = result[0].thumbnail
 
         this.myForm.patchValue({
           title: result[0].title,
-          link: result[0].link
+          link: result[0].link,
+          thumbnail: result[0].thumbnail
         });
 
+        this.thumbnail = result[0].thumbnail;
         this.bookStatus.setValue(result[0].status);
         this.myForm.patchValue({
           bookStatus: result[0].status

@@ -21,37 +21,21 @@
     <form
       [formGroup]="myForm"
       (ngSubmit)="onSubmit(myForm)"
-      enctype="multipart/form-data"
       class="myForm"
     >
-      <div class="form-group" *ngIf="!isEdit">
-        <label for="file">Book Cover Image:</label>
-        <label for="thumbnail" class="file-upload">
-          <img
-            alt="edit"
-            class="icon-button table"
-            src="./../../assets/icons/backup-cloud-server.svg"
-          />
-          {{ filename }}
-        </label>
+    <div *ngIf="isEdit && thumbnail != null">
+      <img src="{{thumbnail}}" width="100px">
+    </div>
+    <div>
+      <label>
+        Book thumbnail url:
         <input
-          id="thumbnail"
-          name="thumbnail"
-          type="file"
-          class="form-control"
-          (change)="onFileChange($event)"
+          formControlName="thumbnail"
+          placeholder="Book thumbnail url"
+          type="text"
         />
-      </div>
-
-      <div class="form-group" *ngIf="isEdit">
-        <label for="image_thumb">Book Cover Image:</label>
-        <img
-          src="{{ image }}"
-          width="200px"
-          name="image_thumb"
-          *ngIf="image != null"
-        />
-      </div>
+      </label>
+    </div>
 
       <div>
         <label>

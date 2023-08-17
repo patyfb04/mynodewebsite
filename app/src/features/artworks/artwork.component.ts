@@ -72,12 +72,13 @@ export class ArtworkComponent implements OnInit {
     this.myForm = new FormGroup({
       title: new FormControl(''),
       link: new FormControl(''),
-      image: new FormControl(''),
+      url: new FormControl(''),
       client: new FormControl(''),
       description: new FormControl(''),
       tools: new FormControl(''),
       totalPaid: new FormControl(''),
-      display: new FormControl('')
+      display: new FormControl(''),
+      image : new FormControl('')
     });
 
     this.filterByStyle('');
@@ -150,8 +151,8 @@ export class ArtworkComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.image,
-                                form.value.image, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
+    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.url,
+                                form.value.url, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
 
     if (this.isEdit) {
       artwork.id = this.selectedId;
@@ -169,29 +170,9 @@ export class ArtworkComponent implements OnInit {
     artwork.clientId = this.clientId;
     artwork.category = this.categoryName;
 
-    const file= this.myForm.get('image')?.value;
-
-    if (file != null)
-    {
-      const formData = new FormData();
-      formData.append('file', file, this.filename);
-
-      artwork.image = this.filename;
-      artwork.thumbnail = this.filename;
-      this.artworkService.uploadFile(formData).subscribe((result: any) => {
-        this.artworkService.create(artwork).subscribe((result1: any) => {
-          this.loadData();
-          this.filename = "";
-        });
-      });
-    }
-    else
-    {
       this.artworkService.create(artwork).subscribe((result1: any) => {
           this.loadData();
-          this.filename = "";
       });
-    }
   }
 
   public update(artwork: Artwork) {
@@ -225,7 +206,8 @@ export class ArtworkComponent implements OnInit {
           category: result[0].category,
           display: result[0].display,
           totalPaid: result[0].totalPaid,
-          link: result[0].link
+          link: result[0].link,
+          image : result[0].image
         });
 
         this.category.setValue(result[0].category);
