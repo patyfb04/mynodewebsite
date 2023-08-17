@@ -41,7 +41,7 @@ export class ArtworkComponent implements OnInit {
 
   public filename: string = 'Upload File';
   public image: string="";
-  public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
+  public rootURL: string = environment.production ? "https://static.wixstatic.com/media/" :"http://localhost:5000/";
   public serverUrl: string = this.rootURL + "images";
 
   public selectedCategory: string ='';
