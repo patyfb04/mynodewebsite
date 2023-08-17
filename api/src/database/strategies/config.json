@@ -2,5 +2,7 @@
     "host":"localhost",
     "database":"patriciaDB",
     "user":"postgres",
-    "password":"123456"
+    "password":"123456",
+    "accessKeyId":"AKIAVSNCYTOJO3BWBRKY",
+    "secretAccessKey":"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"
 }

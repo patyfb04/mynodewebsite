@@ -1,11 +1,9 @@
 var fs = require('fs')
 const path = require('path')
 const nodemailer = require('nodemailer')
+const config_prod = require('./../../../database/strategies/config.prod.json')
 const AWS = require('aws-sdk')
-const s3 = new AWS.S3({
-    accessKeyId: "AKIAVSNCYTOJO3BWBRKY",
-    secretAccessKey: "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",
-    });
+
 
 const BUCKET = 'pb-images-bucket'
 
@@ -81,6 +79,14 @@ class BaseRoute {
             path: '/' + entityName + '/upload',
             method: 'POST',
             handler: (request, response) => {
+                
+                console.log("CONFIG => ", config_prod)
+
+                let s3 = new AWS.S3({
+                    accessKeyId: config_prod.accessKeyId,
+                    secretAccessKey: config_prod.secretAccessKey,
+                 })
+
                 console.log('FILE =>', request.files.file)
                 console.log('FILE NAME =>', request.files.file.originalFilename)
 

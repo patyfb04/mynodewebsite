@@ -2,5 +2,7 @@
     "host":"dpg-cj378v18g3n1jkhtn0lg-a.oregon-postgres.render.com",
     "database":"patriciadb",
     "user":"patriciadb_user",
-    "password":"y7oB2zJdzIOjc33NjAw8p87fLwjbRc3C"
+    "password":"y7oB2zJdzIOjc33NjAw8p87fLwjbRc3C",
+    "accessKeyId":"AKIAVSNCYTOJIXVTH25D",
+    "secretAccessKey":"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"
 }
