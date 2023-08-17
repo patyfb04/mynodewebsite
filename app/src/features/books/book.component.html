@@ -46,7 +46,7 @@
       <div class="form-group" *ngIf="isEdit">
         <label for="image_thumb">Book Cover Image:</label>
         <img
-          src="{{ s3BucketURL }}/{{ image }}"
+          src="{{ serverUrl }}/{{ image }}"
           width="200px"
           name="image_thumb"
           *ngIf="image != null"
@@ -142,7 +142,7 @@
           (click)="displayForm('edit', element.id)"
         >
           <img
-            src="{{this.s3BucketURL}}/{{ element.thumbnail }}"
+            src="{{this.serverUrl}}/{{ element.thumbnail }}"
             width="30px"
             *ngIf="element.thumbnail !== null"
           />
@@ -278,7 +278,7 @@
                   </div>
                   <img
                     class="img-fluid"
-                    src="{{s3BucketURL}}/{{ book.thumbnail }}"
+                    src="{{serverUrl}}/{{ book.thumbnail }}"
                   />
                 </a>
               </div>

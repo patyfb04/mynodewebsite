@@ -2,10 +2,10 @@ var fs = require('fs')
 const path = require('path')
 const nodemailer = require('nodemailer')
 const config_prod = require('./../../../database/strategies/config.prod.json')
-const AWS = require('aws-sdk')
+// const AWS = require('aws-sdk')
 
 
-const BUCKET = 'pb-images-bucket'
+// const BUCKET = 'pb-images-bucket'
 
 class BaseRoute {
     static methods() {
@@ -79,18 +79,14 @@ class BaseRoute {
             path: '/' + entityName + '/upload',
             method: 'POST',
             handler: (request, response) => {
-                
-                console.log("CONFIG => ", config_prod)
-
-                let s3 = new AWS.S3({
-                    accessKeyId: config_prod.accessKeyId,
-                    secretAccessKey: config_prod.secretAccessKey,
-                 })
 
                 console.log('FILE =>', request.files.file)
                 console.log('FILE NAME =>', request.files.file.originalFilename)
+                console.log('Dirname =>', __dirname)
 
-                const newPath = path.resolve(__dirname, "../../../../images/" + request.files.file.originalFilename)
+                let conf = process.argv[2].split('=')[1]
+
+                const newPath = conf != "prod" ? 'images\\': path.resolve(__dirname, "/data/images/" + request.files.file.originalFilename)
 
                 fs.rename(request.files.file.path, newPath, function (err) {
                     if (err) throw err;
@@ -101,23 +97,27 @@ class BaseRoute {
                 const file = fs.readFileSync(newPath)
                 const fileName = request.files.file.originalFilename;
 
-                const uploadParamsFile = {
-                    Bucket: BUCKET,
-                    Key: fileName,
-                    Body: file
-                    };
+                // let s3 = new AWS.S3({
+                //     accessKeyId: config_prod.accessKeyId,
+                //     secretAccessKey: config_prod.secretAccessKey,
+                //  })
+                // const uploadParamsFile = {
+                //     Bucket: BUCKET,
+                //     Key: fileName,
+                //     Body: file
+                //     };
 
-                let uploaded_file = false
-                s3.upload(uploadParamsFile, function (err, data) 
-                {
-                    if (err) {
-                        console.log('error uploading file')
-                    }
-                    if (data) 
-                    {
-                        console.log('uploaded file')
-                    }
-                }) 
+                // let uploaded_file = false
+                // s3.upload(uploadParamsFile, function (err, data) 
+                // {
+                //     if (err) {
+                //         console.log('error uploading file')
+                //     }
+                //     if (data) 
+                //     {
+                //         console.log('uploaded file')
+                //     }
+                // }) 
 
                 return new Promise((resolve, reject) => {
                     resolve(1);

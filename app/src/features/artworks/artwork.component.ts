@@ -43,7 +43,6 @@ export class ArtworkComponent implements OnInit {
   public image: string="";
   public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
   public serverUrl: string = this.rootURL + "images";
-  public s3BucketURL = "http://pb-images-bucket.s3.ca-central-1.amazonaws.com";
 
   public selectedCategory: string ='';
 
