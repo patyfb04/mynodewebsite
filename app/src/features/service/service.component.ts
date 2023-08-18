@@ -21,20 +21,11 @@ export class ServiceComponent {
     this.myForm = new FormGroup({
       description: new FormControl('')
     });
-
-
-    this.serviceModel = new Service(1,'');
-    this.serviceService.getAll().subscribe((result: any) => {
-      this.serviceModel = result[0];
-      this.initForm();
-    })
+    this.initForm();
   }
 
   onSubmit(form: FormGroup) {
     this.submitResult = '';
-
-    console.log('this.serviceModel', this.serviceModel)
-
     const service = new Service(this.serviceModel.id ? this.serviceModel.id : 1, form.value.description);
     this.update(service);
   }
@@ -49,6 +40,7 @@ export class ServiceComponent {
   public initForm() {
     this.serviceService.getAll().subscribe((result: any) => {
       if (result.length > 0) {
+        this.serviceModel = new Service(result[0].id, result[0].description);
         this.myForm.patchValue({
           description: result[0].description
         });
