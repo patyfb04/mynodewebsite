@@ -151,8 +151,8 @@ export class ArtworkComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.url,
-                                form.value.url, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
+    const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.image,
+                                form.value.image, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
 
     if (this.isEdit) {
       artwork.id = this.selectedId;
@@ -178,7 +178,7 @@ export class ArtworkComponent implements OnInit {
   public update(artwork: Artwork) {
     artwork.clientId = this.clientId;
     artwork.category = this.categoryName;
-    artwork.image = this.image;
+    console.log('artwork', artwork)
       this.artworkService.update(artwork).subscribe((result1: any) => {
         this.loadData();
       });

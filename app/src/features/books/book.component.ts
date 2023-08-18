@@ -129,7 +129,7 @@ export class BookComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const book = new Book(0, form.value.author, form.value.title, form.value.status, form.value.link, form.value.url);
+    const book = new Book(0, form.value.author, form.value.title, form.value.status, form.value.link, form.value.thumbnail);
 
     if (this.isEdit) {
       book.id = this.selectedId;
@@ -158,7 +158,7 @@ export class BookComponent implements OnInit {
     book.status = this.status;
     book.clientId = this.clientId;
     book.status = this.status;
-    book.thumbnail = this.thumbnail;
+
       this.bookService.update(book).subscribe((result1: any) => {
         this.loadData();
         this.display = false;
