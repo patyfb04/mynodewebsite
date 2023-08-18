@@ -1,5 +1,14 @@
 .artist-info
   margin-top: 70px
+  width: 100%
+  background: #ecd4fc
+  border: 1px solid #5e548e
+  border-radius: 5px
+  padding: 25px
+  min-height: 350px
+  img
+    float: left
+    padding: 20px
 
   .myForm
     button
@@ -18,6 +27,19 @@
       border-radius: 5px!important
       width: 98%!important
 
+@media only screen and (min-width: 801px)
+    .mobile
+      display: none!important
 @media only screen and (max-width: 800px)
+  .desktop
+    display: none !important
   .artist-info
-    margin-top: 150px
+      background: #ecd4fc
+      margin-top: 150px
+      width: 80%!important
+      border: 1px solid #5e548e
+      border-radius: 5px
+      padding: 25px
+      img
+        width: 150px
+        padding: 20px
