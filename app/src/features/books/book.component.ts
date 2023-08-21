@@ -31,6 +31,7 @@ export class BookComponent implements OnInit {
   public dataSource: MatTableDataSource<Book>;
   public bookPublishedList: Book[];
   public bookInProgressList: Book[];
+  public selectedBook: Book;
 
   public author = new FormControl();
   public options = [];

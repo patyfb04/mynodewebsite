@@ -38,12 +38,12 @@
 </div>
 
  <div *ngIf="!isAdmin" class="artist-info desktop">
-     <img src="https://static.wixstatic.com/media/739e28_9965a7b4600947f6ac41d4f4fea404cc~mv2.jpg">
+     <img src="https://static.wixstatic.com/media/739e28_9965a7b4600947f6ac41d4f4fea404cc~mv2.jpg" alt="Patricia Braga - Illustrator">
      <div [innerHTML]="artistModel.description | safehtml" *ngIf="artistModel.description != undefined"></div>
 </div>
 
 <div *ngIf="!isAdmin" class="artist-info mobile">
-  <img src="https://static.wixstatic.com/media/739e28_9965a7b4600947f6ac41d4f4fea404cc~mv2.jpg">
+  <img src="https://static.wixstatic.com/media/739e28_9965a7b4600947f6ac41d4f4fea404cc~mv2.jpg" alt="Patricia Braga - Illustrator">
   <div [innerHTML]="artistModel.description | safehtml" *ngIf="artistModel.description != undefined"></div>
 </div>
 

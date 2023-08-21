@@ -8,6 +8,7 @@
       (click)="displayForm('create', 0)"
     />
     <img
+      alt="create"
       class="icon-button right"
       src="./../../assets/icons/close-delete-minus.svg"
       *ngIf="display"
@@ -24,7 +25,7 @@
       class="myForm"
     >
     <div *ngIf="isEdit && thumbnail != null">
-      <img src="{{thumbnail}}" width="100px">
+      <img src="{{thumbnail}}" width="100px" alt="Book">
     </div>
     <div>
       <label>
@@ -127,6 +128,7 @@
         >
           <img
             src="{{ element.thumbnail }}"
+            alt="{{element.title}}"
             width="30px"
             *ngIf="element.thumbnail !== null"
           />
@@ -225,6 +227,7 @@
                 <div id="filters" class="filters">
                   <a
                     href="#"
+                    title="published books"
                     (click)="filterByStatus('published')"
                     [ngClass]="{
                       'active-category':
@@ -234,6 +237,7 @@
                   >
                   <a
                     href="#"
+                    title="in progress books"
                     (click)="filterByStatus('inprogress')"
                     [ngClass]="{
                       'active-category': selectedStatus == 'inprogress'
@@ -255,6 +259,7 @@
                 <a
                   href="http://{{ book.link }}"
                   target="_blank"
+                  title="{{book.title}}"
                   class="item-wrap fancybox"
                 >
                   <div class="work-info">
@@ -262,6 +267,7 @@
                   </div>
                   <img
                     class="img-fluid"
+                    alt="{{book.title}}"
                     src="{{ book.thumbnail }}"
                   />
                 </a>
@@ -287,6 +293,7 @@
         <div id="filters" class="filters">
           <a
             href="#"
+            title="published books"
             (click)="filterByStatus('published')"
             [ngClass]="{
               'active-category':
@@ -296,6 +303,7 @@
           >
           <a
             href="#"
+            title="in progress books"
             (click)="filterByStatus('inprogress')"
             [ngClass]="{ 'active-category': selectedStatus == 'inprogress' }"
             >In Progress</a
@@ -310,12 +318,13 @@
             <a
               href="http://{{ book.link }}"
               target="_blank"
+              title="{{book.title}}"
               class="item-wrap fancybox"
             >
               <div class="work-info">
                 <h3>{{ book.title }}</h3>
               </div>
-              <img class="img-fluid" src="{{ book.thumbnail }}" />
+              <img class="img-fluid" src="{{ book.thumbnail }}" alt="{{book.title}}" />
             </a>
           </div>
         </div>

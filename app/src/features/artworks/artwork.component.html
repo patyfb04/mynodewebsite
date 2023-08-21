@@ -24,7 +24,7 @@
       class="myForm"
     >
     <div *ngIf="isEdit && image != null">
-      <img src="{{image}}" width="100px">
+      <img src="{{image}}" width="100px" alt="{{selectedArtwork.title}}">
     </div>
     <div>
       <label>
@@ -179,6 +179,7 @@
         >
           <img
             src="{{ element.image }}"
+            alt="{{ element.title }}"
             width="30px"
             *ngIf="element.image !== null"
           />
@@ -310,12 +311,14 @@
                   <div id="filters" class="filters">
                     <a
                       href="#"
+                      title="all styles"
                       (click)="filterByStyle('')"
                       [ngClass]="{ 'active-category': selectedCategory == '' }"
                       >All Styles</a
                     >
                     <a
                       href="#"
+                      title="children's book illustration"
                       (click)="filterByStyle('children')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'children'
@@ -324,6 +327,7 @@
                     >
                     <a
                       href="#"
+                      title="cartoon"
                       (click)="filterByStyle('cartoon')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'cartoon'
@@ -332,6 +336,7 @@
                     >
                     <a
                       href="#"
+                      title="watercolor"
                       (click)="filterByStyle('watercolor')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'watercolor'
@@ -340,6 +345,7 @@
                     >
                     <a
                       href="#"
+                      title="realistic"
                       (click)="filterByStyle('realistic')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'realistic'
@@ -348,6 +354,7 @@
                     >
                     <a
                       href="#"
+                      title="vector"
                       (click)="filterByStyle('vector')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'vector'
@@ -356,6 +363,7 @@
                     >
                     <a
                       href="#"
+                      title="general"
                       (click)="filterByStyle('general')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'general'
@@ -393,6 +401,7 @@
                   </div>
                   <img
                     class="img-fluid"
+                    alt="{{ artwork.title }}"
                     src="{{ artwork.image }}"
                   />
                 </a>
@@ -412,12 +421,14 @@
                   <div id="filters" class="filters">
                     <a
                       href="#"
+                      title="all styles"
                       (click)="filterByStyle('')"
                       [ngClass]="{ 'active-category': selectedCategory == '' }"
                       >All Styles</a
                     >
                     <a
                       href="#"
+                      title="chindren's book"
                       (click)="filterByStyle('children')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'children'
@@ -426,6 +437,7 @@
                     >
                     <a
                       href="#"
+                      title="cartoon"
                       (click)="filterByStyle('cartoon')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'cartoon'
@@ -434,6 +446,7 @@
                     >
                     <a
                       href="#"
+                      title="watercolor"
                       (click)="filterByStyle('watercolor')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'watercolor'
@@ -442,6 +455,7 @@
                     >
                     <a
                       href="#"
+                      title="realistic"
                       (click)="filterByStyle('realistic')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'realistic'
@@ -450,6 +464,7 @@
                     >
                     <a
                       href="#"
+                      title="vector"
                       (click)="filterByStyle('vector')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'vector'
@@ -458,6 +473,7 @@
                     >
                     <a
                       href="#"
+                      title="general"
                       (click)="filterByStyle('general')"
                       [ngClass]="{
                         'active-category': selectedCategory == 'general'
@@ -481,6 +497,7 @@
                 ">
                 <a
                   href="#"
+                  title="{{artwork.title}}"
                   class="item-wrap fancybox"
                   (click)="$event.preventDefault(); artworkDetails(artwork)"
                 >
@@ -489,6 +506,7 @@
                     <span>{{ artwork.description }}</span>
                   </div>
                   <img
+                    alt="{{artwork.title}}"
                     class="img-fluid"
                     src="{{ artwork.image }}"
                   />
