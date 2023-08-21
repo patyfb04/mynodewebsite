@@ -39,6 +39,7 @@ import {EncrDecrService} from '../common/services/encr-decr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalStorageService } from 'src/common/services/localStorage.service';
 import { LoginComponent } from 'src/features/login/login.component';
+import { DeferLoadModule } from 'src/common/directives/defer-loading/defer-load.module';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { LoginComponent } from 'src/features/login/login.component';
     BrowserAnimationsModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    DeferLoadModule
   ],
   providers: [AppService,
               UserService,

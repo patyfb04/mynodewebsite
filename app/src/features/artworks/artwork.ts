@@ -11,9 +11,10 @@ export class Artwork {
     public  totalPaid  : number;
     public  category  : string;
     public  tools  : string;
+    public show?: boolean;
 
-    constructor(id :number, clientId:number, title:string, description:string, tools:string, thumbnail:string, 
-                image:string, link:string, category:string, createdDate:Date, totalPaid:number, display:boolean){
+    constructor(id :number, clientId:number, title:string, description:string, tools:string, thumbnail:string,
+                image:string, link:string, category:string, createdDate:Date, totalPaid:number, display:boolean, show:boolean){
         this.id = id
         this.clientId = clientId
         this.title = title
@@ -26,5 +27,6 @@ export class Artwork {
         this.createdDate = createdDate,
         this.totalPaid = totalPaid,
         this.display = display
+        this.show = show
     }
 }

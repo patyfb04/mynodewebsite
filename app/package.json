@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@tinymce/tinymce-angular": "^5.0.1",
+    "@trademe/ng-defer-load": "^14.1.0",
     "@types/crypto-js": "^4.1.1",
     "aws-sdk": "^2.1436.0",
     "concurrently": "^8.2.0",

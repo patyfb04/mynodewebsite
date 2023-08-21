@@ -152,7 +152,7 @@ export class ArtworkComponent implements OnInit {
   onSubmit(form: FormGroup) {
 
     const artwork = new Artwork(0, this.clientId, form.value.title, form.value.description, form.value.tools, form.value.image,
-                                form.value.image, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display);
+                                form.value.image, form.value.link, form.value.category, new Date(), form.value.totalPaid, form.value.display, false);
 
     if (this.isEdit) {
       artwork.id = this.selectedId;
@@ -167,6 +167,7 @@ export class ArtworkComponent implements OnInit {
   public create(artwork: Artwork) {
 
     delete artwork['id'];
+    delete artwork['show'];
     artwork.clientId = this.clientId;
     artwork.category = this.categoryName;
 
@@ -176,6 +177,7 @@ export class ArtworkComponent implements OnInit {
   }
 
   public update(artwork: Artwork) {
+    delete artwork['show'];
     artwork.clientId = this.clientId;
     artwork.category = this.categoryName;
     console.log('artwork', artwork)
@@ -233,6 +235,8 @@ export class ArtworkComponent implements OnInit {
       this.artworkList = result.filter(c=> c.display);
       this.dataSource.data = result;
        this.dataSource.data.forEach((artwork: Artwork) => {
+        artwork.show = false;
+
         this.clientService.getById(artwork.clientId != null ? artwork.clientId : 0).subscribe((result1: any) => {
           this.loading = false;
           if(result1[0] != undefined) {
