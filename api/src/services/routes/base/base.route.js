@@ -135,18 +135,17 @@ class BaseRoute {
                 console.log('Message =>',  request.body)
 
                 var transport = nodemailer.createTransport({
-                    host: "sandbox.smtp.mailtrap.io",
-                    port: 2525,
+                    service: 'gmail',
                     auth: {
-                    user: "e21f178f268a87",
-                    pass: "b5c9ab295b570a"
+                      user: 'patyartworks@gmail.com',
+                      pass: 'sspipbaswxjoeejz'
                     }
                 })
 
                 var message = {
                     from: request.body.email,
-                    to: "patyfb04@gmail.com",
-                    subject: "Patricia Braga - Contact Form from " + request.body.name,
+                    to: "patyartworks@gmail.com",
+                    subject: "Patricia Braga - Contact Form : " + request.body.name,
                     text:  request.body.message
             }
                 return transport.sendMail(message)
