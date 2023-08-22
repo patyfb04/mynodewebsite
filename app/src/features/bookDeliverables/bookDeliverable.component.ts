@@ -1,5 +1,5 @@
 import { BookDeliverableService } from './bookDeliverable.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { BookService } from './../books/book.service';
 import { Book } from './../books/book';
 import { BookDeliverable } from './bookDeliverable';
@@ -18,7 +18,7 @@ import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
   templateUrl: './bookDeliverable.component.html',
   styleUrls: ['./bookDeliverable.component.sass']
 })
-export class BookDeliverableComponent implements OnInit {
+export class BookDeliverableComponent implements OnInit, OnChanges {
   public isAdmin: boolean = false;
   public displayedColumns: string[] = [ 'book', 'status', 'amount', 'modifiedDate', 'link', 'id'];
   public display: boolean = false;
@@ -26,15 +26,15 @@ export class BookDeliverableComponent implements OnInit {
   public myForm: FormGroup;
   public selectedId: any;
   public dataSource: MatTableDataSource<BookDeliverable>;
-
   public book = new FormControl();
   public options = [];
   public filteredOptions: Observable<any>;
   public bookId: number = 0;
-
   public bookDeliverableStatus = new FormControl();
   public status: string = '';
 
+  @Output() backToEvent = new EventEmitter<string>();
+  @Input() selectedBook : Book;
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -70,9 +70,12 @@ export class BookDeliverableComponent implements OnInit {
         return this.filter(val || '')
       })
     )
+
+    this.display = true;
+
+    this.loadData();
   }
 
-  
   filter(val: string): Observable<any> {
     return this.bookService.getAll()
       .pipe(
@@ -80,6 +83,13 @@ export class BookDeliverableComponent implements OnInit {
           return option.title.toLowerCase().indexOf(val.toLowerCase()) === 0
         }))
       )
+  }
+
+  public ngOnChanges(changes : any)
+  {
+    if(changes.selectedBook.currentValue != undefined) {
+      console.log('Changes',changes.selectedBook.currentValue);
+    }
   }
 
   public ngOnInit(): void {
@@ -117,10 +127,10 @@ public displayForm(eventName: any, id: any) {
 
 onSubmit(form: FormGroup) {
 
-  const bookdeliverable = new BookDeliverable(0, this.bookId, form.value.description, this.status, form.value.amount, form.value.link, new Date());
+  const bookdeliverable = new BookDeliverable(0, this.selectedBook.id == undefined? 0 : this.selectedBook.id , form.value.description, this.status, form.value.amount, form.value.link, new Date());
 
   if (this.isEdit) {
-    bookdeliverable.id = this.selectedId;
+    bookdeliverable.id = this.selectedBook.id;
     this.update(bookdeliverable);
   }
   else {
@@ -132,20 +142,22 @@ onSubmit(form: FormGroup) {
 public create(bookdeliverable: BookDeliverable) {
 
   delete bookdeliverable['id'];
-  bookdeliverable.bookId = this.bookId;
+  bookdeliverable.bookId = this.selectedBook.id == null ? 0 : this.selectedBook.id ;
   bookdeliverable.status = this.status;
 
     this.bookDeliverableService.create(bookdeliverable).subscribe((result1: any) => {
       this.loadData();
       this.updateBookPayments(bookdeliverable);
-      this.display=false;
     });
-  
+
 }
 
 public update(bookdeliverable: BookDeliverable) {
-  bookdeliverable.bookId = this.bookId;
+  bookdeliverable.bookId = this.selectedBook.id == undefined ? 0 : this.selectedBook.id;
+  bookdeliverable.bookTitle = this.selectedBook.title;
   bookdeliverable.status = this.status;
+  bookdeliverable.id = this.selectedId;
+  console.log(bookdeliverable)
     this.bookDeliverableService.update(bookdeliverable).subscribe((result1: any) => {
       this.loadData();
       this.updateBookPayments(bookdeliverable);
@@ -167,14 +179,21 @@ public clearForm() {
 public updateBookPayments(bookDeliverable: BookDeliverable) {
 
   this.bookPaymentBalanceService.getAll().subscribe((result : any) => {
+
     var filterByBook = result.filter(function(bookpayment : BookPaymentBalance){
         return bookpayment.bookId == bookDeliverable.bookId
     });
 
-    if(filterByBook) {
+    if(filterByBook.length > 0) {
       var total = parseFloat(filterByBook[0].totalAmountPaid) + parseFloat(bookDeliverable.amount.toString());
       var paymentUpdate = new BookPaymentBalance(filterByBook[0].id, filterByBook[0].bookId, total, new Date());
       this.bookPaymentBalanceService.update(paymentUpdate).subscribe((result1: any) => {
+      });
+    }
+    else {
+      var paymentCreate = new BookPaymentBalance(0, bookDeliverable.bookId, bookDeliverable.amount, new Date());
+      delete paymentCreate['id'];
+      this.bookPaymentBalanceService.create(paymentCreate).subscribe((result1: any) => {
       });
     }
   })
@@ -183,7 +202,7 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
   public initForm(id: number) {
     this.bookDeliverableService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
-        
+
         this.myForm.patchValue({
           description: result[0].description,
           amount: result[0].amount,
@@ -209,13 +228,13 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
 
   public loadData() {
     this.bookDeliverableService.getAll().subscribe((result: BookDeliverable[]) => {
-      this.dataSource.data = result;
+      this.dataSource.data = result.filter(c => c.bookId == this.selectedBook.id);
        this.dataSource.data.forEach((bookDeliverable: BookDeliverable) => {
         this.bookService.getById(bookDeliverable.bookId).subscribe((result1: any) => {
           if(result1[0] != undefined) {
             bookDeliverable.bookId = result1[0].id;
             bookDeliverable.bookTitle =  result1[0].title;
-          } 
+          }
         });
       });
     })
@@ -231,4 +250,7 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
     window.open(url, '_blank')
   }
 
+  public backTo(){
+    this.backToEvent.emit('back');
+  }
 }

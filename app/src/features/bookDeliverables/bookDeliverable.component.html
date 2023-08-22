@@ -1,32 +1,13 @@
-<div class="bookClass">
+<div class="bookClass" *ngIf="display">
   <div>
-    <h4>BOOKS DELIVERABLES </h4>
-    <img class="icon-button right" src="./../../assets/icons/add-create-new.svg" *ngIf="!display"
-      (click)="displayForm('create', 0)" />
-    <img class="icon-button right" src="./../../assets/icons/close-delete-minus.svg" *ngIf="display"
-      (click)="displayForm('create', 0)" />
+    <a (click)="backTo()" style="cursor: pointer;font-size: 14px;">   &#8617; BACK </a>
+    <h4> BOOKS DELIVERABLES </h4>
   </div>
 
-  <div *ngIf="display">
-    {{ isEdit? 'Edit': 'Create '}} Book
+  <div> <br/>
+    {{ isEdit? 'Edit': 'Create '}} Book Deliverable :  {{selectedBook.title}}
 
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" >
-
-      <div>
-        <label>
-          Book:
-          <mat-form-field>
-            <input type="text" placeholder="Enter book title" [formControl]="book" matInput [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title"
-                (onSelectionChange)="onBookChange(option)">
-                {{option.title}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-
-        </label>
-      </div>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="myForm">
       <div>
         <label>
           Description:
@@ -69,7 +50,7 @@
     </form>
   </div>
 
-  <div>
+  <div *ngIf="display">
     <mat-form-field class="search">
       <input matInput type="text" (keyup)="doFilter($event)"
         placeholder="Type the book deliverable description, status, book title, or link to search">
@@ -78,8 +59,8 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" [ngClass]="'grid'" matSort>
 
       <ng-container matColumnDef="book">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Title </th>
-        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.bookTitle}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Deliverable </th>
+        <td mat-cell *matCellDef="let element" (click)="displayForm('edit',element.id)"> {{element.description}} </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
@@ -99,8 +80,8 @@
 
       <ng-container matColumnDef="link">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Link </th>
-        <td mat-cell *matCellDef="let element"> 
-          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)" 
+        <td mat-cell *matCellDef="let element">
+          <img alt="edit" class="icon-button table" src="./../../assets/icons/network-publish-send.svg"  (click) ="goToUrl(element.link)"
            *ngIf="element.link != null" style="cursor: pointer"/>
         </td>
       </ng-container>

@@ -1,6 +1,6 @@
 import { BookPaymentBalanceService } from './bookPaymentBalance.service';
 import { BookDeliverableService } from './../bookDeliverables/bookDeliverable.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { BookService } from './../books/book.service';
 import { Book } from './../books/book';
 import { BookDeliverable } from './../bookDeliverables/bookDeliverable';
@@ -26,36 +26,23 @@ export class BookPaymentBalanceComponent implements OnInit {
   public myForm: FormGroup;
   public selectedId: any;
   public dataSource: MatTableDataSource<BookPaymentBalance>;
-
   public book = new FormControl();
   public options = [];
   public filteredOptions: Observable<any>;
   public bookId: number = 0;
+  @Output() backToEvent = new EventEmitter<string>();
 
-  @ViewChild(MatPaginator, { static: false })
-  set paginator(value: MatPaginator) {
-    if (this.dataSource) {
-      this.dataSource.paginator = value;
-    }
-  }
-
-  @ViewChild(MatSort, { static: false })
-  set sort(value: MatSort) {
-    if (this.dataSource) {
-      this.dataSource.sort = value;
-    }
-  }
-  constructor(private activateRoute: ActivatedRoute, 
+  constructor(private activateRoute: ActivatedRoute,
             private bookPaymentBalanceService: BookPaymentBalanceService,
             private bookDeliverableService: BookDeliverableService,
             private bookService: BookService) {
 
               this.dataSource = new MatTableDataSource<BookPaymentBalance>();
-          
+
               this.myForm = new FormGroup({
                 totalAmountPaid: new FormControl('')
               });
-          
+
               this.filteredOptions = this.book.valueChanges.pipe(
                 startWith(''),
                 debounceTime(400),
@@ -86,7 +73,7 @@ export class BookPaymentBalanceComponent implements OnInit {
   public initForm(id: number) {
     this.bookPaymentBalanceService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
-        
+
         this.myForm.patchValue({
           totalAmountPaid: result[0].totalAmountPaid,
           modifiedDate: result[0].modifiedDate
@@ -113,7 +100,7 @@ export class BookPaymentBalanceComponent implements OnInit {
         this.bookService.getById(bookPaymentBalance.bookId).subscribe((result1: any) => {
           if(result1[0] != undefined) {
             bookPaymentBalance.bookTitle =  result1[0].title;
-          } 
+          }
         });
 
       });
@@ -125,6 +112,10 @@ export class BookPaymentBalanceComponent implements OnInit {
     const element = event.currentTarget as HTMLInputElement;
     const value = element.value;
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  public backTo(){
+    this.backToEvent.emit('back');
   }
 
 }

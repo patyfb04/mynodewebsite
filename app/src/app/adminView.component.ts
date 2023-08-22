@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { EncrDecrService } from 'src/common/services/encr-decr.service';
 import { LocalStorageService } from 'src/common/services/localStorage.service';
 import { User } from 'src/features/users/user';
+import { Book } from 'src/features/books/book';
 
 @Component({
   selector: 'admin-view',
@@ -21,10 +22,13 @@ export class AdminViewComponent implements OnInit {
     books: false,
     artworks: false,
     bookPaymentBalance: false,
+    bookDeliverable: false,
     testimonial: false,
     artist : false,
     service: false
   };
+
+  public selectedBook: Book;
 
   constructor(private appService: AppService,
               private localStorageService: LocalStorageService,
@@ -75,6 +79,7 @@ export class AdminViewComponent implements OnInit {
       books: false,
       artworks: false,
       bookPaymentBalance: false,
+      bookDeliverable: false,
       testimonial: false,
       artist : false,
       service: false,
@@ -83,6 +88,27 @@ export class AdminViewComponent implements OnInit {
 
     this.localStorageService.set("adminPage", view)
     return this.display[view] = true
+  }
+
+  public onBookEvent(event: any)
+  {
+    this.selectedBook = event.book;
+
+    if(event.eventName == 'Deliverable'){
+        this.display.bookDeliverables = true;
+        this.displayView(null, 'bookDeliverables');
+    } else {
+      this.display.bookPaymentBalances = true;
+      this.displayView(null, 'bookPaymentBalances');
+    }
+  }
+
+  public onBackEvent(event: any)
+  {
+    console.log("HERE");
+
+      this.display.book = true;
+      this.displayView(null, 'books');
   }
 
   public authorization(user: User |  null)

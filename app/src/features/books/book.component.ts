@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { BookService } from './book.service';
 import { ClientService } from './../clients/client.service';
 import { Book } from './book';
@@ -45,6 +45,8 @@ export class BookComponent implements OnInit {
   public rootURL: string = environment.production ? "https://patriciabraga-api.onrender.com/" :"http://localhost:5000/";
   public serverUrl: string = this.rootURL + "images";
   public thumbnail: string="";
+
+  @Output() bookEvent = new EventEmitter<{ book: Book, eventName: string }>();
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -179,7 +181,13 @@ export class BookComponent implements OnInit {
     this.myForm.reset();
   }
 
+  public goToBookDeliverable(book: Book) {
+    this.bookEvent.emit({ book: book, eventName: 'Deliverable' });
+  }
 
+  public goToBookPayment(book: Book) {
+    this.bookEvent.emit({ book: book, eventName: 'Payment' });
+  }
 // update book payment balance
 public createBookPayments(book: Book) {
       this.bookService.getAll().subscribe((result : Book[]) => {

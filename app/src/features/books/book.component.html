@@ -186,6 +186,20 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <img
+          alt="delete"
+          class="icon-button table"
+          src="./../../assets/icons/dolar-svgrepo-com.svg"
+          (click)="goToBookPayment(element)"
+        />
+        &nbsp;
+        <img
+        alt="book deliverable"
+        class="icon-button table"
+        src="./../../assets/icons/detail-interface-list.svg"
+        (click)="goToBookDeliverable(element)"
+      />
+      &nbsp;
+          <img
             alt="edit"
             class="icon-button table"
             src="./../../assets/icons/draw-edit-new.svg"
@@ -259,7 +273,7 @@
                 <a
                   href="http://{{ book.link }}"
                   target="_blank"
-                  title="{{book.title}}"
+                  ti
                   class="item-wrap fancybox"
                 >
                   <div class="work-info">
@@ -293,7 +307,6 @@
         <div id="filters" class="filters">
           <a
             href="#"
-            title="published books"
             (click)="filterByStatus('published')"
             [ngClass]="{
               'active-category':
@@ -303,7 +316,6 @@
           >
           <a
             href="#"
-            title="in progress books"
             (click)="filterByStatus('inprogress')"
             [ngClass]="{ 'active-category': selectedStatus == 'inprogress' }"
             >In Progress</a
@@ -318,7 +330,6 @@
             <a
               href="http://{{ book.link }}"
               target="_blank"
-              title="{{book.title}}"
               class="item-wrap fancybox"
             >
               <div class="work-info">

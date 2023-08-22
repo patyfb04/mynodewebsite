@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/common/services/base-service.service';
 import  { BookPaymentBalance }  from './bookPaymentBalance';
+import { Book } from '../books/book';
 
 @Injectable()
 export class BookPaymentBalanceService extends BaseService{
+
+  @Input() selectedBook : Book;
 
     constructor(private httpClient: HttpClient) {
        super();
