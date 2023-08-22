@@ -25,7 +25,8 @@ export class AdminViewComponent implements OnInit {
     bookDeliverable: false,
     testimonial: false,
     artist : false,
-    service: false
+    service: false,
+    dashboard: false
   };
 
   public selectedBook: Book;
@@ -58,11 +59,17 @@ export class AdminViewComponent implements OnInit {
         service: false,
         login: true
       }
-      this.displayView(null,'login')
+      this.displayView(null,'login');
     } else
     {
       let currentPage = this.localStorageService.get("adminPage")
-      this.displayView(null, currentPage)
+      if(currentPage != null)
+      {
+        this.displayView(null, currentPage)
+      }
+      else{
+        this.displayView(null, 'dashboard')
+      }
     }
   }
 
@@ -83,7 +90,8 @@ export class AdminViewComponent implements OnInit {
       testimonial: false,
       artist : false,
       service: false,
-      login: false
+      login: false,
+      dashboard: false
     }
 
     this.localStorageService.set("adminPage", view)
@@ -105,8 +113,6 @@ export class AdminViewComponent implements OnInit {
 
   public onBackEvent(event: any)
   {
-    console.log("HERE");
-
       this.display.book = true;
       this.displayView(null, 'books');
   }

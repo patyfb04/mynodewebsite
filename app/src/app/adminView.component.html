@@ -13,17 +13,8 @@
             <a
               href="#"
               style="margin-left: 200px"
-              (click)="displayView($event, 'home')"
-              [ngClass]="{
-                active:
-                  !display.artworks &&
-                  !display.books &&
-                  !display.service &&
-                  !display.contact &&
-                  !display.client &&
-                  !display.users &&
-                  !display.testimonial
-              }"
+              (click)="displayView($event, 'dashboard')"
+              [ngClass]="{ active: display.dashboard}"
               >Home</a
             >
           </li>
@@ -109,17 +100,8 @@
           <a
             href="#"
             style="margin-left: 200px"
-            (click)="displayView($event, 'home')"
-            [ngClass]="{
-              active:
-                !display.artworks &&
-                !display.books &&
-                !display.service &&
-                !display.contact &&
-                !display.client &&
-                !display.users &&
-                !display.testimonial
-            }"
+            (click)="displayView($event, 'dashboard')"
+            [ngClass]="{ active: display.dashboard }"
             >Home</a
           >
         </li>
@@ -198,6 +180,7 @@
       <div *ngIf="display.home">
         <h3>ADMINISTRATION</h3>
       </div>
+      <dashboard-view *ngIf="display.dashboard"></dashboard-view>
       <clients-view *ngIf="display.clients"></clients-view>
       <users-view  *ngIf="display.users"></users-view>
       <artworks-view  *ngIf="display.artworks"></artworks-view>

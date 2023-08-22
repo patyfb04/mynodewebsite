@@ -1,0 +1,16 @@
+<div class="dashboard">
+  <div class="three-columns-grid">
+    <div></div>
+    <div>
+      <h3> In Progress Books</h3> <br/>
+        <div class="books">
+             <div class="card" *ngFor="let book of bookInProgressList">
+                <div class="title">{{book.title}}</div>
+                <div class="paid">Total Paid: ${{book.totalAmountPaid}}</div>
+                <div class="number">Delivered {{book.numberOfDeliverables}}</div>
+             </div>
+        </div>
+    </div>
+    <div></div>
+  </div>
+</div>

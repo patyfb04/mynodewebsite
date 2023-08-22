@@ -20,6 +20,7 @@ import { ServiceComponent } from './../features/service/service.component';
 import { ArtistComponent } from '../features/artist/artist.component';
 import { TestimonialComponent } from './../features/testimonials/testimonial.component';
 import { FormInfoComponent } from './../features/formInfo/formInfo.component';
+import { DashboardComponent } from './../features/dashboard/dashboard.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
@@ -57,6 +58,7 @@ import { DeferLoadModule } from 'src/common/directives/defer-loading/defer-load.
     TestimonialComponent,
     LoginComponent,
     FormInfoComponent,
+    DashboardComponent,
     ArtworFilterPipe,
     SafePipe
   ],
