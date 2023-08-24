@@ -1,13 +1,26 @@
-<div class="bookClass" *ngIf="display">
+<div class="bookClass">
   <div>
     <a (click)="backTo()" style="cursor: pointer;font-size: 14px;">   &#8617; BACK </a>
     <h4> BOOKS DELIVERABLES </h4>
+    <img
+      class="icon-button right"
+      src="./../../assets/icons/add-create-new.svg"
+      *ngIf="!display"
+      (click)="displayForm('create', 0)"
+    />
+    <img
+      alt="create"
+      class="icon-button right"
+      src="./../../assets/icons/close-delete-minus.svg"
+      *ngIf="display"
+      (click)="displayForm('create', 0)"
+    />
   </div>
 
   <div> <br/>
     {{ isEdit? 'Edit': 'Create '}} Book Deliverable :  {{selectedBook.title}}
 
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="myForm">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="myForm" *ngIf="display">
       <div>
         <label>
           Description:
@@ -50,7 +63,7 @@
     </form>
   </div>
 
-  <div *ngIf="display">
+  <div>
     <mat-form-field class="search">
       <input matInput type="text" (keyup)="doFilter($event)"
         placeholder="Type the book deliverable description, status, book title, or link to search">

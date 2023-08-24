@@ -8,6 +8,8 @@ import { BookDeliverableService } from '../bookDeliverables/bookDeliverable.serv
 import { Book } from '../books/book';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookDeliverable } from '../bookDeliverables/bookDeliverable';
+import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
+import { float } from 'aws-sdk/clients/cloudfront';
 
 
 
@@ -20,6 +22,8 @@ export class DashboardComponent {
 
   public bookInProgressList: Book[];
   public dataSource: MatTableDataSource<Book>;
+  public total : number = 0;
+  public currencyConverted : float = 0.0;
 
   constructor(private activateRoute: ActivatedRoute,
               private bookService: BookService,
@@ -44,9 +48,13 @@ export class DashboardComponent {
               }
             });
 
-          this.bookPaymentBalanceService.getById(book.id == null ? 0 : book.id).subscribe((result1: any) => {
-            if(result1[0] != undefined) {
-              book.totalAmountPaid = result1[0].totalAmountPaid;
+          this.bookPaymentBalanceService.getAll().subscribe((result1: BookPaymentBalance[]) => {
+            if(result1.length > 0) {
+
+              var bookPaymentBalance = result1.filter(c => c.bookId == book.id);
+              book.totalAmountPaid = bookPaymentBalance[0].totalAmountPaid;
+              this.total +=  book.totalAmountPaid;
+              this.currencyConverted = Math.round(this.total * 1.36);
             }
           });
 
