@@ -9,7 +9,6 @@ import { Book } from '../books/book';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookDeliverable } from '../bookDeliverables/bookDeliverable';
 import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
-import { float } from 'aws-sdk/clients/cloudfront';
 
 
 
@@ -23,7 +22,7 @@ export class DashboardComponent {
   public bookInProgressList: Book[];
   public dataSource: MatTableDataSource<Book>;
   public total : number = 0;
-  public currencyConverted : float = 0.0;
+  public currencyConverted : any = 0.0;
 
   constructor(private activateRoute: ActivatedRoute,
               private bookService: BookService,
