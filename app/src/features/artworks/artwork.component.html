@@ -110,8 +110,8 @@
               <option value="cartoon">Cartoon</option>
               <option value="watercolor">Watercolor</option>
               <option value="realistic">Realistic/Semi-Realistic</option>
+              <option value="artnoveau">Art Noveau</option>
               <option value="vectorial">Vectorial</option>
-              <option value="general">General</option>
             </select>
           </mat-form-field>
         </label>
@@ -353,6 +353,15 @@
                       >Realism/Semi-Realism</a
                     >
                     <a
+                    href="#"
+                    title="art noveau"
+                    (click)="filterByStyle('artnoveau')"
+                    [ngClass]="{
+                      'active-category': selectedCategory == 'artnoveau'
+                    }"
+                    >Art Noveau</a
+                  >
+                    <a
                       href="#"
                       title="vector"
                       (click)="filterByStyle('vector')"
@@ -360,15 +369,6 @@
                         'active-category': selectedCategory == 'vector'
                       }"
                       >Vector Art</a
-                    >
-                    <a
-                      href="#"
-                      title="general"
-                      (click)="filterByStyle('general')"
-                      [ngClass]="{
-                        'active-category': selectedCategory == 'general'
-                      }"
-                      >General</a
                     >
                   </div>
                 </div>
