@@ -144,6 +144,7 @@ class BaseRoute {
 
                 var message = {
                     from: request.body.email,
+                    replyTo: request.body.email,
                     to: "patyartworks@gmail.com",
                     subject: "Patricia Braga - Contact Form : " + request.body.name,
                     text:  request.body.message
