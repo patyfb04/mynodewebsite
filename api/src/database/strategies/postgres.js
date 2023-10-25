@@ -123,7 +123,7 @@ class PostGresDB extends ICrud {
                 protocol: "postgres",
                 dialectOptions: {
                     app: "psql",
-                    ssl: "true"
+                    ssl:  { rejectUnauthorized: false }
                 },
             }
         )
