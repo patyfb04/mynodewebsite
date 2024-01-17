@@ -80,6 +80,7 @@
               (change)="onStatusChange(mySelect.value)"
             >
               <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
               <option value="Published">Published</option>
               <option value="Cancelled">Cancelled</option>
             </select>
@@ -248,16 +249,25 @@
                         selectedStatus == 'published' || selectedStatus == ''
                     }"
                     >Published</a
-                  >
+                  > &nbsp; | &nbsp;
                   <a
                     href="#"
-                    title="in progress books"
-                    (click)="filterByStatus('inprogress')"
+                    title="completed books"
+                    (click)="filterByStatus('completed')"
                     [ngClass]="{
-                      'active-category': selectedStatus == 'inprogress'
+                      'active-category': selectedStatus == 'completed'
                     }"
-                    >In Progress</a
-                  >
+                    >Completed (To be Published) </a
+                  > &nbsp; | &nbsp;
+                  <a
+                  href="#"
+                  title="in progress books"
+                  (click)="filterByStatus('inprogress')"
+                  [ngClass]="{
+                    'active-category': selectedStatus == 'inprogress'
+                  }"
+                  >In Progress</a
+                >
                 </div>
               </div>
               <div></div>
@@ -265,7 +275,7 @@
 
 
             <!-- published books -->
-            <div id="portfolio-grid1" *ngIf="selectedStatus != 'inprogress'">
+            <div id="portfolio-grid1" *ngIf="selectedStatus != 'inprogress' && selectedStatus != 'completed'">
               <div
                 class="item col-sm-6 col-md-4 col-lg-2 mb-4"
                 *ngFor="let book of bookPublishedList; let i = index"
@@ -287,6 +297,14 @@
                 </a>
               </div>
             </div>
+              <!-- completed books -->
+                <div *ngIf="selectedStatus == 'completed'" class="in-progress">
+                  <ul>
+                    <li *ngFor="let book of bookCompletedList; let i = index">
+                      {{ book.title }} - written by {{ book.authorName }}
+                    </li>
+                  </ul>
+                </div>
             <!-- in progress books -->
             <div *ngIf="selectedStatus == 'inprogress'" class="in-progress">
               <ul>
@@ -295,6 +313,7 @@
                 </li>
               </ul>
             </div>
+
           </div>
         </section>
       </div>
@@ -315,6 +334,12 @@
             >Published</a
           >
           <a
+          href="#"
+          (click)="filterByStatus('completed')"
+          [ngClass]="{ 'active-category': selectedStatus == 'completed' }"
+          >Completed (to be published)</a
+        >
+          <a
             href="#"
             (click)="filterByStatus('inprogress')"
             [ngClass]="{ 'active-category': selectedStatus == 'inprogress' }"
@@ -322,7 +347,7 @@
           >
         </div>
         <!-- published books -->
-        <div id="portfolio-grid1" *ngIf="selectedStatus != 'inprogress'">
+        <div id="portfolio-grid1" *ngIf="selectedStatus != 'inprogress' && selectedStatus != 'completed'">
           <div
             class="item col-sm-6 col-md-4 col-lg-2 mb-4"
             *ngFor="let book of bookPublishedList; let i = index"
@@ -338,6 +363,14 @@
               <img class="img-fluid" src="{{ book.thumbnail }}" alt="{{book.title}}" />
             </a>
           </div>
+        </div>
+        <!-- completed  books -->
+        <div *ngIf="selectedStatus == 'completed'" class="in-progress">
+          <ul>
+            <li *ngFor="let book of bookCompletedList; let i = index">
+              {{ book.title }} - written by {{ book.authorName }}
+            </li>
+          </ul>
         </div>
         <!-- in progress books -->
         <div *ngIf="selectedStatus == 'inprogress'" class="in-progress">

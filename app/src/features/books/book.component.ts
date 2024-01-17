@@ -31,6 +31,7 @@ export class BookComponent implements OnInit {
   public dataSource: MatTableDataSource<Book>;
   public bookPublishedList: Book[];
   public bookInProgressList: Book[];
+  public bookCompletedList: Book [];
   public selectedBook: Book;
 
   public author = new FormControl();
@@ -267,6 +268,7 @@ public deleteBookDeliverables(id: number){
     this.bookService.getAll().subscribe((result: Book[]) => {
       this.bookPublishedList = result.filter(c=>  c.status == "Published");
       this.bookInProgressList = result.filter(c=>  c.status == "In Progress");
+      this.bookCompletedList = result.filter(c=>  c.status == "Completed");
       this.dataSource.data = result;
        this.dataSource.data.forEach((book: Book) => {
         this.clientService.getById(book.clientId).subscribe((result1: any) => {
