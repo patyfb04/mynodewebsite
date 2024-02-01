@@ -161,7 +161,6 @@ export class BookComponent implements OnInit {
   public update(book: Book) {
     book.clientId = this.clientId;
     book.status = this.status;
-    console.log('BOOK',book);
       this.bookService.update(book).subscribe((result1: any) => {
         this.loadData();
         this.display = false;
@@ -251,6 +250,8 @@ public initForm(id: number) {
         this.myForm.patchValue({
           bookStatus: result[0].status
         });
+
+        this.status = result[0].status;
 
         this.clientService.getById(result[0].clientId).subscribe((result1: any) => {
           this.author.setValue(result1[0].name);
