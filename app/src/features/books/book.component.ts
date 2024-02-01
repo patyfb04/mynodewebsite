@@ -33,6 +33,7 @@ export class BookComponent implements OnInit {
   public bookInProgressList: Book[];
   public bookCompletedList: Book [];
   public selectedBook: Book;
+  public selectedAuthor: Client;
 
   public author = new FormControl();
   public options = [];
@@ -160,9 +161,7 @@ export class BookComponent implements OnInit {
   public update(book: Book) {
     book.clientId = this.clientId;
     book.status = this.status;
-    book.clientId = this.clientId;
-    book.status = this.status;
-
+    console.log('BOOK',book);
       this.bookService.update(book).subscribe((result1: any) => {
         this.loadData();
         this.display = false;
@@ -237,7 +236,7 @@ public deleteBookDeliverables(id: number){
     }
   })
 }
-  public initForm(id: number) {
+public initForm(id: number) {
     this.bookService.getById(id).subscribe((result: any) => {
       if (result.length > 0) {
 
@@ -255,6 +254,7 @@ public deleteBookDeliverables(id: number){
 
         this.clientService.getById(result[0].clientId).subscribe((result1: any) => {
           this.author.setValue(result1[0].name);
+          this.clientId = result1[0].id
 
           this.myForm.patchValue({
             author: result[0].author
