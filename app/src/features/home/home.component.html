@@ -1,0 +1,180 @@
+<div class="home-info desktop">
+
+  <div *ngIf="!isAdmin">
+    <div class="content">
+      <carousel [slides]="slides"></carousel>
+    </div>
+  </div>
+
+  <div *ngIf="isAdmin">
+    <div>
+      <h4>Main Page </h4>
+    </div>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <div>
+        <label>
+          Image 1:
+          <input
+            formControlName="img1"
+            placeholder="Enter image 1"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Link 1:
+          <input
+            formControlName="link1"
+            placeholder="Enter link for image 1"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Text 1:
+          <textarea
+            formControlName="txt1"
+            placeholder="Enter text for image 1"
+            type="text"
+          ></textarea>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Image 2:
+          <input
+            formControlName="img2"
+            placeholder="Enter image 2"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Link 2:
+          <input
+            formControlName="link2"
+            placeholder="Enter link for image 2"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Text 2:
+          <textarea
+            formControlName="txt2"
+            placeholder="Enter text for image 2"
+          ></textarea>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Image 3:
+          <input
+            formControlName="img3"
+            placeholder="Enter image 3"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Link 3:
+          <input
+            formControlName="link3"
+            placeholder="Enter link for image 3"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Text 3:
+          <textarea
+            formControlName="txt3"
+            placeholder="Enter text for image 3"
+          ></textarea>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Image 4:
+          <input
+            formControlName="img4"
+            placeholder="Enter image 4"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Link 4:
+          <input
+            formControlName="link4"
+            placeholder="Enter link for image 4"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Text 4:
+          <textarea
+            formControlName="txt4"
+            placeholder="Enter text for image 4"
+          ></textarea>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Image 5:
+          <input
+            formControlName="img5"
+            placeholder="Enter image 5"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Link 5:
+          <input
+            formControlName="link5"
+            placeholder="Enter link for image 5"
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Text 5:
+          <textarea
+            formControlName="txt5"
+            placeholder="Enter text for image 5"
+          ></textarea>
+        </label>
+      </div>
+
+
+      <div class="buttons">
+        <button type="submit">Save</button> &nbsp;
+        <button type="reset">Clear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="home-info mobile">
+  <div *ngIf="!isAdmin">
+    <div class="content">
+      <carousel [slides]="slides"></carousel>
+    </div>
+  </div>
+</div>

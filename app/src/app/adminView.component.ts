@@ -68,7 +68,7 @@ export class AdminViewComponent implements OnInit {
         this.displayView(null, currentPage)
       }
       else{
-        this.displayView(null, 'dashboard')
+        this.displayView(null, 'home')
       }
     }
   }

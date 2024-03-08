@@ -1,0 +1,53 @@
+.home-info
+  width: 100%
+  margin-top: 90px !important
+  .three-columns-grid
+    display: grid
+    grid-auto-rows: 1fr
+    grid-template-columns: 25% 40% 30%!important
+    .content
+      margin-top: 70px
+  .title
+    padding-bottom: 20px
+  .content
+    margin-top: 70px
+  form
+    min-height: 300px
+    border: 1px solid  #9f86c0
+    border-radius: 5px
+    padding: 20px
+    background-color: #eaeaea
+    padding-bottom: 70px
+    label
+      color: #5e548e
+      font-size: 14px
+    input, textarea
+      width: 98%
+      border: 1px solid #cccccc
+    textarea
+      border-radius: 5px
+    button
+      padding:15px
+      border: 1px solid #9f86c0
+      background: white
+      color: #9f86c0
+      border-radius: 40px
+      width: 80px
+    button:hover
+      background: #e7c6ff
+      color: #9f86c0
+@media only screen and (min-width: 801px)
+    .mobile
+      display: none!important
+@media only screen and (max-width: 800px)
+  .desktop
+    display: none !important
+  .home-info
+      background: #ecd4fc
+      margin-top: 150px
+      width: 80%!important
+      border: 1px solid #5e548e
+      border-radius: 5px
+      padding: 25px
+      .slider
+        width:100%

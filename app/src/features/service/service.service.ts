@@ -19,7 +19,7 @@ export class ServiceService extends BaseService{
         return this.httpClient.get<any>(this.rootURL +'service/'+ id, this.requestOptions);
     }
 
-    public update(user : Service): Observable<any> {
-        return this.httpClient.post<any>(this.rootURL +'service/update', user, this.requestOptions);
+    public update(service : Service): Observable<any> {
+        return this.httpClient.post<any>(this.rootURL +'service/update', service, this.requestOptions);
     }
 }

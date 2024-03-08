@@ -21,6 +21,7 @@ import { ArtistComponent } from '../features/artist/artist.component';
 import { TestimonialComponent } from './../features/testimonials/testimonial.component';
 import { FormInfoComponent } from './../features/formInfo/formInfo.component';
 import { DashboardComponent } from './../features/dashboard/dashboard.component';
+import { HomeComponent } from './../features/home/home.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
@@ -33,6 +34,7 @@ import { ServiceService } from './../features/service/service.service';
 import { ArtistService } from '../features/artist/artist.service';
 import { TestimonialService } from './../features/testimonials/testimonial.service';
 import { FormInfoService } from './../features/formInfo/formInfo.service';
+import { HomeService } from './../features/home/home.service';
 
 import { ArtworFilterPipe } from '../features/artworks/pipes/filter-array';
 import { SafePipe } from '../common/pipes/safe-pipe';
@@ -41,12 +43,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalStorageService } from 'src/common/services/localStorage.service';
 import { LoginComponent } from 'src/features/login/login.component';
 import { DeferLoadModule } from 'src/common/directives/defer-loading/defer-load.module';
+import { CarouselModule } from 'src/common/carousel/carousel.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminViewComponent,
     AppViewComponent,
+    HomeComponent,
     UserComponent,
     ClientComponent,
     BookComponent,
@@ -70,7 +74,8 @@ import { DeferLoadModule } from 'src/common/directives/defer-loading/defer-load.
     AngularMaterialModule,
     ReactiveFormsModule,
     EditorModule,
-    DeferLoadModule
+    DeferLoadModule,
+    CarouselModule
   ],
   providers: [AppService,
               UserService,
@@ -84,6 +89,7 @@ import { DeferLoadModule } from 'src/common/directives/defer-loading/defer-load.
               TestimonialService,
               EncrDecrService,
               FormInfoService,
+              HomeService,
               LocalStorageService,
               { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
               { provide: LocationStrategy, useClass: HashLocationStrategy }],

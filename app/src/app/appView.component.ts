@@ -17,7 +17,8 @@ export class AppViewComponent  implements OnInit{
     books: false,
     artworks: false,
     testimonial: false,
-    formInfo: false
+    formInfo: false,
+    home: false
   };
 
   constructor(private appService: AppService,
@@ -28,7 +29,7 @@ export class AppViewComponent  implements OnInit{
   ngOnInit(): void {
       let currentPage = this.localStorageService.get("viewPage")
       if(currentPage == null || currentPage == undefined) {
-        currentPage = "artworks"
+        currentPage = "home"
       }
       this.displayView(null, currentPage)
   }
@@ -43,7 +44,8 @@ export class AppViewComponent  implements OnInit{
       books: false,
       artworks: false,
       testimonial: false,
-      formInfo: false
+      formInfo: false,
+      home: false
     };
 
     let currentPage = this.localStorageService.set("viewPage", view)
