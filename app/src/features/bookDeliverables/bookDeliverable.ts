@@ -7,7 +7,7 @@ export class BookDeliverable {
     public  amount  : number;
     public  modifiedDate  : Date;
     public bookTitle : string = '';
-
+    public clientName : string = '';
 
     constructor(id: number, bookId: number, description:string, status:string, amount:number,link: string, modifiedDate: Date){
         this.id = id

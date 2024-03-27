@@ -12,6 +12,12 @@ import { MatTableDataSource, } from '@angular/material/table';
 import { ThisReceiver } from '@angular/compiler';
 import { BookPaymentBalanceService } from './../bookPaymentBalance/bookPaymentBalance.service';
 import { BookPaymentBalance } from '../bookPaymentBalance/bookPaymentBalance';
+const pdfMake = require('pdfmake/build/pdfmake.js');
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import * as moment from 'moment';
+import { ClientService } from '../clients/client.service';
+import { Client } from '../clients/client';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'book-deliverable-view',
@@ -32,6 +38,8 @@ export class BookDeliverableComponent implements OnInit, OnChanges {
   public bookId: number = 0;
   public bookDeliverableStatus = new FormControl();
   public status: string = '';
+  public bookDeliverable : BookDeliverable;
+  public clientName : string;
 
   @Output() backToEvent = new EventEmitter<string>();
   @Input() selectedBook : Book;
@@ -50,9 +58,12 @@ export class BookDeliverableComponent implements OnInit, OnChanges {
     }
   }
 
+  @ViewChild('dataToExport', { static: false }) public dataToExport: ElementRef;
+
   constructor(private activateRoute: ActivatedRoute,
     private bookDeliverableService: BookDeliverableService,
     private bookService: BookService,
+    private clientService: ClientService,
     private bookPaymentBalanceService : BookPaymentBalanceService) {
     this.dataSource = new MatTableDataSource<BookDeliverable>();
 
@@ -234,6 +245,9 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
           if(result1[0] != undefined) {
             bookDeliverable.bookId = result1[0].id;
             bookDeliverable.bookTitle =  result1[0].title;
+            this.clientService.getById(result1[0].clientId).subscribe((result2 : any) => {
+              bookDeliverable.clientName = result2[0].name;
+            });
           }
         });
       });
@@ -253,4 +267,355 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
   public backTo(){
     this.backToEvent.emit('back');
   }
+
+  public generateInvoiceData(bookDeliverable : BookDeliverable) : void{
+    let number = this.getRandomInvoiceId(1000, 5000000);
+    console.log('this.bookDeliverable', bookDeliverable);
+    console.log('number', number);
+    console.log('moment().toString()', moment().format('dddd, MMMM Do YYYY'));
+    this.downloadAsPdf(bookDeliverable, number);
+  }
+
+    public async downloadAsPdf(bookDeliverable :BookDeliverable, invoiceId : number) {
+      var pdf = {
+        content: [
+          {
+            columns: [
+              {
+                image: await this.getBase64ImageFromURL(
+                "./../../assets/img/logo1.png"
+                )
+                ,width: 150,
+              },
+              [
+                {
+                  text: 'Invoice',
+                  color: '#333333',
+                  width: '*',
+                  fontSize: 28,
+                  bold: true,
+                  alignment: 'right',
+                  margin: [0, 0, 0, 15],
+                },
+                {
+                  stack: [
+                    {
+                      columns: [
+                        {
+                          text: 'Invoice No.',
+                          color: '#aaaaab',
+                          bold: true,
+                          width: '*',
+                          fontSize: 12,
+                          alignment: 'right',
+                        },
+                        {
+                          text: invoiceId.toString(),
+                          bold: true,
+                          color: '#333333',
+                          fontSize: 12,
+                          alignment: 'right',
+                          width: 100,
+                        },
+                      ],
+                    },
+                    {
+                      columns: [
+                        {
+                          text: 'Date Issued',
+                          color: '#aaaaab',
+                          bold: true,
+                          width: '*',
+                          fontSize: 12,
+                          alignment: 'right',
+                        },
+                        {
+                          text: moment().format('dddd, MMMM Do YYYY'),
+                          bold: true,
+                          color: '#333333',
+                          fontSize: 12,
+                          alignment: 'right',
+                          width: 100,
+                        },
+                      ],
+                    },
+                    {
+                      columns: [
+                        {
+                          text: 'Status',
+                          color: '#aaaaab',
+                          bold: true,
+                          fontSize: 12,
+                          alignment: 'right',
+                          width: '*',
+                        },
+                        {
+                          text: 'PAID',
+                          bold: true,
+                          fontSize: 14,
+                          alignment: 'right',
+                          color: 'green',
+                          width: 100,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+          {
+            columns: [
+              {
+                text: 'From',
+                color: '#aaaaab',
+                bold: true,
+                fontSize: 14,
+                alignment: 'left',
+                margin: [0, 20, 0, 5],
+              },
+              {
+                text: 'To',
+                color: '#aaaaab',
+                bold: true,
+                fontSize: 14,
+                alignment: 'left',
+                margin: [0, 20, 0, 5],
+              },
+            ],
+          },
+          {
+            columns: [
+              {
+                text: 'Patricia Braga',
+                bold: true,
+                color: '#333333',
+                alignment: 'left',
+              },
+              {
+                text: bookDeliverable.clientName,
+                bold: true,
+                color: '#333333',
+                alignment: 'left',
+              },
+            ],
+          },
+          '\n\n',
+          {
+            width: '100%',
+            alignment: 'center',
+            text: 'Invoice No. ' + invoiceId.toString(),
+            bold: true,
+            margin: [0, 10, 0, 10],
+            fontSize: 15,
+          },
+          {
+            layout: {
+              defaultBorder: false,
+              hLineWidth: function(i: any, node: any) {
+                return 1;
+              },
+              vLineWidth: function(i: any, node: any) {
+                return 1;
+              },
+              hLineColor: function(i: number, node: any) {
+                if (i === 1 || i === 0) {
+                  return '#bfdde8';
+                }
+                return '#eaeaea';
+              },
+              vLineColor: function(i: any, node: any) {
+                return '#eaeaea';
+              },
+              hLineStyle: function(i: any, node: any) {
+                // if (i === 0 || i === node.table.body.length) {
+                return null;
+                //}
+              },
+              // vLineStyle: function (i, node) { return {dash: { length: 10, space: 4 }}; },
+              paddingLeft: function(i: any, node: any) {
+                return 10;
+              },
+              paddingRight: function(i: any, node: any) {
+                return 10;
+              },
+              paddingTop: function(i: any, node: any) {
+                return 2;
+              },
+              paddingBottom: function(i: any, node: any) {
+                return 2;
+              },
+              fillColor: function(rowIndex: any, node: any, columnIndex: any) {
+                return '#fff';
+              },
+            },
+            table: {
+              headerRows: 1,
+              widths: ['*', 80],
+              body: [
+                [
+                  {
+                    text: 'ITEM DESCRIPTION',
+                    fillColor: '#eaf2f5',
+                    border: [false, true, false, true],
+                    margin: [0, 5, 0, 5],
+                    textTransform: 'uppercase',
+                  },
+                  {
+                    text: 'ITEM TOTAL',
+                    border: [false, true, false, true],
+                    alignment: 'right',
+                    fillColor: '#eaf2f5',
+                    margin: [0, 5, 0, 5],
+                    textTransform: 'uppercase',
+                  },
+                ],
+                [
+                  {
+                    text: bookDeliverable.description,
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                    alignment: 'left',
+                  },
+                  {
+                    border: [false, false, false, true],
+                    text: 'USD $' + bookDeliverable.amount.toString(),
+                    fillColor: '#f5f5f5',
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+              ],
+            },
+          },
+          '\n',
+          '\n\n',
+          {
+            layout: {
+              defaultBorder: false,
+              hLineWidth: function(i: any, node: any) {
+                return 1;
+              },
+              vLineWidth: function(i: any, node: any) {
+                return 1;
+              },
+              hLineColor: function(i: any, node: any) {
+                return '#eaeaea';
+              },
+              vLineColor: function(i: any, node: any) {
+                return '#eaeaea';
+              },
+              hLineStyle: function(i: any, node: any) {
+                // if (i === 0 || i === node.table.body.length) {
+                return null;
+                //}
+              },
+              // vLineStyle: function (i, node) { return {dash: { length: 10, space: 4 }}; },
+              paddingLeft: function(i: any, node: any) {
+                return 10;
+              },
+              paddingRight: function(i: any, node: any) {
+                return 10;
+              },
+              paddingTop: function(i: any, node: any) {
+                return 3;
+              },
+              paddingBottom: function(i: any, node: any) {
+                return 3;
+              },
+              fillColor: function(rowIndex: any, node: any, columnIndex: any) {
+                return '#fff';
+              },
+            },
+            table: {
+              headerRows: 1,
+              widths: ['*', 'auto'],
+              body: [
+                [
+                  {
+                    text: 'Payment Subtotal',
+                    border: [false, true, false, true],
+                    alignment: 'right',
+                    margin: [0, 5, 0, 5],
+                  },
+                  {
+                    border: [false, true, false, true],
+                    text: 'USD $' + bookDeliverable.amount.toString(),
+                    alignment: 'right',
+                    fillColor: '#f5f5f5',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+
+                [
+                  {
+                    text: 'Total Amount',
+                    bold: true,
+                    fontSize: 20,
+                    alignment: 'right',
+                    border: [false, false, false, true],
+                    margin: [0, 5, 0, 5],
+                  },
+                  {
+                    text: 'USD $' + bookDeliverable.amount.toString(),
+                    bold: true,
+                    fontSize: 20,
+                    alignment: 'right',
+                    border: [false, false, false, true],
+                    fillColor: '#f5f5f5',
+                    margin: [0, 5, 0, 5],
+                  },
+                ],
+              ],
+            },
+          },
+        ],
+        styles: {
+          notesTitle: {
+            fontSize: 10,
+            bold: true,
+            margin: [0, 50, 0, 3],
+          },
+          notesText: {
+            fontSize: 10,
+          },
+        },
+        defaultStyle: {
+          columnGap: 20,
+          //font: 'Quicksand',
+        },
+      };
+      let filename = 'Invoice';
+      pdfMake.createPdf(pdf).download(filename);
+    }
+
+    private getBase64ImageFromURL(url: string) {
+      return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.setAttribute("crossOrigin", "anonymous");
+
+        img.onload = () => {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var ctx = canvas.getContext("2d");
+          ctx!.drawImage(img, 0, 0);
+          var dataURL = canvas.toDataURL("image/png");
+          resolve(dataURL);
+        };
+        img.onerror = error => {
+          reject(error);
+        };
+        img.src = url;
+      });
+    }
+
+    private getRandomInvoiceId (min = 1000, max = 500000) : number {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      const num =  Math.floor(Math.random() * (max - min + 1)) + min;
+      return num;
+    };
+
 }
+
