@@ -1,92 +1,66 @@
+
 <nav class="fixed-nav-bar app-view desktop">
   <div class="row">
-    <div class="column logo">
-      <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
-    </div>
-    <div class="column menu">
-      <div class="three-columns-grid">
-          <div></div>
-          <div>
-            <div id="menu" class="menu">
-
-              <ul class="menu-items">
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'home')"
-                    [ngClass]="{ active: display.home }"
-                    >Home</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'artworks')"
-                    [ngClass]="{ active: display.artworks }"
-                    >Artworks</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'books')"
-                    [ngClass]="{ active: display.books }"
-                    >Books</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'service')"
-                    [ngClass]="{ active: display.service }"
-                    >Service</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'testimonial')"
-                    [ngClass]="{ active: display.testimonial }"
-                    >Testimonials</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'artist')"
-                    [ngClass]="{ active: display.artist }"
-                    >Artist</a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    (click)="displayView($event, 'formInfo')"
-                    [ngClass]="{ active: display.formInfo }"
-                    >Contact</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div></div>
-      </div>
-
-
-    </div>
-    <div class="column social">
-      <a href="http://www.instagram.com/patriciabraga.art" target="_blank">
-        <img src="../assets/icons/instagram.png" width="20" height="20" />
-        &nbsp;
-      </a>
-      <a
-        href="http://www.facebook.com/profile.php?id=100095416392578"
-        target="_blank"
-      >
-        <img src="../assets/icons/facebook.png" width="20" height="20" /> &nbsp;
-      </a>
-      <a href="https://www.behance.net/patriciabraga_art" target="_blank">
-        <img src="../assets/icons/behance.png" width="20" height="20" /> &nbsp;
-      </a>
-    </div>
+  <div class="cell logo">
+  </div>
+  <div class="cell menu">
+    <ul class="menu-items">
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'home')"
+          [ngClass]="{ active: display.home }"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'artworks')"
+          [ngClass]="{ active: display.artworks }"
+          >Artworks</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'books')"
+          [ngClass]="{ active: display.books }"
+          >Books</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'service')"
+          [ngClass]="{ active: display.service }"
+          >Service</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'testimonial')"
+          [ngClass]="{ active: display.testimonial }"
+          >Testimonials</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'artist')"
+          [ngClass]="{ active: display.artist }"
+          >Artist</a>
+      </li>
+      <li>
+        <a
+          href="#"
+          (click)="displayView($event, 'formInfo')"
+          [ngClass]="{ active: display.formInfo }"
+          >Contact</a>
+      </li>
+    </ul>
+  </div>
   </div>
 </nav>
 
