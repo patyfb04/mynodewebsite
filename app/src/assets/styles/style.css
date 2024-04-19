@@ -40,7 +40,7 @@ a:link, a:visited, a:hover, a:active {
 
 
 .fixed-nav-bar .row{
-  width: 95%;
+  width: 70%;
   position: relative;
   display: table;
   table-layout: fixed;
@@ -63,13 +63,9 @@ a:link, a:visited, a:hover, a:active {
     height:80px;
     background: url('../img/logo.png');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 200px 80px;
     padding-left: 5%;
     margin-top: -10px;
-}
-
-.fixed-nav-bar .row .cell.menu{
-
 }
 
 .content {
@@ -81,12 +77,11 @@ a:link, a:visited, a:hover, a:active {
   width: 100%;
   margin: 0 auto;
   padding-top:30px;
-  min-height: 550px;
 }
 .page-content.admin {
   width: 100%;
-  margin: 0 auto;
-  padding-top:90px;
+  /* margin: 0 auto; */
+  padding-top:120px;
 }
 .page-content h1 {
   color: #e7c6ff;
@@ -148,7 +143,7 @@ a:link, a:visited, a:hover, a:active {
 .admin-view .menu-items {
   display: inline-block;
   padding-top: 25px;
-  margin-left: -150px;
+  margin-left: -110px;
 }
 
 .logo{
@@ -233,6 +228,43 @@ a.logo, a:visited.logo {
   margin-top: 10px;
 }
 
+
+/****************************** ADMIN****************************/
+.fixed-nav-bar.admin-view.desktop .row{
+  height: 40px;
+}
+.fixed-nav-bar.admin-view.desktop .row.submenu{
+  margin-top: -338px;
+  height: 42px;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  position: fixed;
+}
+
+.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems{
+  display: table-cell;
+  width: 100%;
+  background: #e7c6ff;
+  color:#5e548e;
+  padding: 10px;
+  text-align: center;
+}
+
+.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems span{
+  padding-left: 20px;
+  padding-right: 20px;
+  color:#5e548e;
+  cursor: pointer;
+}
+
+.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems span:hover{
+  color:#18113b;
+  font-weight: bold;
+}
+
+
+
 @media only screen and (width > 800px) {
   .mobile {
     display: none;
@@ -258,6 +290,13 @@ a.logo, a:visited.logo {
     padding-top: 15px;
   }
 
+  .row.bg-white{
+    background: white;
+    width: 100%;
+    margin-top: -31px;
+  }
+
+
   .fixed-nav-bar a{
     line-height: 35px;
   }
@@ -270,8 +309,6 @@ a.logo, a:visited.logo {
     color: #a8a0cf!important;
     text-decoration: underline!important;
   }
-
-
 }
 
 @media only screen and (max-width: 220px) {

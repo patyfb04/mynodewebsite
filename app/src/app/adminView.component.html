@@ -1,95 +1,91 @@
+<login-view
+  *ngIf="display.login"
+  (authResult)="authorization($event)"
+></login-view>
 
-<login-view *ngIf="display.login" (authResult)="authorization($event)"></login-view>
-
-<nav class="fixed-nav-bar admin-view desktop"  *ngIf="!display.login">
+<nav class="fixed-nav-bar admin-view desktop" *ngIf="!display.login">
   <div class="row">
-    <div class="column logo">
-      <a class="sitename" href="/"><img src="../assets/img/logo.png" /></a>
+    <div class="cell logo"></div>
+    <div class="cell menu">
+      <ul class="menu-items">
+        <li>
+          <a
+            style="margin-left: 20px; cursor: pointer"
+            [ngClass]="{ active: display.dashboard }"
+            (mouseenter)="displaySubMenu('dashboard', true)"
+            >System</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'clients')"
+            (mouseenter)="displaySubMenu('all', false)"
+            [ngClass]="{ active: display.clients }"
+            >Clients</a
+          >
+        </li>
+        <li>
+          <a
+            style="cursor: pointer"
+            [ngClass]="{ active: display.artworks }"
+            (mouseenter)="displaySubMenu('portfolio', true)"
+            >Portfolio</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'books')"
+            (mouseenter)="displaySubMenu('all', false)"
+            [ngClass]="{ active: display.books }"
+            >Books</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'service')"
+            (mouseenter)="displaySubMenu('all', false)"
+            [ngClass]="{ active: display.service }"
+            >Service</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'testimonial')"
+            (mouseenter)="displaySubMenu('all', false)"
+            [ngClass]="{ active: display.testimonial }"
+            >Testimonials</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            (click)="displayView($event, 'artist')"
+            (mouseenter)="displaySubMenu('all', false)"
+            [ngClass]="{ active: display.artist }"
+            >The Artist</a
+          >
+        </li>
+        <li>
+          <a href="#" (click)="logout($event)"  (mouseenter)="displaySubMenu('all', false)">Logout</a>
+        </li>
+      </ul>
     </div>
-    <div class="column menu">
-      <div id="menu" class="menu">
-        <ul class="menu-items">
-          <li>
-            <a
-              href="#"
-              style="margin-left: 20px"
-              (click)="displayView($event, 'dashboard')"
-              [ngClass]="{ active: display.dashboard}"
-              >Dashboard</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'users')"
-              [ngClass]="{ active: display.users }"
-              >Users</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'clients')"
-              [ngClass]="{ active: display.clients }"
-              >Clients</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'home')"
-              [ngClass]="{ active: display.home}"
-              >Main Page</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'artworks')"
-              [ngClass]="{ active: display.artworks }"
-              >Artworks</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'books')"
-              [ngClass]="{ active: display.books }"
-              >Books</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'service')"
-              [ngClass]="{ active: display.service }"
-              >Service</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'testimonial')"
-              [ngClass]="{ active: display.testimonial }"
-              >Testimonials</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="displayView($event, 'artist')"
-              [ngClass]="{ active: display.artist }"
-              >The Artist</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              (click)="logout($event)"
-              >Logout</a
-            >
-          </li>
-        </ul>
+  </div>
+  <div class="row submenu">
+    <div class="submenuitems">
+      <div *ngIf="submenus['dashboard'] == true" id="submenu1">
+        <span (click)="displayView($event, 'dashboard')"> Dashboard </span> |
+        <span (click)="displayView($event, 'users')"> Users </span> |
+        <span (click)="displayView($event, 'home')"> Home Page </span>
+      </div>
+      <div *ngIf="submenus['portfolio'] == true" id="submenu2">
+        <span (click)="displayView($event, 'artworks')"> Illustrations </span> |
+        <span> Book Trailers </span>|
+        <span> Websites</span>
       </div>
     </div>
   </div>
@@ -170,11 +166,7 @@
           >
         </li>
         <li>
-          <a
-            href="#"
-            (click)="logout($event)"
-            >Logout</a
-          >
+          <a href="#" (click)="logout($event)">Logout</a>
         </li>
       </ul>
     </div>
@@ -186,19 +178,29 @@
     <div></div>
     <div>
       <div *ngIf="display.home">
-        <h3>ADMINISTRATION</h3>
       </div>
       <dashboard-view *ngIf="display.dashboard"></dashboard-view>
       <home-view *ngIf="display.home"></home-view>
       <clients-view *ngIf="display.clients"></clients-view>
-      <users-view  *ngIf="display.users"></users-view>
-      <artworks-view  *ngIf="display.artworks"></artworks-view>
-      <books-view  *ngIf="display.books" (bookEvent)="onBookEvent($event)"></books-view>
-      <book-payment-balances-view  *ngIf="display.bookPaymentBalances" [selectedBook]="selectedBook" (backToEvent)="onBackEvent($event)"></book-payment-balances-view>
-      <book-deliverable-view  *ngIf="display.bookDeliverables" [selectedBook]="selectedBook" (backToEvent)="onBackEvent($event)"></book-deliverable-view>
-      <testimonial-view  *ngIf="display.testimonial"></testimonial-view>
-      <artist-view  *ngIf="display.artist"></artist-view>
-      <service-view  *ngIf="display.service"></service-view>
+      <users-view *ngIf="display.users"></users-view>
+      <artworks-view *ngIf="display.artworks"></artworks-view>
+      <books-view
+        *ngIf="display.books"
+        (bookEvent)="onBookEvent($event)"
+      ></books-view>
+      <book-payment-balances-view
+        *ngIf="display.bookPaymentBalances"
+        [selectedBook]="selectedBook"
+        (backToEvent)="onBackEvent($event)"
+      ></book-payment-balances-view>
+      <book-deliverable-view
+        *ngIf="display.bookDeliverables"
+        [selectedBook]="selectedBook"
+        (backToEvent)="onBackEvent($event)"
+      ></book-deliverable-view>
+      <testimonial-view *ngIf="display.testimonial"></testimonial-view>
+      <artist-view *ngIf="display.artist"></artist-view>
+      <service-view *ngIf="display.service"></service-view>
     </div>
     <div></div>
   </div>

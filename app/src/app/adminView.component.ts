@@ -30,6 +30,10 @@ export class AdminViewComponent implements OnInit {
   };
 
   public selectedBook: Book;
+  public submenus: any = {
+    dashboard: false,
+    portfolio : false
+  };
 
   constructor(private appService: AppService,
               private localStorageService: LocalStorageService,
@@ -41,6 +45,7 @@ export class AdminViewComponent implements OnInit {
                 {
                   this.display["login"] = true
                 }
+                this.displaySubMenu('dashboard', true);
               }
 
   ngOnInit(): void {
@@ -60,6 +65,7 @@ export class AdminViewComponent implements OnInit {
         login: true
       }
       this.displayView(null,'login');
+
     } else
     {
       let currentPage = this.localStorageService.get("adminPage")
@@ -71,6 +77,16 @@ export class AdminViewComponent implements OnInit {
         this.displayView(null, 'home')
       }
     }
+  }
+
+  public displaySubMenu(submenu : any | null, display : boolean | null){
+      this.submenus = {
+        dashboard: false,
+        portfolio : false
+      };
+      if(submenu != 'all'){
+        this.submenus[submenu] = display;
+      }
   }
 
   public displayView(event: Event | null, view: any)
@@ -93,6 +109,11 @@ export class AdminViewComponent implements OnInit {
       login: false,
       dashboard: false
     }
+
+    this.submenus = {
+      dashboard: (view == 'dashboard' || view == 'users' || view == 'home') ? true : false,
+      portfolio : (view == 'artworks' || view == 'booktrailers' || view == 'websites') ? true : false
+    };
 
     this.localStorageService.set("adminPage", view)
     return this.display[view] = true

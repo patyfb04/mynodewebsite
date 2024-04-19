@@ -6,9 +6,9 @@
     </div>
   </div>
 
-  <div *ngIf="isAdmin">
+  <div *ngIf="isAdmin" class="admin">
     <div>
-      <h4>Main Page </h4>
+      <h4>Home Page </h4>
     </div>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
       <div>
