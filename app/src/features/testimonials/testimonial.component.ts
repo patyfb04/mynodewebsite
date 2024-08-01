@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TestimonialService } from './testimonial.service';
 import { ClientService } from './../clients/client.service';
+import { BookService } from './../books/book.service';
 import { Testimonial } from './testimonial';
 import { Client } from './../clients/client';
 import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
@@ -9,6 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
+import { Book } from '../books/book';
 
 @Component({
   selector: 'testimonial-view',
@@ -30,7 +32,8 @@ export class TestimonialComponent implements OnInit {
   public filteredOptions: Observable<any>;
   public selectedClient: Client;
   public authorName?: string = '';
-
+  public allClients : Client [] | [];
+  public allBooks : Book [] | [];
 
   @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
@@ -48,7 +51,8 @@ export class TestimonialComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
     private testimonialService: TestimonialService,
-    private clientService: ClientService) {
+    private clientService: ClientService,
+    private bookService:BookService) {
     this.isAdmin = activateRoute.snapshot.url.length > 0 ? activateRoute.snapshot.url[0].path == "admin" : false;
     this.dataSource = new MatTableDataSource<Testimonial>();
 
@@ -169,22 +173,25 @@ export class TestimonialComponent implements OnInit {
     this.testimonialService.getAll().subscribe((result: Testimonial[]) => {
       this.dataSource.data = result;
       this.testimonialsList = result;
+      this.testimonialsList.forEach((testimonial, index) => {
+          this.clientService.getAll().subscribe((result : Client[]) => {
+            let author = result.filter((item : Client) => item.name === testimonial.author);
+            if(author.length > 0) {
+                this.bookService.getAll().subscribe((result1 : Book[]) => {
+                    testimonial.books = result1.filter((item : Book) => item. clientId === author[0].id && item.link  != null);
+                });
+            }
+          });
+      });
     })
   }
 
   public getByName(author: string) : any {
-    this.clientService.getAll().subscribe((result: Client[]) => {
-      var filtered =  result.filter(function(elem) {
-        return elem.name == author
-      });
+    return this.allClients?.filter(item => item.name.trim() == author.trim());
+  }
 
-      if(filtered.length > 0){
-        return filtered[0];
-      }
-      else {
-        return null;
-      }
-    });
+  public getBooksByAuthor(authorId: number) : any {
+   return this.allBooks?.filter(item => item.clientId == authorId);
   }
 
   public doFilter = (event: Event) => {

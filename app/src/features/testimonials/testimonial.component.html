@@ -81,10 +81,13 @@
 <div *ngIf="!isAdmin">
   <div id="portfolio-grid2">
     <div class="testimonial" *ngFor="let testimonial of testimonialsList; let i = index" [ngClass]="{ even : (i % 2) == 0 }">
-          <p>
+          <div>
             " {{testimonial.comment}} "<br><br>
-            <span class="author">{{testimonial.author}}</span>
-          </p>
+            <div class="author">{{testimonial.author}}, author of
+                <a  href="{{testimonial.books[0].link}}" target="_blank" >{{testimonial.books[0].title}}</a>
+                <span *ngIf="testimonial.books.length > 1"> and others.</span>
+            </div>
+          </div>
     </div>
   </div>
 </div>

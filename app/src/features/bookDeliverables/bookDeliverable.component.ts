@@ -339,26 +339,6 @@ public updateBookPayments(bookDeliverable: BookDeliverable) {
                         },
                       ],
                     },
-                    {
-                      columns: [
-                        {
-                          text: 'Status',
-                          color: '#aaaaab',
-                          bold: true,
-                          fontSize: 12,
-                          alignment: 'right',
-                          width: '*',
-                        },
-                        {
-                          text: 'PAID',
-                          bold: true,
-                          fontSize: 14,
-                          alignment: 'right',
-                          color: 'green',
-                          width: 100,
-                        },
-                      ],
-                    },
                   ],
                 },
               ],
