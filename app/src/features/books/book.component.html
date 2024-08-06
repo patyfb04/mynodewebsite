@@ -281,7 +281,7 @@
                 *ngFor="let book of bookPublishedList; let i = index"
               >
                 <a
-                  href="http://{{ book.link }}"
+                  href="{{ book.link }}"
                   target="_blank"
                   ti
                   class="item-wrap fancybox"
@@ -353,7 +353,7 @@
             *ngFor="let book of bookPublishedList; let i = index"
           >
             <a
-              href="http://{{ book.link }}"
+              href="{{ book.link }}"
               target="_blank"
               class="item-wrap fancybox"
             >
