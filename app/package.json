@@ -28,7 +28,7 @@
     "@tinymce/tinymce-angular": "^5.0.1",
     "@trademe/ng-defer-load": "^14.1.0",
     "@types/crypto-js": "^4.1.1",
-    "@types/node": "^20.11.30",
+    "@types/node": "^22.5.4",
     "aws-sdk": "^2.1436.0",
     "carousel-angular": "^1.5.3",
     "concurrently": "^8.2.0",
