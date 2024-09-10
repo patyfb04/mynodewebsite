@@ -84,7 +84,8 @@
           <div>
             " {{testimonial.comment}} "<br><br>
             <div class="author">{{testimonial.author}}, author of
-                <a  href="{{testimonial.books[0].link}}" target="_blank" >{{testimonial.books[0].title}}</a>
+                <a  href="{{testimonial.books[0].link}}" target="_blank" *ngIf="testimonial.books[0].link != null">{{testimonial.books[0].title}}</a>
+                <span *ngIf="testimonial.books[0].link == null">{{testimonial.books[0].title}}</span>
                 <span *ngIf="testimonial.books.length > 1"> and others.</span>
             </div>
           </div>

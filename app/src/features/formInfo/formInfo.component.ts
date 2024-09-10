@@ -4,7 +4,7 @@ import { FormInfo } from './formInfo';
 import { Client } from '../clients/client';
 import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
@@ -25,9 +25,9 @@ export class FormInfoComponent implements OnInit {
     private formInfoService: FormInfoService) {
 
     this.myForm = new FormGroup({
-      name: new FormControl(''),
-      message: new FormControl(''),
-      email: new FormControl('')
+      name: new FormControl('',Validators.required),
+      message: new FormControl('',Validators.required),
+      email: new FormControl('',Validators.required)
     });
   }
 
@@ -36,7 +36,22 @@ export class FormInfoComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     const formInfo = new FormInfo(form.value.name, form.value.email, form.value.message);
-      this.sendEmail(formInfo);
+     if(this.isValidForm(formInfo)){
+       this.sendEmail(formInfo);
+     } else{
+       this.submitResult = true;
+       this.submitResultMessage = 'Error: all fields are required and should be valid.';
+     }
+  }
+
+  public isValidForm(formInfo: FormInfo){
+     const result = formInfo.name.trim() != '' && formInfo.email.trim() != '' && this.validateEmail(formInfo.email.trim());
+     return result;
+  }
+
+  public validateEmail(email: string) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
   }
 
   public sendEmail(formInfo: FormInfo) {

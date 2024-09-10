@@ -178,7 +178,8 @@ export class TestimonialComponent implements OnInit {
             let author = result.filter((item : Client) => item.name === testimonial.author);
             if(author.length > 0) {
                 this.bookService.getAll().subscribe((result1 : Book[]) => {
-                    testimonial.books = result1.filter((item : Book) => item. clientId === author[0].id && item.link  != null);
+                    testimonial.books = result1.filter((item : Book) => item. clientId === author[0].id && (item.status  == "Published" || item.status  == "Completed"))
+                                                .sort((a, b) => b.status.localeCompare(a.status));
                 });
             }
           });
