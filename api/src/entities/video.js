@@ -1,5 +1,5 @@
 class Video {
-    constructor({id,thumbnail, link, description, title}){
+    constructor({thumbnail, link, description, title, id = null}){
             this.id = id
             this.thumbnail = thumbnail
             this.link = link

@@ -9,7 +9,7 @@
     "server_dev": "node ../api/src/api.js env=dev",
     "sass": "node-sass src/styles.sass -src/assets/styles/main.css",
     "start_dev": "concurrently \"npm run sass\" \"npm run build\" \"npm run server_dev\"",
-    "start_prod": "concurrently \"npm run sass\" \"npm run build\" \"npm run server\"",
+    "start_prod": "concurrently \"npm run sass\" \"npm run build\" \"npm run server\" \"ng serve\"",
     "build": "concurrently \"npm run sass\" \"ng build\""
   },
   "private": true,

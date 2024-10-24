@@ -31,7 +31,6 @@ export class VideoComponent implements OnInit {
 
   public options = [];
   public filteredOptions: Observable<any>;
-  public clientId: number = 0;
 
   public image: string="";
   public rootURL: string = environment.production ? "https://static.wixstatic.com/media/" :"http://localhost:5000/";
@@ -91,7 +90,7 @@ export class VideoComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const video = new Video(0, form.value.thumbnail, form.value.link, form.value.description, form.value.title);
+    const video = new Video(form.value.thumbnail, form.value.link, form.value.description, form.value.title);
 
     if (this.isEdit) {
       video.id = this.selectedId;

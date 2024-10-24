@@ -6,7 +6,7 @@ export class Video {
     public  thumbnail  : string;
 
 
-    constructor(id :number, thumbnail:string, link:string,  description:string, title:string){
+    constructor(thumbnail:string, link:string,  description:string, title:string, id? :number){
         this.id = id
         this.description = description
         this.thumbnail = thumbnail

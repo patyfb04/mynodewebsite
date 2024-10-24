@@ -477,7 +477,7 @@ class PostGresDB extends ICrud {
       "contact",
       {
         id: {
-          type: Sequelize.BIGINT,
+          type: Sequelize.INTEGER,
           required: true,
           primaryKey: true,
           autoIncrement: true,
@@ -503,7 +503,7 @@ class PostGresDB extends ICrud {
       "service",
       {
         id: {
-          type: Sequelize.BIGINT,
+          type: Sequelize.INTEGER,
           required: true,
           primaryKey: true,
           autoIncrement: true,
@@ -555,10 +555,9 @@ class PostGresDB extends ICrud {
     "video",
     {
       id: {
-        type: Sequelize.BIGINT,
-        required: true,
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
       },
       thumbnail: {
         type: Sequelize.STRING,
@@ -586,10 +585,9 @@ class PostGresDB extends ICrud {
     "website",
     {
       id: {
-        type: Sequelize.BIGINT,
-        required: true,
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
       },
       thumbnail: {
         type: Sequelize.STRING,
