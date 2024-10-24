@@ -31,6 +31,8 @@ const TestimonialRoutes = require('./services/routes/testimonial.routes')
 const ContactRoutes = require('./services/routes/contact.routes')
 const ServiceRoutes = require('./services/routes/service.routes')
 const HomeRoutes = require('./services/routes/home.routes')
+const VideoRoutes = require('./services/routes/video.routes')
+const WebsiteRoutes = require('./services/routes/website.routes')
 
 app.listen(PORT, () => {
     console.log(`node listening on port ${PORT}`)
@@ -52,6 +54,8 @@ async function main() {
     const serviceRoutes = mapRoutes(new ServiceRoutes(contextDB), ServiceRoutes.methods())
     const formRoute = mapRoutes(new ServiceRoutes(contextDB), ServiceRoutes.methods())
     const homeRoutes = mapRoutes(new HomeRoutes(contextDB), HomeRoutes.methods())
+    const videoRoutes = mapRoutes(new VideoRoutes(contextDB), VideoRoutes.methods())
+    const websiteRoutes = mapRoutes(new WebsiteRoutes(contextDB), WebsiteRoutes.methods())
 
     const allRoutes = [
         ...userRoutes,
@@ -64,6 +68,8 @@ async function main() {
         ...contactRoutes,
         ...serviceRoutes,
         ...homeRoutes,
+        ...videoRoutes,
+        ...websiteRoutes,
         ...formRoute
     ]
 

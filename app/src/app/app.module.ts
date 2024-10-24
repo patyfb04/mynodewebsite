@@ -22,6 +22,7 @@ import { TestimonialComponent } from './../features/testimonials/testimonial.com
 import { FormInfoComponent } from './../features/formInfo/formInfo.component';
 import { DashboardComponent } from './../features/dashboard/dashboard.component';
 import { HomeComponent } from './../features/home/home.component';
+import { VideoComponent } from './../features/video/video.component';
 
 import { AppService } from './app.service';
 import { UserService } from './../features/users/user.service';
@@ -35,6 +36,7 @@ import { ArtistService } from '../features/artist/artist.service';
 import { TestimonialService } from './../features/testimonials/testimonial.service';
 import { FormInfoService } from './../features/formInfo/formInfo.service';
 import { HomeService } from './../features/home/home.service';
+import { VideoService } from './../features/video/video.service';
 
 import { ArtworFilterPipe } from '../features/artworks/pipes/filter-array';
 import { SafePipe } from '../common/pipes/safe-pipe';
@@ -63,6 +65,7 @@ import { CarouselModule } from 'src/common/carousel/carousel.module';
     LoginComponent,
     FormInfoComponent,
     DashboardComponent,
+    VideoComponent,
     ArtworFilterPipe,
     SafePipe
   ],
@@ -90,6 +93,7 @@ import { CarouselModule } from 'src/common/carousel/carousel.module';
               EncrDecrService,
               FormInfoService,
               HomeService,
+              VideoService,
               LocalStorageService,
               { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
               { provide: LocationStrategy, useClass: HashLocationStrategy }],

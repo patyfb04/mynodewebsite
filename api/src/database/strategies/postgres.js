@@ -21,6 +21,8 @@ class PostGresDB extends ICrud {
     this._service = null;
     this._testimonial = null;
     this._home = null;
+    this._video = null;
+    this.website = null;
 
     this.entities = {
       user: this._user,
@@ -33,6 +35,8 @@ class PostGresDB extends ICrud {
       service: this._service,
       testimonial: this.testimonial,
       home: this.home,
+      video : this._video,
+      website: this._website
     };
   }
 
@@ -544,8 +548,75 @@ class PostGresDB extends ICrud {
         timestamps: false,
       }
     );
-
     await this._testimonial.sync();
+
+    //VIDEO
+    this._video = this._driver.define(
+    "video",
+    {
+      id: {
+        type: Sequelize.BIGINT,
+        required: true,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      thumbnail: {
+        type: Sequelize.STRING,
+      },
+      link: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      title: {
+        type: Sequelize.STRING,
+      },
+      display: {
+        type: Sequelize.BOOLEAN,
+      }
+    },
+    {
+      tableName: "video",
+      freezeTableName: false,
+      timestamps: false,
+    }
+  );
+  await this._video.sync();
+
+  //WEBSITE
+  this._website = this._driver.define(
+    "website",
+    {
+      id: {
+        type: Sequelize.BIGINT,
+        required: true,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      thumbnail: {
+        type: Sequelize.STRING,
+      },
+      link: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      title: {
+        type: Sequelize.STRING,
+      },
+      display: {
+        type: Sequelize.BOOLEAN,
+      }
+    },
+    {
+      tableName: "website",
+      freezeTableName: false,
+      timestamps: false,
+    }
+  );
+  await this._website.sync();
 
     this.entities = {
       user: this._user,
@@ -557,7 +628,9 @@ class PostGresDB extends ICrud {
       contact: this._contact,
       service: this._service,
       testimonial: this._testimonial,
-      home: this._home
+      home: this._home,
+      video : this._video,
+      website: this._website
     };
   }
 }

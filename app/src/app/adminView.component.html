@@ -84,8 +84,8 @@
       </div>
       <div *ngIf="submenus['portfolio'] == true" id="submenu2">
         <span (click)="displayView($event, 'artworks')"> Illustrations </span> |
-        <span> Book Trailers </span>|
-        <span> Websites</span>
+        <span (click)="displayView($event, 'videos')"> Book Trailers </span>|
+        <span (click)="displayView($event, 'websites')"> Websites</span>
       </div>
     </div>
   </div>
@@ -184,6 +184,7 @@
       <clients-view *ngIf="display.clients"></clients-view>
       <users-view *ngIf="display.users"></users-view>
       <artworks-view *ngIf="display.artworks"></artworks-view>
+      <videos-view *ngIf="display.videos"></videos-view>
       <books-view
         *ngIf="display.books"
         (bookEvent)="onBookEvent($event)"

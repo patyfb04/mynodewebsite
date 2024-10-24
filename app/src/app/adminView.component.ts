@@ -26,7 +26,9 @@ export class AdminViewComponent implements OnInit {
     testimonial: false,
     artist : false,
     service: false,
-    dashboard: false
+    dashboard: false,
+    videos: false,
+    websites: false
   };
 
   public selectedBook: Book;
@@ -107,12 +109,14 @@ export class AdminViewComponent implements OnInit {
       artist : false,
       service: false,
       login: false,
-      dashboard: false
+      dashboard: false,
+      videos: false,
+      websites: false
     }
 
     this.submenus = {
       dashboard: (view == 'dashboard' || view == 'users' || view == 'home') ? true : false,
-      portfolio : (view == 'artworks' || view == 'booktrailers' || view == 'websites') ? true : false
+      portfolio : (view == 'artworks' || view == 'videos' || view == 'websites') ? true : false
     };
 
     this.localStorageService.set("adminPage", view)
