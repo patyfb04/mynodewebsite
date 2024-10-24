@@ -62,7 +62,6 @@ export class VideoComponent implements OnInit {
     this.myForm = new FormGroup({
       link: new FormControl(''),
       description: new FormControl(''),
-      display: new FormControl(''),
       thumbnail : new FormControl(''),
       title: new FormControl('')
     });
@@ -92,7 +91,7 @@ export class VideoComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
 
-    const video = new Video(0, form.value.thumbnail, form.value.link, form.value.description, form.value.title, form.value.display);
+    const video = new Video(0, form.value.thumbnail, form.value.link, form.value.description, form.value.title);
 
     if (this.isEdit) {
       video.id = this.selectedId;
