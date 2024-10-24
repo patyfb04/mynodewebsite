@@ -7,12 +7,11 @@ export class Video {
     public  display  : boolean;
 
 
-    constructor(id :number, thumbnail:string, link:string,  description:string, title:string, display:boolean){
+    constructor(id :number, thumbnail:string, link:string,  description:string, title:string){
         this.id = id
         this.description = description
         this.thumbnail = thumbnail
         this.link = link
-        this.display = display
         this.title = title
     }
 }
