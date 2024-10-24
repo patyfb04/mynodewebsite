@@ -4,7 +4,6 @@ export class Video {
     public  description  : string;
     public  link  : string;
     public  thumbnail  : string;
-    public  display  : boolean;
 
 
     constructor(id :number, thumbnail:string, link:string,  description:string, title:string){

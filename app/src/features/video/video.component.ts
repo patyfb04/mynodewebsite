@@ -19,7 +19,7 @@ import { environment } from '../../environments/environment';
 export class VideoComponent implements OnInit {
   public isAdmin: boolean = false;
   public isDetail: boolean = false;
-  public displayedColumns: string[] = ['thumbnail', 'title','display', 'link', 'id'];
+  public displayedColumns: string[] = ['thumbnail', 'title', 'link', 'id'];
   public display: boolean = false;
   public isEdit: boolean = false;
   public myForm: FormGroup;
@@ -135,7 +135,6 @@ export class VideoComponent implements OnInit {
 
         this.myForm.patchValue({
           description: result[0].description,
-          display: result[0].display,
           link: result[0].link,
           thumbnail : result[0].thumbnail,
           title : result[0].title
@@ -146,7 +145,7 @@ export class VideoComponent implements OnInit {
 
   public loadData() {
     this.videoService.getAll().subscribe((result: Video[]) => {
-      this.videoList = result.filter(c=> c.display);
+      this.videoList = result;
       this.dataSource.data = result;
     })
   }
