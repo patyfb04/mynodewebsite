@@ -1,7 +1,7 @@
 <!------------------ ADMIN ------------------------>
 <div *ngIf="isAdmin">
   <div>
-    <h4>VIDEOS</h4>
+    <h4>WEBSITES</h4>
     <img
       class="icon-button right"
       src="./../../assets/icons/add-create-new.svg"
@@ -16,7 +16,7 @@
     />
   </div>
   <div *ngIf="display" class="form_title">
-    {{ isEdit ? "Edit" : "Create " }} Video
+    {{ isEdit ? "Edit" : "Create " }} Website
 
     <form
       [formGroup]="myForm"
@@ -24,14 +24,14 @@
       class="myForm"
     >
     <div *ngIf="isEdit && image != null">
-      <img src="{{selectedVideo.thumbnail}}" width="100px" alt="{{selectedVideo.description}}">
+      <img src="{{selectedWebsite.thumbnail}}" width="100px" alt="{{selectedWebsite.description}}">
     </div>
     <div>
       <label>
-        Video Thumbnail URL:
+        website Thumbnail URL:
         <input
           formControlName="thumbnail"
-          placeholder="Video url"
+          placeholder="website url"
           type="text"
         />
       </label>
@@ -41,7 +41,7 @@
         Title:
         <input
           formControlName="title"
-          placeholder="Video title"
+          placeholder="website title"
           type="text"
         />
       </label>
@@ -51,7 +51,7 @@
           Description:
           <textarea
             formControlName="description"
-            placeholder="Video description"
+            placeholder="website description"
             rows="3"
           >
           </textarea>
@@ -62,7 +62,7 @@
           Link:
           <input
             formControlName="link"
-            placeholder="Video Link"
+            placeholder="website Link"
             type="text"
           />
         </label>
@@ -80,7 +80,7 @@
         matInput
         type="text"
         (keyup)="doFilter($event)"
-        placeholder="Type the video title or description  to search"
+        placeholder="Type the website title or description  to search"
       />
     </mat-form-field>
 
@@ -159,7 +159,7 @@
     <mat-paginator
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
-      aria-label="Select page of videos"
+      aria-label="Select page of websites"
     >
     </mat-paginator>
   </div>
@@ -174,7 +174,7 @@
           <div class="container">
 
 
-            VIDEOS HERE
+            websiteS HERE
           </div>
         </section>
       </div>
@@ -186,7 +186,7 @@
         <section class="section site-portfolio">
           <div class="container">
 
-           VIDEOS HERE
+           websiteS HERE
           </div>
         </section>
   </main>
@@ -203,7 +203,7 @@
       </div>
       <div class="row mb-4 align-items-center">
         <div class="col-md-6" data-aos="fade-up">
-          <h2 id="title2">{{ selectedVideo.description }}</h2>
+          <h2 id="title2">{{ selectedWebsite.description }}</h2>
         </div>
       </div>
     </div>
@@ -214,9 +214,9 @@
           <div class="col-md-8" data-aos="fade-up">
             <img
               id="img"
-              alt="{{ selectedVideo.description }}"
+              alt="{{ selectedWebsite.description }}"
               class="img-fluid"
-              src="{{ selectedVideo.thumbnail }}"
+              src="{{ selectedWebsite.thumbnail }}"
             />
           </div>
           <div class="col-md-3 ml-auto" data-aos="fade-up" data-aos-delay="100">
@@ -224,7 +224,7 @@
               <h4 class="h4 mb-3">Description</h4>
               <p class="mb-4">
                 <span class="text-muted" id="subtype">{{
-                  selectedVideo.description
+                  selectedWebsite.description
                 }}</span>
               </p>
             </div>

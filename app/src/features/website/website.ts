@@ -7,7 +7,7 @@ export class Website {
   public  display  : boolean;
 
 
-  constructor(id :number,title:string, description:string, thumbnail:string, link:string){
+  constructor( thumbnail:string, link:string,  description:string, title:string, id :number){
       this.id = id
       this.description = description
       this.thumbnail = thumbnail
