@@ -571,9 +571,6 @@ class PostGresDB extends ICrud {
       },
       title: {
         type: Sequelize.STRING,
-      },
-      display: {
-        type: Sequelize.BOOLEAN,
       }
     },
     {
@@ -605,9 +602,6 @@ class PostGresDB extends ICrud {
       },
       title: {
         type: Sequelize.STRING,
-      },
-      display: {
-        type: Sequelize.BOOLEAN,
       }
     },
     {
