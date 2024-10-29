@@ -1,7 +1,7 @@
 <!------------------ ADMIN ------------------------>
 <div *ngIf="isAdmin">
   <div>
-    <h4>WEBSITES</h4>
+    <h4>VIDEOS</h4>
     <img
       class="icon-button right"
       src="./../../assets/icons/add-create-new.svg"
@@ -28,10 +28,10 @@
     </div>
     <div>
       <label>
-        website Thumbnail URL:
+        Website Thumbnail URL:
         <input
           formControlName="thumbnail"
-          placeholder="website url"
+          placeholder="Website url"
           type="text"
         />
       </label>
@@ -41,7 +41,7 @@
         Title:
         <input
           formControlName="title"
-          placeholder="website title"
+          placeholder="Website title"
           type="text"
         />
       </label>
@@ -51,7 +51,7 @@
           Description:
           <textarea
             formControlName="description"
-            placeholder="website description"
+            placeholder="Website description"
             rows="3"
           >
           </textarea>
@@ -59,10 +59,10 @@
       </div>
       <div>
         <label>
-          Link:
+          Website Link:
           <input
             formControlName="link"
-            placeholder="website Link"
+            placeholder="Website Link"
             type="text"
           />
         </label>
@@ -164,7 +164,7 @@
     </mat-paginator>
   </div>
 </div>
-<!------------------ ARTWORKS ------------------------>
+<!------------------ WEBSITES  ------------------------>
 <div *ngIf="!isAdmin && !isDetail">
   <main id="main" class="desktop">
     <div class="three-columns-grid">
@@ -172,9 +172,34 @@
       <div>
         <section class="section site-portfolio">
           <div class="container">
-
-
-            websiteS HERE
+            <div
+            id="portfolio-grid-website"
+            class="row no-gutter"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="item col-sm-6 col-md-4 col-lg-2 mb-4"
+              *ngFor="
+                let website of websiteList
+                let i = index
+              ">
+              <a
+                href="#"
+                class="item-wrap website fancybox"
+                (click)="$event.preventDefault(); websiteDetails(website)"
+              >
+                <div class="work-info">
+                  <h3>{{ website.title }}</h3>
+                </div>
+                <img
+                  class="img-fluid"
+                  alt="{{ website.title }}"
+                  src="{{ website.thumbnail }}"
+                />
+              </a>
+            </div>
+          </div>
           </div>
         </section>
       </div>
@@ -183,10 +208,36 @@
   </main>
 
   <main id="main" class="mobile">
-        <section class="section site-portfolio">
+        <section class="section site-portfolio-website">
           <div class="container">
-
-           websiteS HERE
+            <div
+            id="portfolio-grid-website"
+            class="row no-gutter"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="item col-sm-6 col-md-4 col-lg-2 mb-4"
+              *ngFor="
+                let website of websiteList
+                let i = index
+              ">
+              <a
+                href="#"
+                class="item-wrap website fancybox"
+                (click)="$event.preventDefault(); websiteDetails(website)"
+              >
+                <div class="work-info">
+                  <h3>{{ website.title }}</h3>
+                </div>
+                <img
+                  class="img-fluid"
+                  alt="{{ website.title }}"
+                  src="{{ website.thumbnail }}"
+                />
+              </a>
+            </div>
+          </div>
           </div>
         </section>
   </main>
@@ -194,7 +245,7 @@
 </div>
 <!------------------ DETAILS ------------------------>
 <div *ngIf="!isAdmin && isDetail">
-  <section class="section1">
+  <section class="section1 website desktop">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6" data-aos="fade-up">
@@ -203,33 +254,67 @@
       </div>
       <div class="row mb-4 align-items-center">
         <div class="col-md-6" data-aos="fade-up">
-          <h2 id="title2">{{ selectedWebsite.description }}</h2>
+          <h2 id="title2">{{ selectedWebsite.title }}</h2>
         </div>
       </div>
     </div>
-
     <div class="site-section pb-0">
       <div class="container">
-        <div class="row align-items-stretch">
-          <div class="col-md-8" data-aos="fade-up">
-            <img
-              id="img"
-              alt="{{ selectedWebsite.description }}"
-              class="img-fluid"
-              src="{{ selectedWebsite.thumbnail }}"
-            />
-          </div>
-          <div class="col-md-3 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="sticky-content">
-              <h4 class="h4 mb-3">Description</h4>
-              <p class="mb-4">
-                <span class="text-muted" id="subtype">{{
-                  selectedWebsite.description
-                }}</span>
-              </p>
-            </div>
-          </div>
+      <div class="grid website">
+        <div class="box">
+         <img src="{{selectedWebsite.thumbnail}}" (click)="goToUrl(selectedWebsite.link)"/>
         </div>
+        <div class="box">
+           <h3 class="h4"><b>Description</b></h3>
+            <p class="mb-4">
+              <span class="text-muted" id="subtype">{{
+                selectedWebsite.description
+              }}</span>
+            </p>
+             <br/>
+            <h3 class="h4"><b>Link</b></h3>
+            <p class="mb-4">
+              <a class="text-muted" id="subtype" href="{{selectedWebsite.link}}" target="_blank">{{
+                selectedWebsite.link
+              }}</a>
+            </p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section1 website mobile">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6" data-aos="fade-up">
+          <a href="#" (click)="isDetail = false"> &#8617; BACK </a>
+        </div>
+      </div>
+      <div class="row mb-4 align-items-center">
+        <div class="col-md-6" data-aos="fade-up">
+          <h2 id="title2">{{ selectedWebsite.title }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="site-section pb-0">
+      <div class="container">
+
+         <img src="{{selectedWebsite.thumbnail}}" (click)="goToUrl(selectedWebsite.link)" id="site-thumbnail"/>
+
+           <h3 class="h4"><b>Description</b></h3>
+            <p class="mb-4">
+              <span class="text-muted" id="subtype">{{
+                selectedWebsite.description
+              }}</span>
+            </p>
+             <br/>
+            <h3 class="h4"><b>Link</b></h3>
+            <p class="mb-4">
+              <a class="text-muted" id="subtype" href="{{selectedWebsite.link}}" target="_blank">{{
+                selectedWebsite.link
+              }}</a>
+            </p>
+
       </div>
     </div>
   </section>

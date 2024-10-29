@@ -19,12 +19,18 @@
     .item-wrap
       &.video
         width: 250px
-        height: 130px
+        height: 140px
 
-.item .item-wrap:hover .work-info
+.item .item-wrap.video:hover .work-info
   opacity: 1
   visibility: visible
   margin-top: -20%
+
+.item
+    .item-wrap:hover:after
+        background: #5e548e
+        opacity: 0.8
+        visibility: visible
 
 .section1
   &.video
@@ -38,6 +44,8 @@
 
 .box
   padding: 10px
+  img
+    width: 640px
 
 @media only screen and (min-width: 801px)
   .mobile
@@ -52,7 +60,21 @@
 
   .mobile
     display: block
+    width: 100%
 
   .site-portfolio
     margin-top: 0px
 
+  #site-thumbnail
+    width: 80vw
+
+  #portfolio-grid-video > div
+    display: block
+    img
+      width: 80vw
+
+  .item
+     .item-wrap
+      &.video
+        width: 80vw
+        height: calc(100vh - 360px)

@@ -144,6 +144,7 @@ export class WebsiteComponent implements OnInit {
   public loadData() {
     this.websiteService.getAll().subscribe((result: Website[]) => {
       this.websiteList = result;
+      console.log(this.websiteList);
       this.dataSource.data = result;
     })
   }
@@ -160,7 +161,7 @@ export class WebsiteComponent implements OnInit {
 
 //------------ app view ------------------
 
-  public videoDetails(website:Website){
+  public websiteDetails(website:Website){
     this.selectedWebsite = website;
     this.isDetail = true;
   }

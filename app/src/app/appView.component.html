@@ -73,9 +73,8 @@
     <div class="submenuitems">
       <div *ngIf="submenus['portfolio'] == true" id="submenu">
         <span (click)="displayView($event, 'artworks')"> Illustrations </span> |
-        <span (click)="displayView($event, 'videos')"> Book Trailers </span>
-        <!-- |
-        <span (click)="displayView($event, 'websites')"> Websites</span> -->
+        <span (click)="displayView($event, 'videos')"> Book Trailers </span> |
+        <span (click)="displayView($event, 'websites')"> Websites</span>
       </div>
     </div>
   </div>
@@ -157,6 +156,7 @@
     <div>
       <artworks-view *ngIf="display.artworks"></artworks-view>
       <videos-view *ngIf="display.videos"></videos-view>
+      <websites-view *ngIf="display.websites"></websites-view>
       <books-view *ngIf="display.books"></books-view>
       <service-view *ngIf="display.service"></service-view>
       <testimonial-view *ngIf="display.testimonial"></testimonial-view>

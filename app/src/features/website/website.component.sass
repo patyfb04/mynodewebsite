@@ -1,0 +1,71 @@
+.site-portfolio
+     margin-top: -97px
+
+#portfolio-grid-website
+    width: 100%
+    text-align: center
+    margin-top: 45px
+
+#portfolio-grid-website > div
+    width: calc(100%/6)
+    display: inline-block
+    vertical-align: top
+    text-align: center
+    margin: 2%
+    margin-right: 5%
+    height: 215px
+
+.item
+    .item-wrap
+      &.website
+        width: 250px
+        height: 130px
+
+.item .item-wrap:hover .work-info
+  opacity: 1
+  visibility: visible
+  margin-top: -20%
+
+.section1
+  &.video
+    padding: 6rem 0
+
+.grid.website
+  display: grid
+  grid-template-rows: repeat(1, 1fr)
+  grid-template-columns: repeat(2, 1fr)
+  grid-gap: 10px
+
+.box
+  padding: 10px
+  img
+    width: 640px
+
+@media only screen and (min-width: 801px)
+  .mobile
+    display: none
+
+  .desktop
+    display: block
+
+@media only screen and (max-width: 800px)
+  .desktop
+    display: none
+
+  .mobile
+    display: block
+    width: 100%
+
+  #portfolio-grid > div
+    display: block
+
+  .site-portfolio-website
+    margin-top: 0px
+
+  #site-thumbnail
+    width: 80vw
+
+  #portfolio-grid-website > div
+    display: block
+    img
+      width: 80vw
