@@ -21,6 +21,10 @@ export class AppViewComponent  implements OnInit{
     home: false
   };
 
+  public submenus: any = {
+    portfolio : false
+  };
+
   constructor(private appService: AppService,
     private localStorageService: LocalStorageService) {
     this.response = new Observable<any>();
@@ -48,7 +52,20 @@ export class AppViewComponent  implements OnInit{
       home: false
     };
 
+    this.submenus = {
+      portfolio : (view == 'artworks' || view == 'videos' || view == 'websites') ? true : false
+    };
+
     let currentPage = this.localStorageService.set("viewPage", view)
     return this.display[view] = true
   }
+
+  public displaySubMenu(submenu : any | null, display : boolean | null){
+    this.submenus = {
+      portfolio : false
+    };
+    if(submenu != 'all'){
+      this.submenus[submenu] = display;
+    }
+}
 }

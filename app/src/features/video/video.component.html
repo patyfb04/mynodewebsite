@@ -59,7 +59,7 @@
       </div>
       <div>
         <label>
-          Link:
+          Video Id (YouTube):
           <input
             formControlName="link"
             placeholder="Video Link"
@@ -164,7 +164,7 @@
     </mat-paginator>
   </div>
 </div>
-<!------------------ ARTWORKS ------------------------>
+<!------------------ VIDEOS ------------------------>
 <div *ngIf="!isAdmin && !isDetail">
   <main id="main" class="desktop">
     <div class="three-columns-grid">
@@ -172,9 +172,34 @@
       <div>
         <section class="section site-portfolio">
           <div class="container">
-
-
-            VIDEOS HERE
+            <div
+            id="portfolio-grid-video"
+            class="row no-gutter"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="item col-sm-6 col-md-4 col-lg-2 mb-4"
+              *ngFor="
+                let video of videoList
+                let i = index
+              ">
+              <a
+                href="#"
+                class="item-wrap video fancybox"
+                (click)="$event.preventDefault(); videoDetails(video)"
+              >
+                <div class="work-info">
+                  <h3>{{ video.title }}</h3>
+                </div>
+                <img
+                  class="img-fluid"
+                  alt="{{ video.title }}"
+                  src="{{ video.thumbnail }}"
+                />
+              </a>
+            </div>
+          </div>
           </div>
         </section>
       </div>
@@ -185,8 +210,35 @@
   <main id="main" class="mobile">
         <section class="section site-portfolio">
           <div class="container">
-
-           VIDEOS HERE
+            <div
+            id="portfolio-grid"
+            class="row no-gutter"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="item col-sm-6 col-md-4 col-lg-2 mb-4"
+              *ngFor="
+                let video of videoList
+                let i = index
+              ">
+              <a
+                href="#"
+                title="{{video.title}}"
+                class="item-wrap fancybox"
+                (click)="$event.preventDefault(); videoDetails(video)"
+              >
+                <div class="work-info">
+                  <h3>{{ video.title }}</h3>
+                </div>
+                <img
+                  alt="{{video.title}}"
+                  class="img-fluid"
+                  src="{{ video.thumbnail }}"
+                />
+              </a>
+            </div>
+          </div>
           </div>
         </section>
   </main>
@@ -194,7 +246,7 @@
 </div>
 <!------------------ DETAILS ------------------------>
 <div *ngIf="!isAdmin && isDetail">
-  <section class="section1">
+  <section class="section1 video desktop">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6" data-aos="fade-up">
@@ -203,33 +255,50 @@
       </div>
       <div class="row mb-4 align-items-center">
         <div class="col-md-6" data-aos="fade-up">
-          <h2 id="title2">{{ selectedVideo.description }}</h2>
+          <h2 id="title2">{{ selectedVideo.title }}</h2>
         </div>
       </div>
     </div>
-
     <div class="site-section pb-0">
       <div class="container">
-        <div class="row align-items-stretch">
-          <div class="col-md-8" data-aos="fade-up">
-            <img
-              id="img"
-              alt="{{ selectedVideo.description }}"
-              class="img-fluid"
-              src="{{ selectedVideo.thumbnail }}"
-            />
-          </div>
-          <div class="col-md-3 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="sticky-content">
-              <h4 class="h4 mb-3">Description</h4>
-              <p class="mb-4">
-                <span class="text-muted" id="subtype">{{
-                  selectedVideo.description
-                }}</span>
-              </p>
-            </div>
-          </div>
+      <div class="grid video">
+        <div class="box">
+          <div [innerHTML]="youtubePlayer | safehtml"></div>
         </div>
+        <div class="box">
+           <h3 class="h4"><b>Description</b></h3>
+            <p class="mb-4">
+              <span class="text-muted" id="subtype">{{
+                selectedVideo.description
+              }}</span>
+            </p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section1 video mobile">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6" data-aos="fade-up">
+          <a href="#" (click)="isDetail = false"> &#8617; BACK </a>
+        </div>
+      </div>
+      <div class="row mb-4 align-items-center">
+        <div class="col-md-6" data-aos="fade-up">
+          <h2 id="title2">{{ selectedVideo.title }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="site-section pb-0">
+      <div class="container">
+          <div [innerHTML]="youtubePlayer | safehtml"></div>
+           <h3 class="h4"><b>Description</b></h3>
+            <p class="mb-4">
+              <span class="text-muted" id="subtype">{{
+                selectedVideo.description
+              }}</span>
+            </p>
       </div>
     </div>
   </section>

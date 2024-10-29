@@ -229,11 +229,11 @@ a.logo, a:visited.logo {
 }
 
 
-/****************************** ADMIN****************************/
+/****************************** SUBMENU****************************/
 .fixed-nav-bar.admin-view.desktop .row{
   height: 40px;
 }
-.fixed-nav-bar.admin-view.desktop .row.submenu{
+.fixed-nav-bar.admin-view.desktop .row.submenu, .fixed-nav-bar.app-view.desktop .row.submenu{
   margin-top: -338px;
   height: 42px;
   width: 100%;
@@ -242,7 +242,7 @@ a.logo, a:visited.logo {
   position: fixed;
 }
 
-.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems{
+.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems, .fixed-nav-bar.app-view.desktop .row.submenu .submenuitems{
   display: table-cell;
   width: 100%;
   background: #e7c6ff;
@@ -251,14 +251,14 @@ a.logo, a:visited.logo {
   text-align: center;
 }
 
-.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems span{
+.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems span, .fixed-nav-bar.app-view.desktop .row.submenu .submenuitems span{
   padding-left: 20px;
   padding-right: 20px;
   color:#5e548e;
   cursor: pointer;
 }
 
-.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems span:hover{
+.fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems span:hover, .fixed-nav-bar.app-view.desktop .row.submenu .submenuitems span:hover{
   color:#18113b;
   font-weight: bold;
 }

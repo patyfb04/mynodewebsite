@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges, Pipe, PipeTransform } from '@angular/core';
 import { VideoService } from './video.service';
 import { Video } from './video';
 import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs';
@@ -8,7 +8,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
 import {Router} from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -28,6 +27,7 @@ export class VideoComponent implements OnInit {
   public dataSource: MatTableDataSource<Video>;
   public loading :boolean = true;
   public videoList: Video[];
+  public youtubePlayer : string;
 
   public options = [];
   public filteredOptions: Observable<any>;
@@ -164,5 +164,7 @@ export class VideoComponent implements OnInit {
   public videoDetails(video: Video){
     this.selectedVideo = video;
     this.isDetail = true;
+    this.youtubePlayer= '<iframe id="player" width="640" height="360" src="https://www.youtube.com/embed/'+ video.link +'"></iframe>';
   }
+
 }

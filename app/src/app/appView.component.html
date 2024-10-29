@@ -10,6 +10,7 @@
           href="#"
           (click)="displayView($event, 'home')"
           [ngClass]="{ active: display.home }"
+          (mouseenter)="displaySubMenu('all', false)"
           >Home</a
         >
       </li>
@@ -17,8 +18,9 @@
         <a
           href="#"
           (click)="displayView($event, 'artworks')"
+          (mouseenter)="displaySubMenu('portfolio', true)"
           [ngClass]="{ active: display.artworks }"
-          >Artworks</a
+          >Portfolio</a
         >
       </li>
       <li>
@@ -26,6 +28,7 @@
           href="#"
           (click)="displayView($event, 'books')"
           [ngClass]="{ active: display.books }"
+          (mouseenter)="displaySubMenu('all', false)"
           >Books</a
         >
       </li>
@@ -34,6 +37,7 @@
           href="#"
           (click)="displayView($event, 'service')"
           [ngClass]="{ active: display.service }"
+        (mouseenter)="displaySubMenu('all', false)"
           >Service</a
         >
       </li>
@@ -42,6 +46,7 @@
           href="#"
           (click)="displayView($event, 'testimonial')"
           [ngClass]="{ active: display.testimonial }"
+          (mouseenter)="displaySubMenu('all', false)"
           >Testimonials</a
         >
       </li>
@@ -50,6 +55,7 @@
           href="#"
           (click)="displayView($event, 'artist')"
           [ngClass]="{ active: display.artist }"
+          (mouseenter)="displaySubMenu('all', false)"
           >Artist</a>
       </li>
       <li>
@@ -57,10 +63,21 @@
           href="#"
           (click)="displayView($event, 'formInfo')"
           [ngClass]="{ active: display.formInfo }"
+         (mouseenter)="displaySubMenu('all', false)"
           >Contact</a>
       </li>
     </ul>
   </div>
+  </div>
+  <div class="row submenu">
+    <div class="submenuitems">
+      <div *ngIf="submenus['portfolio'] == true" id="submenu">
+        <span (click)="displayView($event, 'artworks')"> Illustrations </span> |
+        <span (click)="displayView($event, 'videos')"> Book Trailers </span>
+        <!-- |
+        <span (click)="displayView($event, 'websites')"> Websites</span> -->
+      </div>
+    </div>
   </div>
 </nav>
 

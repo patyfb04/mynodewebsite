@@ -1,0 +1,58 @@
+.site-portfolio
+     margin-top: -97px
+
+#portfolio-grid-video
+    width: 100%
+    text-align: center
+    margin-top:45px
+
+#portfolio-grid-video > div
+    width: calc(100%/6)
+    display: inline-block
+    vertical-align: top
+    text-align: center
+    margin: 2%
+    margin-right: 5%
+    height: 215px
+
+.item
+    .item-wrap
+      &.video
+        width: 250px
+        height: 130px
+
+.item .item-wrap:hover .work-info
+  opacity: 1
+  visibility: visible
+  margin-top: -20%
+
+.section1
+  &.video
+    padding: 6rem 0
+
+.grid.video
+  display: grid
+  grid-template-rows: repeat(1, 1fr)
+  grid-template-columns: repeat(2, 1fr)
+  grid-gap: 10px
+
+.box
+  padding: 10px
+
+@media only screen and (min-width: 801px)
+  .mobile
+    display: none
+
+  .desktop
+    display: block
+
+@media only screen and (max-width: 800px)
+  .desktop
+    display: none
+
+  .mobile
+    display: block
+
+  .site-portfolio
+    margin-top: 0px
+
