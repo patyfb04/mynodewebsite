@@ -248,7 +248,7 @@
                       'active-category':
                         selectedStatus == 'published' || selectedStatus == ''
                     }"
-                    >Published</a
+                    >Published ({{bookPublishedList.length}})</a
                   > &nbsp; | &nbsp;
                   <a
                     href="#"
@@ -257,7 +257,7 @@
                     [ngClass]="{
                       'active-category': selectedStatus == 'completed'
                     }"
-                    >Completed (To be Published) </a
+                    >Completed (To be Published) ({{bookCompletedList.length}})</a
                   > &nbsp; | &nbsp;
                   <a
                   href="#"
@@ -266,7 +266,7 @@
                   [ngClass]="{
                     'active-category': selectedStatus == 'inprogress'
                   }"
-                  >In Progress</a
+                  >In Progress ({{bookInProgressList.length}})</a
                 >
                 </div>
               </div>
