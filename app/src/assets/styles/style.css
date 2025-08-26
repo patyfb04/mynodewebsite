@@ -100,7 +100,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .fixed-nav-bar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -234,12 +234,12 @@ a.logo, a:visited.logo {
   height: 40px;
 }
 .fixed-nav-bar.admin-view.desktop .row.submenu, .fixed-nav-bar.app-view.desktop .row.submenu{
-  margin-top: -338px;
+  margin-top: -8px;
   height: 42px;
   width: 100%;
   display: table;
   table-layout: fixed;
-  position: fixed;
+  position: relative;
 }
 
 .fixed-nav-bar.admin-view.desktop .row.submenu .submenuitems, .fixed-nav-bar.app-view.desktop .row.submenu .submenuitems{
